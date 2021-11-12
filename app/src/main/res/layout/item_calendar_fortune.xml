@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:ring="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="@dimen/dp_15"
+    android:layout_marginBottom="@dimen/dp_15"
+    android:background="@drawable/calendar_fortune_bg"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_50"
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_20"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginTop="@dimen/dp_5"
+            android:src="@mipmap/ic_calendar_fortune_left" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="-8dp"
+            android:layout_marginTop="@dimen/dp_15"
+            android:layout_weight="1"
+            android:text="今日运势"
+            android:textColor="#AE5E17"
+            android:textSize="@dimen/sp_16"
+            android:textStyle="bold">
+
+        </TextView>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:layout_marginRight="-5dp"
+            android:layout_weight="2"
+            android:drawableRight="@mipmap/ic_calendar_fortune_back"
+            android:drawablePadding="@dimen/dp_8"
+            android:gravity="center_vertical|end"
+            android:text="点击开启我的运势"
+            android:textColor="#C4875F"
+            android:textSize="@dimen/sp_16">
+
+        </TextView>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_5"
+            android:layout_marginRight="@dimen/dp_15"
+            android:src="@mipmap/ic_calendar_fortune_right" />
+
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="0.5dp"
+        android:layout_marginBottom="@dimen/dp_15"
+        android:background="#C4875F" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <com.littlejie.circleprogress.CircleProgress
+            android:id="@+id/circle_progress"
+            android:layout_width="90dp"
+            android:layout_height="90dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/dp_5"
+            android:gravity="center"
+            app:antiAlias="true"
+            app:arcColors="#E64646"
+            app:arcWidth="@dimen/small"
+            app:bgArcColor="#FADCDC"
+            app:bgArcWidth="@dimen/small"
+            app:hint="百分比"
+            app:hintColor="#E64646"
+            app:hintSize="20sp"
+            app:maxValue="100"
+            app:textOffsetPercentInRadius="0.3"
+            app:unit="100"
+            app:unitColor="#E64646"
+            app:unitSize="18sp"
+            app:valueSize="0.01sp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="综合"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@drawable/calendar_fortune_total_bg"
+
+                android:padding="@dimen/dp_5"
+                android:text="思维敏捷，积极发言"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_10"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_15"
+                android:text="事业"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@drawable/calendar_fortune_cause_bg"
+                android:padding="@dimen/dp_5"
+                android:text="工作烦劳，身心俱疲"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_10"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginBottom="@dimen/dp_20"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="财富"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@drawable/calendar_fortune_money_bg"
+                android:padding="@dimen/dp_5"
+
+                android:text="财运上涨，投资得利"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_10"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_15"
+                android:text="感情"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_5"
+                android:background="@drawable/calendar_fortune_felling_bg"
+                android:padding="@dimen/dp_5"
+                android:text="相处融洽，感情升温"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_10"
+                android:textStyle="bold" />
+
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

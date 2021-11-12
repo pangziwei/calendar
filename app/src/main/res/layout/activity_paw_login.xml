@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".mine.newlogin.NewLoginActivity">
+
+    <include layout="@layout/view_title_actionbar" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="#F7F7F7" />
+
+    <LinearLayout
+        android:id="@+id/ll_lgin_success"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_mine_welcome"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_20"
+            android:padding="@dimen/dp_12"
+            android:text="欢迎来到聚友互动"
+            android:textStyle="bold"
+            android:textColor="@color/textcoloe3"
+            android:textSize="@dimen/sp_24" />
+
+
+
+
+
+
+        <EditText
+            android:id="@+id/et_pawlogin_get_tel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_32"
+            android:layout_marginTop="@dimen/dp_40"
+            android:layout_marginRight="@dimen/dp_32"
+            android:background="@null"
+            android:hint="请输入手机号"
+            android:inputType="number"
+            android:maxLength="11"
+            android:textColor="@color/textcoloe3"
+            android:textSize="@dimen/sp_16"
+            android:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tv_log_bg"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:layout_marginLeft="@dimen/dp_32"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginRight="@dimen/dp_32"
+            android:background="#D5D5D5" />
+
+
+
+
+
+        <TextView
+            android:id="@+id/btn_pawlogin_get_next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_32"
+            android:layout_marginTop="@dimen/dp_50"
+            android:layout_marginRight="@dimen/dp_32"
+            android:background="@drawable/login_bg_gray"
+            android:clickable="false"
+            android:gravity="center"
+            android:padding="@dimen/dp_12"
+            android:text="下一步"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_14" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/ck_agree_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:button="@null"
+                android:drawableLeft="@drawable/bg_check_box"
+                android:drawablePadding="@dimen/dp_10"
+                android:paddingTop="@dimen/dp_40"
+                android:paddingBottom="@dimen/dp_30"
+                android:text="同意"
+                android:textColor="@color/textcoloe6"
+                android:textSize="@dimen/sp_14" />
+
+            <TextView
+                android:id="@+id/tv_link_login"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingTop="@dimen/dp_40"
+                android:paddingBottom="@dimen/dp_30"
+
+                android:text="《用户协议与隐私政策》"
+                android:textColor="@color/textcoloe6"
+                android:textSize="@dimen/sp_14" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

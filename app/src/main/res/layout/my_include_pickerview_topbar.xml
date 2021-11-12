@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rv_topbar"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/pickerview_bg_topbar"
+    android:orientation="horizontal">
+
+    <Button
+        android:id="@+id/btnCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:gravity="left|center_vertical"
+        android:paddingLeft="@dimen/pickerview_topbar_padding"
+        android:text="@string/pickerview_cancel"
+        android:textColor="@drawable/selector_pickerview_btn"
+        android:textSize="@dimen/pickerview_topbar_btn_textsize" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="@dimen/dp_1"
+        android:layout_weight="1"
+        android:textColor="#ff0000"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_gravity="center"
+        android:layout_toLeftOf="@+id/btnSubmit"
+        android:layout_toRightOf="@+id/btnCancel"
+        android:background="@drawable/choice_time_title"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:textColor="@color/pickerview_topbar_title"
+        android:textSize="@dimen/pickerview_topbar_title_textsize">
+
+        <TextView
+            android:id="@+id/tvTitle02"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginTop="@dimen/dp_1"
+            android:layout_marginBottom="@dimen/dp_1"
+            android:background="@drawable/choice_time_title_left"
+            android:paddingLeft="@dimen/dp_25"
+            android:paddingTop="@dimen/dp_5"
+            android:paddingRight="@dimen/dp_5"
+            android:paddingBottom="@dimen/dp_5"
+            android:text="公立"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tvTitle01"
+
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:paddingLeft="@dimen/dp_5"
+            android:paddingTop="@dimen/dp_5"
+            android:paddingRight="@dimen/dp_25"
+            android:paddingBottom="@dimen/dp_5"
+            android:text="农历"
+            android:textColor="@color/color_F04646"
+            android:textSize="@dimen/pickerview_topbar_title_textsize" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/dp_1"
+        android:layout_weight="1"
+        android:textColor="#ff0000"
+        android:textSize="18sp" />
+
+    <Button
+        android:id="@+id/btnSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:background="@android:color/transparent"
+        android:gravity="right|center_vertical"
+        android:paddingRight="@dimen/pickerview_topbar_padding"
+        android:text="@string/pickerview_submit"
+        android:textColor="@drawable/selector_pickerview_btn"
+        android:textSize="@dimen/pickerview_topbar_btn_textsize" />
+</LinearLayout>

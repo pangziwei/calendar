@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.juyou.calendar.manage.MaxHeightView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_white_corner10"
+    android:orientation="vertical"
+    app:mhv_HeightRatio="0.8">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingTop="@dimen/dp_24"
+            android:text="温馨提示"
+            android:textColor="@color/textcoloe3"
+            android:textSize="@dimen/sp_18"
+            android:textStyle="bold" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:scrollbars="none">
+
+            <TextView
+                android:id="@+id/tvContent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lineSpacingExtra="@dimen/dp_10"
+                android:paddingLeft="@dimen/dp_26"
+                android:paddingTop="@dimen/dp_17"
+                android:paddingRight="@dimen/dp_26"
+                android:paddingBottom="@dimen/dp_22"
+                android:text="" />
+        </ScrollView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:background="@color/textcoloe3" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/btn_cancel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:layout_marginRight="@dimen/dp_14"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingLeft="@dimen/dp_27"
+                android:paddingTop="@dimen/dp_15"
+                android:paddingRight="@dimen/dp_27"
+                android:paddingBottom="@dimen/dp_15"
+                android:text="不同意"
+                android:textColor="@color/textcoloe3"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="@dimen/dp_1"
+                android:layout_height="match_parent"
+                android:background="@color/textcoloe3" />
+
+            <TextView
+                android:id="@+id/btn_sure"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_2"
+                android:layout_marginLeft="@dimen/dp_14"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingLeft="@dimen/dp_27"
+                android:paddingTop="@dimen/dp_15"
+                android:paddingRight="@dimen/dp_27"
+                android:paddingBottom="@dimen/dp_15"
+                android:text="同意"
+                android:textColor="@color/textcoloe3"
+                android:textSize="@dimen/sp_16"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
+</com.juyou.calendar.manage.MaxHeightView>

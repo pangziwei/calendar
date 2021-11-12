@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="@color/color_E64646" />
+            <size
+                android:width="@dimen/dp_25"
+                android:height="@dimen/dp_25" />
+            <corners
+                android:bottomLeftRadius="4dp"
+                android:bottomRightRadius="4dp"
+                android:topLeftRadius="4dp"
+                android:topRightRadius="4dp" />
+        </shape>
+    </item>
+    <item
+        android:bottom="@dimen/dp_1"
+        android:left="@dimen/dp_1"
+        android:right="@dimen/dp_1"
+        android:top="@dimen/dp_1">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/colorWhite" />
+            <size
+                android:width="@dimen/dp_15"
+                android:height="@dimen/dp_15" />
+            <corners
+                android:bottomLeftRadius="4dp"
+                android:bottomRightRadius="4dp"
+                android:topLeftRadius="4dp"
+                android:topRightRadius="4dp" />
+        </shape>
+    </item>
+
+    <item
+        android:bottom="@dimen/dp_2"
+        android:left="@dimen/dp_2"
+        android:right="@dimen/dp_2"
+        android:top="@dimen/dp_2">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/color_E64646" />
+            <size
+                android:width="@dimen/dp_15"
+                android:height="@dimen/dp_15" />
+            <corners
+                android:bottomLeftRadius="4dp"
+                android:bottomRightRadius="4dp"
+                android:topLeftRadius="4dp"
+                android:topRightRadius="4dp" />
+        </shape>
+    </item>
+    <item
+        android:bottom="@dimen/dp_3"
+        android:left="@dimen/dp_3"
+        android:right="@dimen/dp_3"
+        android:top="@dimen/dp_3">
+        <shape android:shape="rectangle">
+            <solid android:color="@color/colorWhite" />
+            <size
+                android:width="@dimen/dp_25"
+                android:height="@dimen/dp_25" />
+            <corners
+                android:bottomLeftRadius="4dp"
+                android:bottomRightRadius="4dp"
+                android:topLeftRadius="4dp"
+                android:topRightRadius="4dp" />
+        </shape>
+    </item>
+</layer-list>

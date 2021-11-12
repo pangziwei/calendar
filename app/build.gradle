@@ -1,0 +1,165 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.3"
+    defaultConfig {
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+            }
+        }
+
+        applicationId "com.juyou.calendar"
+        minSdkVersion 21
+        targetSdkVersion 29
+        versionCode 2021
+        versionName "1.0"//
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+
+        ndk {
+            // 注意：这里需要添加项目所需 CPU 类型的最小集
+            abiFilters "armeabi", "armeabi-v7a", "x86_64", "x86", "arm64-v8a"
+        }
+        packagingOptions {
+
+            doNotStrip "*/armeabi-v7a/*.so"
+            doNotStrip "*/x86/*.so"
+            doNotStrip "*/arm64-v8a/*.so"
+            doNotStrip "*/x86_64/*.so"
+            doNotStrip "armeabi.so"
+        }
+
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+            assets.srcDirs = ['src/main/assets', 'src/main/assets/']
+        }
+    }
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+dependencies {
+    implementation 'androidx.annotation:annotation:1.2.0'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'com.android.support:appcompat-v7:29.+'
+    implementation 'com.android.support:design:29.+'
+    implementation 'com.android.support:support-annotations:29.+'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'android.arch.lifecycle:extensions:1.1.1'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    implementation 'com.jakewharton:butterknife:10.0.0'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.0.0'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.50'
+    implementation 'com.google.android.material:material:1.1.0'
+    implementation 'com.jaeger.statusbarutil:library:1.4.0'
+    api 'com.scwang.smart:refresh-layout-kernel:2.0.0-alpha-1'
+
+    //核心必须依赖
+    api 'com.scwang.smart:refresh-header-classics:2.0.0-alpha-1'
+
+    //经典刷新头
+    api 'com.scwang.smart:refresh-footer-classics:2.0.0-alpha-1'
+
+    //经典加载
+    api 'com.scwang.smart:refresh-header-material:2.0.0-alpha-1'
+
+    //谷歌刷新头
+    implementation project(path: ':manggeekLib')
+
+    //支持跨进程缓存
+    api 'net.grandcentrix.tray:tray:0.12.0'
+
+    //跑马灯
+    implementation 'com.sunfusheng:marqueeview:1.3.3'
+
+    // okhttp
+    implementation 'com.squareup.okhttp3:okhttp:3.12.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.12.1'
+    implementation 'com.squareup.okhttp:okhttp:2.7.5'
+    implementation 'com.google.code.gson:gson:2.5'
+    implementation 'com.squareup.okhttp3:okhttp:3.4.1'
+    implementation 'com.squareup.okio:okio:1.9.0'
+
+    //pop弹框库
+    api 'com.lxj:xpopup:1.8.10-x'
+
+    //万能选择器 可以设置圆角、描边，按下颜色，禁用颜色，选中颜色
+    api 'com.yuan.library.selector:selectordrawable-release:1.0.3'
+    api 'com.github.pinguo-zhouwei:MZBannerView:v2.0.0'
+    api 'com.github.LuckSiege.PictureSelector:picture_library:v2.5.8'
+
+    //动态权限申请
+    implementation 'pub.devrel:easypermissions:1.0.1'
+
+    //分享
+    implementation project(':socialsdk')
+
+    //验证码
+    implementation project(':VerificationCodeInputView_Lib')
+
+    //eventbus传递信息
+    implementation 'org.greenrobot:eventbus:3.1.1'
+
+    //分包-
+    implementation 'com.android.support:multidex:1.0.2'
+
+    //防止快速点击
+    api 'com.jakewharton.rxbinding:rxbinding:1.0.0'
+    api 'com.jakewharton.rxbinding:rxbinding-design:1.0.0'
+
+    //时间选择器
+    implementation 'com.contrarywind:Android-PickerView:4.1.8'
+
+    //字体颜色什么的变换
+    api 'com.zrq:spanbuilder:1.0.5'
+
+    //AndroidX 版本
+    api 'com.yqritc:recyclerview-flexibledivider:1.4.0'
+
+    //noinspection GradleCompatible
+    implementation 'com.android.support:design:27.1.1'
+    configurations {
+        all*.exclude group: 'com.google.code.gson'
+    }
+    implementation files('libs/gson-2.8.0.jar')
+
+    //    百度联盟广告
+    implementation files('libs/android-query-full.0.26.7.jar')
+    implementation(name: 'Baidu_MobAds_SDK-release_v9.16', ext: 'aar')
+
+    //日历的库
+    implementation project(':calendarview')
+    //圆弧的
+    implementation project(':circleprogress')
+
+    //    天气访问接口的联网数据的库
+    implementation files('libs/android-async-http-master.jar')
+
+    //时间接口
+    implementation 'joda-time:joda-time:2.10'
+    implementation files('libs/AMap_Location_V4.0.1_20180426.jar')
+    implementation files('libs/android-logging-log4j-1.0.3.jar')
+    implementation files('libs/HeWeather_sdk.jar')
+    implementation files('libs/log4j-1.2.17.jar')
+}

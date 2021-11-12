@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="MaxHeightView">
+        <attr name="mhv_HeightRatio" format="reference|float" />
+        <attr name="mhv_HeightDimen" format="reference|dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="TitleBarAttr">
+        <attr name="titleName" format="string" />
+        <attr name="titleRightName" format="string" />
+        <attr name="titleShowBackButton" format="boolean" />
+        <attr name="titleRightIco" format="reference" />
+        <attr name="titleLeftIco" format="reference" />
+        <attr name="titleBgColor" format="color" />
+        <attr name="titleColor" format="color" />
+        <attr name="titleRightColor" format="color" />
+    </declare-styleable>
+
+
+
+</resources>

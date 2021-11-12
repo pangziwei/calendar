@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".mine.newlogin.RegisteredActivity">
+
+    <include layout="@layout/view_title_actionbar" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_1"
+        android:background="#F7F7F7" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_20"
+            android:padding="@dimen/dp_12"
+            android:text="输入登录密码"
+            android:textColor="@color/textcoloe3"
+            android:textSize="@dimen/sp_24"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_34"
+            android:text="请使用帐号密码登录"
+            android:textColor="@color/textcoloe3"
+            android:textSize="@dimen/sp_14" />
+
+
+        <EditText
+            android:id="@+id/et_logpaw_get_paw"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_32"
+            android:layout_marginTop="@dimen/dp_40"
+            android:layout_marginRight="@dimen/dp_32"
+            android:background="@null"
+            android:hint="请输入密码"
+            android:maxLength="16"
+            android:textColor="@color/textcoloe3"
+            android:textSize="@dimen/sp_16"
+            android:visibility="visible" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_1"
+            android:layout_marginLeft="@dimen/dp_32"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginRight="@dimen/dp_32"
+            android:background="#D5D5D5" />
+
+
+        <TextView
+            android:id="@+id/btn_reg_next"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_32"
+            android:layout_marginTop="@dimen/dp_50"
+            android:layout_marginRight="@dimen/dp_32"
+            android:background="@drawable/bg_big_line_down"
+            android:clickable="false"
+            android:gravity="center"
+            android:padding="@dimen/dp_12"
+            android:text="登录"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_14" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_logingpas_forgetpaw"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="@dimen/dp_12"
+            android:layout_weight="1"
+            android:padding="@dimen/sp_20"
+            android:text="忘记密码？"
+            android:textColor="@color/textcoloe3"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:id="@+id/tv_logingpas_use_code"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="@dimen/dp_12"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:padding="@dimen/sp_20"
+            android:text="使用验证码登录"
+            android:textColor="@color/textcoloe3"
+            android:textSize="@dimen/sp_14" />
+
+    </LinearLayout>
+</LinearLayout>

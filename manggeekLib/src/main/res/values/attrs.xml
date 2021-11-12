@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CircleImageView">
+        <attr name="civ_border_width" format="dimension" />
+        <attr name="civ_border_color" format="color" />
+        <attr name="civ_border_overlay" format="boolean" />
+        <attr name="civ_fill_color" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="RoundImageView">
+        <attr name="roundWidth" format="dimension"></attr>
+
+        <attr name="roundHeight" format="dimension"></attr>
+
+        <attr name="cornerType">
+            <enum name="ALL" value="1"></enum>
+            <enum name="LEFT" value="2"></enum>
+            <enum name="RIGHT" value="3"></enum>
+            <enum name="TOP" value="4"></enum>
+            <enum name="BOTTOM" value="5"></enum>
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="AutoWrapLayout">
+        <attr name="horizontalSpace" format="dimension|reference" />
+
+        <attr name="vertivalSpace" format="dimension|reference" />
+    </declare-styleable>
+
+    <attr name="bgColor" format="color" />
+    <attr name="fgColor" format="color" />
+    <attr name="percent" format="float" />
+    <attr name="startAngle" format="float" />
+
+    <declare-styleable name="SectorProgressView">
+        <attr name="bgColor" />
+        <attr name="fgColor" />
+        <attr name="percent" />
+        <attr name="startAngle" />
+    </declare-styleable>
+
+    <declare-styleable name="ColorfulRingProgressView">
+        <attr name="bgColor" />
+        <attr name="fgColorStart" format="color" />
+        <attr name="fgColorEnd" format="color" />
+        <attr name="strokeWidth" format="dimension" />
+        <attr name="percent" />
+        <attr name="startAngle" />
+    </declare-styleable>
+    <declare-styleable name="SwipeCaptchaView">
+        <attr name="captchaWidth" format="dimension"/>
+        <attr name="captchaHeight" format="dimension"/>
+        <attr name="matchDeviation" format="dimension"/>
+    </declare-styleable>
+</resources>

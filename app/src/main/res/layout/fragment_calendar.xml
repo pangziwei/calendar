@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:calendarview="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".fragment.calendar.CalendarFragment">
+
+
+    <include layout="@layout/view_title_actionbar" />
+
+
+    <com.juyou.calendar.manage.GradationScrollView
+        android:id="@+id/gs_scrollview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_calendar_out"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <com.othershe.calendarview.weiget.WeekView
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp" />
+
+                <com.othershe.calendarview.weiget.CalendarView
+                    android:id="@+id/calendar"
+                    android:layout_width="match_parent"
+                    android:layout_height="220dp"
+                    calendarview:choose_type="single"
+                    calendarview:show_holiday="true"
+                    calendarview:show_lunar="true"
+                    calendarview:show_term="true"
+                    calendarview:switch_choose="false" />
+
+            </LinearLayout>
+
+            <include layout="@layout/item_calendar_yellow" />
+            <include layout="@layout/item_calendar_fortune" />
+
+            <Spinner
+                android:id="@+id/channel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:visibility="gone" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/button"
+                    android:layout_width="173dp"
+                    android:layout_height="wrap_content"
+                    android:text="展示频道"
+                    android:visibility="gone" />
+
+                <RelativeLayout
+                    android:id="@+id/parent_block"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+            </LinearLayout>
+        </LinearLayout>
+    </com.juyou.calendar.manage.GradationScrollView>
+
+
+</LinearLayout>

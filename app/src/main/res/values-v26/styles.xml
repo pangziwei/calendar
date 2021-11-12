@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <!-- 适配android手机系统8.0(api26)，Only fullscreen opaque activities can request orientation -->
+        <item name="android:windowIsTranslucent">false</item>
+ 
+
+        <!--<item name="android:windowNoTitle">true</item>-->
+        <!--<item name="android:button">@mipmap/node_check</item>-->
+        <!--<item name="android:windowEnterAnimation">@anim/pop_enter_anim</item>-->
+        <!--<item name="android:windowExitAnimation">@anim/pop_exit_anim</item>-->
+    </style>
+
+
+</resources>

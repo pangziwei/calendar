@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/frame_layout"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:id="@+id/main_radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/main_Business"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/ic_launcher"
+            android:drawablePadding="@dimen/dp_6"
+            android:gravity="center"
+            android:padding="@dimen/dp_12"
+            android:text="日历"
+            android:textColor="@color/color_fa4b67"
+            android:textSize="@dimen/sp_14" />
+
+        <TextView
+            android:id="@+id/main_study"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/ic_launcher"
+            android:drawablePadding="@dimen/dp_6"
+            android:gravity="center"
+            android:padding="@dimen/dp_12"
+            android:text="黄历"
+            android:textColor="@color/textcoloe3"
+            android:textSize="@dimen/sp_14"
+
+            />
+        <TextView
+            android:id="@+id/main_Business03"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/ic_launcher"
+            android:drawablePadding="@dimen/dp_6"
+            android:gravity="center"
+            android:padding="@dimen/dp_12"
+            android:text="星座"
+            android:textColor="@color/textcoloe3"
+            android:textSize="@dimen/sp_14"
+
+            />
+        <TextView
+            android:id="@+id/main_Business04"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/ic_launcher"
+            android:drawablePadding="@dimen/dp_6"
+            android:gravity="center"
+            android:padding="@dimen/dp_12"
+            android:text="运势"
+            android:textColor="@color/textcoloe3"
+            android:textSize="@dimen/sp_14"
+
+            />
+
+        <TextView
+            android:id="@+id/main_my"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:drawableTop="@mipmap/ic_launcher"
+            android:drawablePadding="@dimen/dp_6"
+            android:gravity="center"
+            android:padding="@dimen/dp_12"
+            android:text="我的"
+            android:textColor="@color/textcoloe3"
+            android:textSize="@dimen/sp_14" />
+    </LinearLayout>
+</LinearLayout>
