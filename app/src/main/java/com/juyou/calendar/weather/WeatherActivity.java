@@ -9,6 +9,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,6 +34,7 @@ import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
 import com.google.gson.Gson;
 import com.juyou.calendar.R;
+import com.juyou.calendar.activity.MyMainActivity;
 import com.juyou.calendar.adapter.weather.ViewPagerAdapter;
 import com.juyou.calendar.bean.weather.CityBean;
 import com.juyou.calendar.bean.weather.CityBeanList;
@@ -44,6 +47,8 @@ import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import interfaces.heweather.com.interfacesmodule.bean.base.Code;
 import interfaces.heweather.com.interfacesmodule.bean.base.Lang;
@@ -72,7 +77,7 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
     private TextView tvLocation;
     private ImageView ivLoc;
     CityBeanList cityBeanList = new CityBeanList();
-//    private ImageView ivBack;
+    //    private ImageView ivBack;
     private String condCode;
 
 
@@ -182,7 +187,7 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
             initLocation();
         } else {
             getNowCity(false);
-            Log.e("citys", "--------555------------"+WeatherContentUtil.NOW_LON + "," + WeatherContentUtil.NOW_LAT);
+            Log.e("citys", "--------555------------" + WeatherContentUtil.NOW_LON + "," + WeatherContentUtil.NOW_LAT);
         }
 
     }
@@ -252,7 +257,7 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
                     cityBeans.add(cityBean);
                 }
                 tvLocation.setText(location);//地理位置，西湖
-                Log.e("citys", "cityBeans-------发多个-------"+new Gson().toJson(cityBeans));
+                Log.e("citys", "cityBeans-------发多个-------" + new Gson().toJson(cityBeans));
 
                 getData(cityBeans, first);
             }
@@ -318,9 +323,9 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
             cityIds.add(cityId);
             lats.add(cityLat);
             lons.add(cityLon);
-            Log.e("fragments", "fragments--------------"+fragments.size());
-            Log.e("citys", "cityBeans--------citys------"+new Gson().toJson(city));
-            WeatherFragment weatherFragment = WeatherFragment.newInstance(cityId,cityLat,cityLon);
+            Log.e("fragments", "fragments--------------" + fragments.size());
+            Log.e("citys", "cityBeans--------citys------" + new Gson().toJson(city));
+            WeatherFragment weatherFragment = WeatherFragment.newInstance(cityId, cityLat, cityLon);
             fragments.add(weatherFragment);
         }
         if (cityIds.get(0).equalsIgnoreCase(WeatherContentUtil.NOW_CITY_ID)) {
@@ -444,7 +449,6 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
     }
 
 
-
     private void changeLang(final Lang lang) {
         HeWeather.getGeoCityLookup(this, WeatherContentUtil.NOW_LON + "," + WeatherContentUtil.NOW_LAT, Mode.FUZZY, Range.WORLD, 3, lang, new HeWeather.OnResultGeoListener() {
             @Override
@@ -544,4 +548,16 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
                     }
                 }).show();
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            Intent intent = new Intent(WeatherActivity.this, MyMainActivity.class);
+            intent.putExtra("SelectIndex", 1);
+            startActivity(intent);
+            finish();
+        }
+        return false;
+    }
+
 }

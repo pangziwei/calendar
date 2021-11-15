@@ -16,7 +16,7 @@
 
         <LinearLayout
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/dp_8"
             android:layout_weight="3"
             android:orientation="vertical">
@@ -24,7 +24,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1">
+                android:layout_weight="2">
 
                 <TextView
                     android:id="@+id/test_textview"
@@ -42,29 +42,36 @@
                     android:layout_weight="1" />
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginRight="@dimen/dp_50"
-                    android:background="@drawable/calendar_fortune_jx_bg"
+                    android:gravity="center"
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="@dimen/dp_8"
-                        android:gravity="center"
-                        android:padding="@dimen/dp_3"
-                        android:text="择吉避凶"
-                        android:textColor="@color/color_E64646"
-                        android:textSize="@dimen/sp_13"
-                        android:textStyle="bold" />
-
-                    <ImageView
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginRight="@dimen/dp_15"
-                        android:src="@mipmap/ic_calendar_fortune_back" />
+                        android:background="@drawable/calendar_fortune_jx_bg">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/dp_8"
+                            android:layout_gravity="center"
+                            android:padding="@dimen/dp_3"
+                            android:text="择吉避凶"
+                            android:textColor="@color/color_E64646"
+                            android:textSize="@dimen/sp_13"
+                            android:textStyle="bold" />
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginRight="@dimen/dp_8"
+                            android:layout_marginLeft="@dimen/dp_3"
+                            android:src="@mipmap/ic_calendar_fortune_back" />
+                    </LinearLayout>
 
 
                 </LinearLayout>
@@ -74,8 +81,10 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
+                android:layout_gravity="center"
                 android:layout_marginTop="@dimen/dp_8"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:gravity="center">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -90,7 +99,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:padding="@dimen/dp_5"
                     android:text="丁酉月"
                     android:textColor="@color/main_but"
                     android:textSize="@dimen/sp_12" />
@@ -109,7 +117,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:padding="@dimen/dp_5"
                     android:text="乙末时"
                     android:textColor="@color/main_but"
                     android:textSize="@dimen/sp_12" />
@@ -119,23 +126,29 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:padding="@dimen/dp_5"
                     android:text="星期二"
                     android:textColor="@color/main_but"
                     android:textSize="@dimen/sp_12" />
             </LinearLayout>
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/dp_15"
+            android:layout_marginRight="@dimen/dp_10"
+            android:orientation="vertical">
+
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_8"
-                android:layout_weight="1"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-
                     android:layout_marginRight="@dimen/dp_10"
                     android:orientation="horizontal">
 
@@ -176,6 +189,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/dp_10"
                     android:orientation="horizontal">
 
                     <TextView
@@ -211,105 +225,9 @@
                         android:layout_marginLeft="@dimen/dp_5"
                         android:src="@mipmap/ic_calendar_fortune_back" />
                 </LinearLayout>
-
-
-            </LinearLayout>
-
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/ll_calendar_to_weather"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="@dimen/dp_15"
-            android:layout_marginRight="@dimen/dp_10"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:id="@+id/iv_calendar_weather_ic"
-                    android:layout_width="@dimen/dp_15"
-                    android:layout_height="@dimen/dp_15"
-                    android:layout_gravity="bottom"
-                    android:src="@drawable/pzw" />
-
-                <TextView
-                    android:id="@+id/tv_calendar_weather_maxtem"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginRight="@dimen/dp_10"
-                    android:gravity="end"
-                    android:text="27°"
-                    android:textColor="#5082E6"
-                    android:textSize="@dimen/sp_22"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="@dimen/dp_8"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:id="@+id/tv_calendar_weather_wea"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:text="多云"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_14" />
-
-                <TextView
-                    android:id="@+id/tv_calendar_weather_tem"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:padding="@dimen/dp_5"
-                    android:text="27°/23°"
-                    android:textColor="@color/black"
-                    android:textSize="@dimen/sp_12" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="@dimen/dp_8"
-                android:layout_weight="1"
-
-                android:orientation="horizontal">
-
-
-                <TextView
-                    android:id="@+id/tv_calendar_weather_air_level"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/shape_aqi_title"
-                    android:padding="@dimen/dp_4"
-                    android:text="良"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/sp_14" />
-
-                <TextView
-                    android:id="@+id/tv_calendar_weather_city"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="end"
-                    android:layout_marginRight="@dimen/dp_10"
-                    android:gravity="end"
-                    android:text="西湖区"
-                    android:textColor="#A0A0A0"
-                    android:textSize="16sp" />
             </LinearLayout>
         </LinearLayout>
+
     </LinearLayout>
 
     <View

@@ -101,23 +101,8 @@ public class CalendarFragment extends MyExFragment implements GradationScrollVie
     TextView tvTitleLeft;
     @BindView(R.id.go_back_calendar)
     TextView goBackCalendar;
-
     @BindView(R.id.circle_progress)
     CircleProgress circleProgress;
-    @BindView(R.id.iv_calendar_weather_ic)
-    ImageView ivCalendarWeatherIc;
-    @BindView(R.id.tv_calendar_weather_maxtem)
-    TextView tvCalendarWeatherMaxtem;
-    @BindView(R.id.tv_calendar_weather_wea)
-    TextView tvCalendarWeatherWea;
-    @BindView(R.id.tv_calendar_weather_tem)
-    TextView tvCalendarWeatherTem;
-    @BindView(R.id.tv_calendar_weather_air_level)
-    TextView tvCalendarWeatherAirLevel;
-    @BindView(R.id.tv_calendar_weather_city)
-    TextView tvCalendarWeatherCity;
-    @BindView(R.id.ll_calendar_to_weather)
-    LinearLayout llCalendarToWeather;
     @BindView(R.id.ll_center_title)
     LinearLayout llCenterTitle;
     @BindView(R.id.tv_date)
@@ -253,7 +238,7 @@ public class CalendarFragment extends MyExFragment implements GradationScrollVie
 
         initAD();
 
-        initNowDay();//天气的初始化
+//        initNowDay();//天气的初始化
 
         initListeners();//渐变的高度监听
 
@@ -332,6 +317,7 @@ public class CalendarFragment extends MyExFragment implements GradationScrollVie
         circleProgress.setHint("76");//76
         circleProgress.setUnit("平淡");//平淡
         circleProgress.setValue(76);//这个是进度数---专业实况天气接口v63
+        tvDate.setText(cDate[0] + "年" + cDate[1] + "月" + cDate[2] + "日" + " ");
     }
 
     @Override
@@ -343,7 +329,7 @@ public class CalendarFragment extends MyExFragment implements GradationScrollVie
         return R.layout.fragment_calendar;
     }
 
-    @OnClick({R.id.view_actionBar_title, R.id.tv_title_left, R.id.ll_right, R.id.ll_calendar_to_weather, R.id.go_back_calendar})
+    @OnClick({R.id.view_actionBar_title, R.id.tv_title_left, R.id.ll_right,  R.id.go_back_calendar})
     public void onViewClicked(View view) {
         switch (view.getId()) {
 
@@ -358,10 +344,10 @@ public class CalendarFragment extends MyExFragment implements GradationScrollVie
 //                WebUtils.loadTitleWeb(getActivity(), "https://www.77tianqi.com/h5/rules.html?hideCloseBtn=1", "dfsg");
                 addressDialog.show();
                 break;
-            case R.id.ll_calendar_to_weather:
-                startActivity(new Intent(getActivity(), WeatherActivity.class));
-                Toast.makeText(getActivity(), "今日天气", Toast.LENGTH_SHORT).show();
-                break;
+//            case R.id.ll_calendar_to_weather:
+//                startActivity(new Intent(getActivity(), WeatherActivity.class));
+//                Toast.makeText(getActivity(), "今日天气", Toast.LENGTH_SHORT).show();
+//                break;
             case R.id.go_back_calendar:
 //                Toast.makeText(getActivity(), "返回日历", Toast.LENGTH_SHORT).show();---gsScrollview
 
@@ -603,59 +589,7 @@ public class CalendarFragment extends MyExFragment implements GradationScrollVie
             return text;
         }
 
-
     }
-
-
-    private void initNowDay() {
-
-//        https://v0.yiketianqi.com/api?unescape=1&version=v62&appid=69384542&appsecret=4QxOcjyX
-        String register = Api.YKWeatherUrl + "api";
-        //使用AsyncHttpClient，实现联网的声明
-        AsyncHttpClient client = new AsyncHttpClient();
-        //这里是要传送的参数
-        RequestParams params = new RequestParams();
-        params.put("unescape", "1");
-        params.put("version", "v61");
-        params.put("appid", WeatherContentUtil.APPID);
-        params.put("appsecret", WeatherContentUtil.APP_SECRET);
-
-
-        client.get(register, params, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(String content) {
-//                Log.e("weather", "content-------------" + content);
-                //这里去解析数据content
-//                JSONObject jsonObject = JSONUtil.getJsonObject(String.valueOf(content));
-//                hours = jsonObject.optString("hours");
-
-                WeatherV61Bean nowDayBean = new Gson().fromJson(content, WeatherV61Bean.class);
-                getWeatherAir(nowDayBean);//空气质量，详情
-
-            }
-
-            @Override
-            public void onFailure(Throwable error, String content) {
-//                Log.e("weather", "onFailure---第二步----------" + new Gson().toJson(content));
-//                Log.e("weather", "onFailure---第二步----------" + new Gson().toJson(error));
-
-            }
-        });
-
-
-    }
-
-    private void getWeatherAir(WeatherV61Bean nowDayBean) {
-        ivCalendarWeatherIc.setImageResource(IconUtils.getWeatherIcon(nowDayBean.getWea_img()));
-        imgRight.setImageResource(IconUtils.getWeatherIcon(nowDayBean.getWea_img()));
-        tvCalendarWeatherAirLevel.setText(nowDayBean.getAir_level());
-        tvCalendarWeatherWea.setText(nowDayBean.getWea());
-        tvCalendarWeatherTem.setText(nowDayBean.getTem1() + "°" + " / " + nowDayBean.getTem2() + "°");
-        tvCalendarWeatherMaxtem.setText(nowDayBean.getTem() + "°");
-        tvCalendarWeatherCity.setText(nowDayBean.getCity());
-        tvDate.setText(cDate[0] + "年" + cDate[1] + "月" + cDate[2] + "日" + " " + nowDayBean.getWeek());
-    }
-
 
     AddressDialog addressDialog;
 

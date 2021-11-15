@@ -18,7 +18,7 @@
         android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/main_Business"
+            android:id="@+id/main_calendar"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -31,7 +31,7 @@
             android:textSize="@dimen/sp_14" />
 
         <TextView
-            android:id="@+id/main_study"
+            android:id="@+id/main_yellow"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -45,7 +45,7 @@
 
             />
         <TextView
-            android:id="@+id/main_Business03"
+            android:id="@+id/main_star"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -59,7 +59,7 @@
 
             />
         <TextView
-            android:id="@+id/main_Business04"
+            android:id="@+id/main_weather"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -67,11 +67,9 @@
             android:drawablePadding="@dimen/dp_6"
             android:gravity="center"
             android:padding="@dimen/dp_12"
-            android:text="运势"
+            android:text="天气"
             android:textColor="@color/textcoloe3"
-            android:textSize="@dimen/sp_14"
-
-            />
+            android:textSize="@dimen/sp_14" />
 
         <TextView
             android:id="@+id/main_my"

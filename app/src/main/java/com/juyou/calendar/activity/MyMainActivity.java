@@ -48,6 +48,8 @@ import com.juyou.calendar.fragment.YellowCalendarFragment;
 import com.juyou.calendar.fragment.calendar.CalendarFragment;
 import com.juyou.calendar.fragment.stare.StareFragment;
 import com.juyou.calendar.mine.newlogin.NewLoginActivity;
+import com.juyou.calendar.weather.WeatherActivity;
+import com.juyou.calendar.weather.WeatherFragment;
 import com.manggeek.android.geek.utils.JSONUtil;
 import com.manggeek.android.geek.utils.PermissionUtils;
 import com.umeng.commonsdk.UMConfigure;
@@ -61,26 +63,27 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class MyMainActivity extends BaseActivity {
-    @BindView(R.id.main_Business03)
-    TextView mainBusiness03;
-    @BindView(R.id.main_Business04)
-    TextView mainBusiness04;
+    @BindView(R.id.main_star)
+    TextView mainStar;
+    @BindView(R.id.main_weather)
+    TextView mainWeather;
     private VersionEntity versionEntity;
     private UpdataDialog updataDialog;
     int i = 0;
     MineFragment mineFragment;
     CalendarFragment calendarFragment;
     StareFragment stareFragment;
-    FortuneFragment fortuneFragment;
+    //    FortuneFragment fortuneFragment;
+    WeatherFragment weatherFragment;
     YellowCalendarFragment yellowCalendarFragment;
     @BindView(R.id.frame_layout)
     FrameLayout frameLayout;
-    @BindView(R.id.main_Business)
-    TextView radioBtnSy;
-    @BindView(R.id.main_study)
-    TextView radioBtnStudy;
+    @BindView(R.id.main_calendar)
+    TextView mainCalendar;
+    @BindView(R.id.main_yellow)
+    TextView mainYellow;
     @BindView(R.id.main_my)
-    TextView radioBtnMine;
+    TextView mainMine;
     @BindView(R.id.main_radioGroup)
     LinearLayout mainRadioGroup;
 
@@ -173,7 +176,7 @@ public class MyMainActivity extends BaseActivity {
     private void initView() {
         resImg();//初始化图标
         setSelect(0);
-        radioBtnSy.setOnClickListener(new View.OnClickListener() {
+        mainCalendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 resImg();
@@ -182,14 +185,14 @@ public class MyMainActivity extends BaseActivity {
             }
         });
 
-        radioBtnStudy.setOnClickListener(new View.OnClickListener() {
+        mainYellow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 resImg();
                 setSelect(1);
             }
         });
-        mainBusiness03.setOnClickListener(new View.OnClickListener() {
+        mainStar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 resImg();
@@ -197,15 +200,16 @@ public class MyMainActivity extends BaseActivity {
                 //
             }
         });
-        mainBusiness04.setOnClickListener(new View.OnClickListener() {
+        mainWeather.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 resImg();
-                setSelect(3);
+//                setSelect(3);
+                startActivity(new Intent(MyMainActivity.this, WeatherActivity.class));
                 //
             }
         });
-        radioBtnMine.setOnClickListener(new View.OnClickListener() {
+        mainMine.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 //                Log.e("TAG", "首页-------" + (!StringCache.get("login").equals("true")));
@@ -241,16 +245,16 @@ public class MyMainActivity extends BaseActivity {
     }
 
     public void resImg() {
-        radioBtnSy.setTextColor(getResources().getColor(R.color.main_but));
-        setDradle(radioBtnSy, getResources().getDrawable(R.mipmap.ic_cel));
-        radioBtnStudy.setTextColor(getResources().getColor(R.color.main_but));
-        setDradle(radioBtnStudy, getResources().getDrawable(R.mipmap.ic_yello));
-        mainBusiness03.setTextColor(getResources().getColor(R.color.main_but));
-        setDradle(mainBusiness03, getResources().getDrawable(R.mipmap.ic_star));
-        mainBusiness04.setTextColor(getResources().getColor(R.color.main_but));
-        setDradle(mainBusiness04, getResources().getDrawable(R.mipmap.ic_fortune));
-        radioBtnMine.setTextColor(getResources().getColor(R.color.main_but));
-        setDradle(radioBtnMine, getResources().getDrawable(R.mipmap.ic_mine));
+        mainCalendar.setTextColor(getResources().getColor(R.color.main_but));
+        setDradle(mainCalendar, getResources().getDrawable(R.mipmap.ic_cel));
+        mainYellow.setTextColor(getResources().getColor(R.color.main_but));
+        setDradle(mainYellow, getResources().getDrawable(R.mipmap.ic_yello));
+        mainStar.setTextColor(getResources().getColor(R.color.main_but));
+        setDradle(mainStar, getResources().getDrawable(R.mipmap.ic_star));
+        mainWeather.setTextColor(getResources().getColor(R.color.main_but));
+        setDradle(mainWeather, getResources().getDrawable(R.mipmap.ic_fortune));
+        mainMine.setTextColor(getResources().getColor(R.color.main_but));
+        setDradle(mainMine, getResources().getDrawable(R.mipmap.ic_mine));
     }
 
     private void setSelect(int select) {
@@ -263,39 +267,41 @@ public class MyMainActivity extends BaseActivity {
 //                showFragment(R.id.main_Business);
                 calendarFragment = new CalendarFragment();
                 addFragment(calendarFragment, R.id.frame_layout);
-                radioBtnSy.setTextColor(getResources().getColor(R.color.main_but_down));
-                setDradle(radioBtnSy, getResources().getDrawable(R.mipmap.ic_calendar_down));
+                mainCalendar.setTextColor(getResources().getColor(R.color.main_but_down));
+                setDradle(mainCalendar, getResources().getDrawable(R.mipmap.ic_calendar_down));
                 Log.e("我是主要", "我是主要---------");
                 break;
             case 1:
 //                showFragment(R.id.main_study);
                 yellowCalendarFragment = new YellowCalendarFragment();
                 addFragment(yellowCalendarFragment, R.id.frame_layout);
-                radioBtnStudy.setTextColor(getResources().getColor(R.color.main_but_down));
-                setDradle(radioBtnStudy, getResources().getDrawable(R.mipmap.ic_yellow_down));
+                mainYellow.setTextColor(getResources().getColor(R.color.main_but_down));
+                setDradle(mainYellow, getResources().getDrawable(R.mipmap.ic_yellow_down));
                 Log.e("我是主要", "我是主要2222222222");
                 break;
             case 2:
 //                showFragment(R.id.main_my);
                 stareFragment = new StareFragment();
                 addFragment(stareFragment, R.id.frame_layout);
-                mainBusiness03.setTextColor(getResources().getColor(R.color.main_but_down));
-                setDradle(mainBusiness03, getResources().getDrawable(R.mipmap.ic_yellow_down));
+                mainStar.setTextColor(getResources().getColor(R.color.main_but_down));
+                setDradle(mainStar, getResources().getDrawable(R.mipmap.ic_yellow_down));
                 break;
             case 3:
 //                showFragment(R.id.main_my);
-                fortuneFragment = new FortuneFragment();
-                addFragment(fortuneFragment, R.id.frame_layout);
-                mainBusiness04.setTextColor(getResources().getColor(R.color.main_but_down));
-                setDradle(mainBusiness04, getResources().getDrawable(R.mipmap.ic_yellow_down));
+//                fortuneFragment = new FortuneFragment();
+//                addFragment(fortuneFragment, R.id.frame_layout);
+                weatherFragment = new WeatherFragment();
+                addFragment(weatherFragment, R.id.frame_layout);
+                mainWeather.setTextColor(getResources().getColor(R.color.main_but_down));
+                setDradle(mainWeather, getResources().getDrawable(R.mipmap.ic_yellow_down));
                 Log.e("我是主要", "我是主要3333333333333");
                 break;
             case 4:
 //                showFragment(R.id.main_my);
                 mineFragment = new MineFragment();
                 addFragment(mineFragment, R.id.frame_layout);
-                radioBtnMine.setTextColor(getResources().getColor(R.color.main_but_down));
-                setDradle(radioBtnMine, getResources().getDrawable(R.mipmap.ic_yellow_down));
+                mainMine.setTextColor(getResources().getColor(R.color.main_but_down));
+                setDradle(mainMine, getResources().getDrawable(R.mipmap.ic_yellow_down));
                 Log.e("我是主要", "我是主要3333333333333");
                 break;
 
@@ -310,9 +316,12 @@ public class MyMainActivity extends BaseActivity {
         if (stareFragment != null) {
             transaction.hide(stareFragment);
         }
-        if (fortuneFragment != null) {
-            transaction.hide(fortuneFragment);
+        if (weatherFragment != null) {
+            transaction.hide(weatherFragment);
         }
+//        if (fortuneFragment != null) {
+//            transaction.hide(fortuneFragment);
+//        }
         if (yellowCalendarFragment != null) {
             transaction.hide(yellowCalendarFragment);
         }
@@ -376,7 +385,7 @@ public class MyMainActivity extends BaseActivity {
         Timer tExit = null;
         if (isExit == false) {
             isExit = true; // 准备退出
-            Toast.makeText(this, "再按一次退出程序", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "再按一次退出聚友", Toast.LENGTH_SHORT).show();
             tExit = new Timer();
             tExit.schedule(new TimerTask() {
                 @Override
