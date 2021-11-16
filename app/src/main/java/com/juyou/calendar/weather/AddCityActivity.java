@@ -8,15 +8,12 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
-import com.google.gson.Gson;
 import com.juyou.calendar.R;
-import com.juyou.calendar.bean.weather.CityBean;
+import com.juyou.calendar.weather.bean.CityBean;
 import com.juyou.calendar.constant.WeatherContentUtil;
 
 import java.util.ArrayList;

@@ -1,9 +1,6 @@
 package com.juyou.calendar.bean;
 
-/*
- * 链证科技 2021年07月01日，星期四，15:45:37
- * 作用：
- */
+
 public class MyTestLoginBean {
 
 

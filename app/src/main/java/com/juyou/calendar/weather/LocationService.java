@@ -27,7 +27,6 @@ public class LocationService extends Service {
             if (aMapLocation.getErrorCode() == 0) {
                 WeatherContentUtil.NOW_LON = aMapLocation.getLongitude();
                 WeatherContentUtil.NOW_LAT = aMapLocation.getLatitude();
-                Log.i(TAG, "now location: " +  WeatherContentUtil.NOW_LON + "," + WeatherContentUtil.NOW_LAT);
             }else {
                 String errText = "定位失败," + aMapLocation.getErrorCode() + ": " + aMapLocation.getErrorInfo();
                 Log.e(TAG, errText);

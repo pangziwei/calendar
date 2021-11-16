@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.juyou.calendar.R;
-import com.juyou.calendar.adapter.weather.ForecastAdapter;
+import com.juyou.calendar.weather.adapter.ForecastAdapter;
 import com.juyou.calendar.base.MyExFragment;
 import com.juyou.calendar.bo.Api;
 import com.juyou.calendar.constant.WeatherContentUtil;

@@ -1,4 +1,4 @@
-package com.juyou.calendar.bean.weather;
+package com.juyou.calendar.weather.bean;
 
 import java.util.List;
 

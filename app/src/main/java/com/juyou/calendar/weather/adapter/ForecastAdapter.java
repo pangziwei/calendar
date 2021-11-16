@@ -1,4 +1,4 @@
-package com.juyou.calendar.adapter.weather;
+package com.juyou.calendar.weather.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

@@ -5,8 +5,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -31,12 +33,11 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
-import com.google.gson.Gson;
 import com.juyou.calendar.R;
 import com.juyou.calendar.activity.MyMainActivity;
-import com.juyou.calendar.adapter.weather.ViewPagerAdapter;
-import com.juyou.calendar.bean.weather.CityBean;
-import com.juyou.calendar.bean.weather.CityBeanList;
+import com.juyou.calendar.weather.adapter.ViewPagerAdapter;
+import com.juyou.calendar.weather.bean.CityBean;
+import com.juyou.calendar.weather.bean.CityBeanList;
 import com.juyou.calendar.constant.WeatherContentUtil;
 import com.juyou.calendar.dialog.LocListWindow;
 import com.juyou.calendar.util.DisplayUtil;
@@ -228,10 +229,7 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
                 GeoBean.LocationBean basic = search.getLocationBean().get(0);
                 String cid = basic.getId();
                 String location = basic.getName();
-                Log.e("HeWeather", "-----1111--DVD发---------HeWeather.getGeoCityLookup");
                 if (first) {
-                    Log.e("HeWeather", "--first---1111");
-
                     WeatherContentUtil.NOW_CITY_ID = cid;
                     WeatherContentUtil.NOW_CITY_NAME = location;
                 }
@@ -252,16 +250,12 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
                     cityBeans.add(cityBean);
                 }
                 tvLocation.setText(location);//地理位置，西湖
-//                Log.e("HeWeather", "cityBeans-------发多个-------" + new Gson().toJson(cityBeans));
-
                 getData(cityBeans, first);
             }
         });
     }
 
     private void getNow(String location, final boolean nowCity) {
-        Log.e("HeWeather", "----------222------HeWeather.getGeoCityLookup" + location);
-
         HeWeather.getGeoCityLookup(this, location, Mode.FUZZY, Range.WORLD, 3, Lang.ZH_HANS, new HeWeather.OnResultGeoListener() {
             @Override
             public void onError(Throwable throwable) {
@@ -280,27 +274,20 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
                     if (cityIds != null && cityIds.size() > 0) {
                         cityIds.add(0, cid);
                         cityIds.remove(1);
-                        Log.e("HeWeather", "----------222--" + cityIds);
-
                     }
                 }
                 HeWeather.getWeatherNow(WeatherActivity.this, cid, new HeWeather.OnResultWeatherNowListener() {
                     @Override
                     public void onError(Throwable throwable) {
-
                     }
 
                     @Override
                     public void onSuccess(WeatherNowBean weatherNowBean) {
                         if (Code.OK.getCode().equalsIgnoreCase(weatherNowBean.getCode())) {
-//                            Log.e("HeWeather", "--------333333333-------HeWeather.getWeatherNow");
-
                             WeatherNowBean.NowBaseBean now = weatherNowBean.getNow();
                             condCode = now.getIcon();
                             DateTime nowTime = DateTime.now();
                             int hourOfDay = nowTime.getHourOfDay();
-                            Log.e("HeWeather", "--------333333333------condCode" + condCode);
-
 //                            if (hourOfDay > 6 && hourOfDay < 19) {
 //                                ivBack.setImageResource(IconUtils.getDayIconDark(condCode));
 //                            } else {
@@ -330,11 +317,11 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
             WeatherFragment weatherFragment = WeatherFragment.newInstance(cityId, cityLat, cityLon);
             fragments.add(weatherFragment);
         }
-//        if (cityIds.get(0).equalsIgnoreCase(WeatherContentUtil.NOW_CITY_ID)) {
-//            ivLoc.setVisibility(View.VISIBLE);
-//        } else {
-//            ivLoc.setVisibility(View.INVISIBLE);
-//        }
+        if (cityIds.get(0).equalsIgnoreCase(WeatherContentUtil.NOW_CITY_ID)) {
+            ivLoc.setVisibility(View.VISIBLE);
+        } else {
+            ivLoc.setVisibility(View.INVISIBLE);
+        }
         View view;
         for (int i = 0; i < fragments.size(); i++) {
             //创建底部指示器(小圆点)
@@ -451,8 +438,7 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
         switch (requestCode) {
             case REQUEST_PERMISSION_LOCATION: {
                 // If request is cancelled, the result arrays are empty.
@@ -479,12 +465,23 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
     private void showWaringDialog() {
         AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle("警告！")
-                .setMessage("请前往设置->应用->PermissionDemo->权限中打开相关权限，否则功能无法正常运行！")
-                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                .setMessage("请前往应用权限中打开相关权限，否则功能无法正常运行！")
+                .setCancelable(false)
+                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // 一般情况下如果用户不授权的话，功能是无法运行的，做退出处理
                         finish();
+                    }
+                })
+                .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //跳转到权限设置页面
+                        Intent intentCom = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                        Uri uri = Uri.fromParts("package", getPackageName(), null);
+                        intentCom.setData(uri);
+                        startActivity(intentCom);
                     }
                 }).show();
     }

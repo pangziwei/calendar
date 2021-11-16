@@ -1,10 +1,6 @@
 package com.juyou.calendar.fragment.calendar;
 
 import android.app.Dialog;
-import android.content.Context;
-import android.content.Intent;
-import android.content.res.AssetManager;
-import android.location.Geocoder;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -29,36 +25,19 @@ import android.widget.Toolbar;
 import com.baidu.mobads.sdk.api.CPUWebAdRequestParam;
 import com.baidu.mobads.sdk.api.CpuAdView;
 import com.baidu.mobads.sdk.api.CpuLpFontSize;
-import com.google.gson.Gson;
 import com.juyou.calendar.R;
 import com.juyou.calendar.base.MyExFragment;
-import com.juyou.calendar.bean.weather.WeatherV61Bean;
-import com.juyou.calendar.bo.Api;
-import com.juyou.calendar.constant.WeatherContentUtil;
 import com.juyou.calendar.dialog.AddressDialog;
-import com.juyou.calendar.weather.WeatherActivity;
 import com.juyou.calendar.manage.GradationScrollView;
-import com.juyou.calendar.util.IconUtils;
 import com.juyou.calendar.util.SharedPreUtils;
-import com.juyou.calendar.util.WebUtils;
 import com.littlejie.circleprogress.CircleProgress;
-import com.littlejie.circleprogress.utils.Constant;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
 import com.manggeek.android.geek.GeekActivity;
-import com.manggeek.android.geek.cache.StringCache;
-import com.manggeek.android.geek.utils.JSONUtil;
-import com.manggeek.android.geek.utils.PrintUtil;
 import com.othershe.calendarview.bean.DateBean;
 import com.othershe.calendarview.listener.OnPagerChangeListener;
 import com.othershe.calendarview.listener.OnSingleChooseListener;
 import com.othershe.calendarview.utils.CalendarUtil;
 import com.othershe.calendarview.weiget.CalendarView;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -68,7 +47,6 @@ import java.util.UUID;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import interfaces.heweather.com.interfacesmodule.bean.geo.GeoBean;
 
 public class CalendarFragment extends MyExFragment implements GradationScrollView.ScrollViewListener {
 

@@ -6,18 +6,13 @@ import com.juyou.calendar.util.SpUtils;
 public class WeatherContentUtil {
     //省市区json文件
     public static final String AREA_JSON = "AREA_JSON";
-    //易客天气api
-    //用户id
-    public static final String APPID = "69384542";
-    //用户秘钥
-    public static final String APP_SECRET = "4QxOcjyX";
     //初始化和风天气的key和userName
     public static final String HE_PUBLIC_ID = "HE2110271712351913";
     //用户秘钥
     public static final String HE_APK_KEY = "d8f9930db8784825b9d6a3df91cd315f";
     //当前所在位置
-    public static Double NOW_LON = 116.40;
-    public static Double NOW_LAT = 39.9;
+    public static Double NOW_LON = 116.20;
+    public static Double NOW_LAT = 39.56;
 
     public static boolean FIRST_OPEN = SpUtils.getBoolean(BaseApplication.getContext(), "first_open", true);
     //当前城市
@@ -26,13 +21,7 @@ public class WeatherContentUtil {
     //应用设置里的文字
     public static String SYS_LANG = "zh";
     public static String APP_SETTING_LANG = SpUtils.getString(BaseApplication.getContext(), "language", "sys");
-    public static String APP_SETTING_UNIT = SpUtils.getString(BaseApplication.getContext(), "unit", "she");
-    public static String APP_SETTING_TESI = SpUtils.getString(BaseApplication.getContext(), "size", "mid");
-    public static String APP_PRI_TESI = SpUtils.getString(BaseApplication.getContext(), "size", "mid");
-    public static String APP_SETTING_THEME = SpUtils.getString(BaseApplication.getContext(), "theme", "浅色");
 
-    public static boolean UNIT_CHANGE = false;
-    public static boolean CHANGE_LANG = false;
     public static boolean CITY_CHANGE = false;
 
 

@@ -6,13 +6,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
 import com.juyou.calendar.R;
-import com.juyou.calendar.bean.weather.CityBean;
-import com.juyou.calendar.bean.weather.CityBeanList;
+import com.juyou.calendar.weather.bean.CityBean;
+import com.juyou.calendar.weather.bean.CityBeanList;
 import com.juyou.calendar.constant.WeatherContentUtil;
 import com.juyou.calendar.util.SpUtils;
 

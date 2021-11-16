@@ -17,8 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.juyou.calendar.R;
-import com.juyou.calendar.bean.weather.CityBean;
-import com.juyou.calendar.bean.weather.CityBeanList;
+import com.juyou.calendar.weather.bean.CityBean;
+import com.juyou.calendar.weather.bean.CityBeanList;
 import com.juyou.calendar.constant.WeatherContentUtil;
 
 import com.juyou.calendar.util.SpUtils;

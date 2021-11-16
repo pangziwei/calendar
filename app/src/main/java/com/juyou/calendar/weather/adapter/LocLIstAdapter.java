@@ -1,4 +1,4 @@
-package com.juyou.calendar.adapter.weather;
+package com.juyou.calendar.weather.adapter;
 
 
 import android.view.LayoutInflater;
@@ -11,8 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.juyou.calendar.R;
 import com.juyou.calendar.activity.MyMainActivity;
-import com.juyou.calendar.bean.weather.CityBean;
-import com.juyou.calendar.bean.weather.CityBeanList;
+import com.juyou.calendar.weather.bean.CityBean;
+import com.juyou.calendar.weather.bean.CityBeanList;
 import com.juyou.calendar.dialog.LocListWindow;
 import com.juyou.calendar.util.SpUtils;
 import com.juyou.calendar.weather.DataUtil;
