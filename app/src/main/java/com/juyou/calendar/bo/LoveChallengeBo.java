@@ -87,7 +87,6 @@ public class LoveChallengeBo {
         httpParams.put("telephone", telephone);
         httpParams.put("type", smsType);
 
-        Log.e("发送短信", "httpParams----------------" + new Gson().toJson(httpParams));
         GeekHttp.getHttp().get(0, Api.BaseUrl + "sms/send", httpParams, listener);
 
     }
@@ -184,8 +183,6 @@ public class LoveChallengeBo {
 
     public static void getDynamicTop(Context context, NetResultCallBack listener) {
         BaseParams httpParams = new BaseParams();
-        Log.e("SuperNodeActivity", "httpParams---------------" + httpParams);
-
         GeekHttp.getHttp().get(context, 0, Api.BaseUrl + "dynamic/top", httpParams, listener);
     }
 

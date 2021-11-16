@@ -94,7 +94,6 @@ public class AddressDialog extends GeekDialog {
             areaJson = getJson("area.json", mActivity);//选择的市区
             StringCache.put(WeatherContentUtil.AREA_JSON, areaJson);
         }
-        Log.e("地址", "areaJson--------------------"+new Gson().toJson(areaJson));//所有的市区
         provinceList = JSONUtil.getListObj(areaJson, ProvinceEntity.class);
         confirmTv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -122,7 +121,6 @@ public class AddressDialog extends GeekDialog {
             //通过管理器打开文件并读取
             BufferedReader bf = new BufferedReader(new InputStreamReader(assetManager.open(fileName)));
             String line;
-            Log.e("地址", "bf-----------------"+new Gson().toJson(bf));
             while ((line = bf.readLine()) != null) {
                 stringBuilder.append(line);
             }

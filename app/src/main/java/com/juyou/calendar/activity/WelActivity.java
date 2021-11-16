@@ -107,7 +107,6 @@ public class WelActivity extends AppCompatActivity {
                 SharedPreferenceUtil.putBooleanValue(SharedPreferenceUtil.IS_AGREE_PROTOCOL, true);
 //                startMainActivity();
                 startSplashActivity();
-                Log.e("函数来处理", "函数来处理----------------------");
                 builder.dismiss();
             }
         });

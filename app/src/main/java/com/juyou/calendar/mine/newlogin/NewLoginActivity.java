@@ -137,7 +137,6 @@ public class NewLoginActivity extends MyBaseActivity {
                 if (currentBean.getCode().equals("200")) {
                     //判断用户状态 0未注册 1未设置密码 2设置密码
                     String statusCode = String.valueOf(currentBean.getData());
-                    Log.e("SetPawActivity", "判断用户状态 0未注册 1未设置密码 2设置密码----------------" + statusCode);
                     if ("0".contains(statusCode)) {
                         //未注册新用户---0未注册
 

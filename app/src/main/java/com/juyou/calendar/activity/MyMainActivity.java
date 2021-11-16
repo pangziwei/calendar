@@ -442,15 +442,10 @@ public class MyMainActivity extends BaseActivity {
                                 PackageInfo packageInfo = BaseApplication.getPackageInfo();
                                 String name = packageInfo.versionName;
                                 int versionCode = packageInfo.versionCode;
-                                Log.e("TAG", "name---------------" + name);
                                 //服务器版本
                                 double versionDouble = Double.parseDouble(version.replace(".", ""));//字符进行替换
                                 //app版本
                                 double nameDouble = Double.parseDouble(name.replace(".", ""));//
-                                Log.e("更新app版本", "name---------------" + name);
-                                Log.e("更新app版本", "versionDouble---------------" + versionDouble);
-                                Log.e("更新app版本", "nameDouble---------------" + nameDouble);
-                                Log.e("更新app版本", "versionCode---------------" + versionCode);
 
                                 //本地比服务器底，需要更新
 

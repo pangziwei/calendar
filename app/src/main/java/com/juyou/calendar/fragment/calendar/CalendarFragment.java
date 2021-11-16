@@ -606,7 +606,6 @@ public class CalendarFragment extends MyExFragment implements GradationScrollVie
             provinceName = province;
             cityName = city;
             areaName = area;
-            Log.e("地址", "provinceCode---------------"+areaName);
             test_textview.setText(areaName);
 
         }

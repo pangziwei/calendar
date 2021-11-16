@@ -66,8 +66,6 @@ public class RegisteredActivity extends AppCompatActivity {
         if (getIntent() != null) {
             PhoneTel = getIntent().getStringExtra("PhoneTel");
             statusCode = getIntent().getStringExtra("statusCode");
-            Log.e("RegisteredActivity", "PhoneTel------------------" + PhoneTel);
-            Log.e("RegisteredActivity", "statusCode------------------" + statusCode);
         }
 
     }

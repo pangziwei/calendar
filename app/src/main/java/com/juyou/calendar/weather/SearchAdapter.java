@@ -98,7 +98,6 @@ public class SearchAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             @Override
             public void onClick(View view) {
                 final String cid = data.get(i).getCityId();
-                Log.e("location", "----------------"+new Gson().toJson(data));
                 if (lang.equals(Lang.ZH_HANS)) {
                     saveData(Lang.EN, "cityBeanEn", cid);
                     saveBean("cityBean", cid, i);

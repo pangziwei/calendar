@@ -19,7 +19,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,8 +46,6 @@ import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import interfaces.heweather.com.interfacesmodule.bean.base.Code;
 import interfaces.heweather.com.interfacesmodule.bean.base.Lang;
@@ -88,7 +85,6 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
         Window window = getWindow();
         //透明状态栏
         window.addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        Log.e("citys", "我是Activity");
 
         viewPager = findViewById(R.id.view_pager);
         llRound = findViewById(R.id.ll_round);
@@ -103,8 +99,6 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
         ivAdd.setOnClickListener(this);
         setMargins(viewPager, 0, getStatusBarHeight(this) + DisplayUtil.dip2px(this, 52), 0, 0);
         setMargins(rvTitle, 0, getStatusBarHeight(this), 0, 0);
-
-
         initPermission();
     }
 
@@ -119,7 +113,6 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
                 WeatherContentUtil.NOW_LON = aMapLocation.getLongitude();
                 WeatherContentUtil.NOW_LAT = aMapLocation.getLatitude();
                 getNowCity(true);
-
                 mLocationClient.onDestroy();
             } else {
                 if (ContextCompat.checkSelfPermission(WeatherActivity.this, Manifest.permission.ACCESS_FINE_LOCATION)
@@ -187,7 +180,7 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
             initLocation();
         } else {
             getNowCity(false);
-            Log.e("citys", "--------555------------" + WeatherContentUtil.NOW_LON + "," + WeatherContentUtil.NOW_LAT);
+            Log.e("HeWeather", "--------555------------" + WeatherContentUtil.NOW_LON + "," + WeatherContentUtil.NOW_LAT);
         }
 
     }
@@ -213,7 +206,6 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void getNowCity(final boolean first) {
-        Log.e("citys", ",+ WeatherContentUtil.NOW_LAT--------------");
         Lang lang;
         if (WeatherContentUtil.APP_SETTING_LANG.equals("en") || WeatherContentUtil.APP_SETTING_LANG.equals("sys") && WeatherContentUtil.SYS_LANG.equals("en")) {
             lang = Lang.EN;
@@ -236,7 +228,10 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
                 GeoBean.LocationBean basic = search.getLocationBean().get(0);
                 String cid = basic.getId();
                 String location = basic.getName();
+                Log.e("HeWeather", "-----1111--DVD发---------HeWeather.getGeoCityLookup");
                 if (first) {
+                    Log.e("HeWeather", "--first---1111");
+
                     WeatherContentUtil.NOW_CITY_ID = cid;
                     WeatherContentUtil.NOW_CITY_NAME = location;
                 }
@@ -245,8 +240,8 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
                 CityBean cityBean = new CityBean();
                 cityBean.setCityName(location);
                 cityBean.setCityId(cid);
-                cityBean.setLat(cityBean.getLat());
-                cityBean.setLon(cityBean.getLon());
+                cityBean.setLat(basic.getLat());
+                cityBean.setLon(basic.getLon());
 
                 locaitons.add(0, location);
                 locaitonsEn.add(0, location);
@@ -257,7 +252,7 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
                     cityBeans.add(cityBean);
                 }
                 tvLocation.setText(location);//地理位置，西湖
-                Log.e("citys", "cityBeans-------发多个-------" + new Gson().toJson(cityBeans));
+//                Log.e("HeWeather", "cityBeans-------发多个-------" + new Gson().toJson(cityBeans));
 
                 getData(cityBeans, first);
             }
@@ -265,6 +260,8 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void getNow(String location, final boolean nowCity) {
+        Log.e("HeWeather", "----------222------HeWeather.getGeoCityLookup" + location);
+
         HeWeather.getGeoCityLookup(this, location, Mode.FUZZY, Range.WORLD, 3, Lang.ZH_HANS, new HeWeather.OnResultGeoListener() {
             @Override
             public void onError(Throwable throwable) {
@@ -276,12 +273,15 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
                 GeoBean.LocationBean basic = search.getLocationBean().get(0);
                 String cid = basic.getId();
                 String location = basic.getName();
+
                 if (nowCity) {
                     WeatherContentUtil.NOW_CITY_ID = cid;
                     WeatherContentUtil.NOW_CITY_NAME = location;
                     if (cityIds != null && cityIds.size() > 0) {
                         cityIds.add(0, cid);
                         cityIds.remove(1);
+                        Log.e("HeWeather", "----------222--" + cityIds);
+
                     }
                 }
                 HeWeather.getWeatherNow(WeatherActivity.this, cid, new HeWeather.OnResultWeatherNowListener() {
@@ -293,10 +293,14 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
                     @Override
                     public void onSuccess(WeatherNowBean weatherNowBean) {
                         if (Code.OK.getCode().equalsIgnoreCase(weatherNowBean.getCode())) {
+//                            Log.e("HeWeather", "--------333333333-------HeWeather.getWeatherNow");
+
                             WeatherNowBean.NowBaseBean now = weatherNowBean.getNow();
                             condCode = now.getIcon();
                             DateTime nowTime = DateTime.now();
                             int hourOfDay = nowTime.getHourOfDay();
+                            Log.e("HeWeather", "--------333333333------condCode" + condCode);
+
 //                            if (hourOfDay > 6 && hourOfDay < 19) {
 //                                ivBack.setImageResource(IconUtils.getDayIconDark(condCode));
 //                            } else {
@@ -323,16 +327,14 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
             cityIds.add(cityId);
             lats.add(cityLat);
             lons.add(cityLon);
-            Log.e("fragments", "fragments--------------" + fragments.size());
-            Log.e("citys", "cityBeans--------citys------" + new Gson().toJson(city));
             WeatherFragment weatherFragment = WeatherFragment.newInstance(cityId, cityLat, cityLon);
             fragments.add(weatherFragment);
         }
-        if (cityIds.get(0).equalsIgnoreCase(WeatherContentUtil.NOW_CITY_ID)) {
-            ivLoc.setVisibility(View.VISIBLE);
-        } else {
-            ivLoc.setVisibility(View.INVISIBLE);
-        }
+//        if (cityIds.get(0).equalsIgnoreCase(WeatherContentUtil.NOW_CITY_ID)) {
+//            ivLoc.setVisibility(View.VISIBLE);
+//        } else {
+//            ivLoc.setVisibility(View.INVISIBLE);
+//        }
         View view;
         for (int i = 0; i < fragments.size(); i++) {
             //创建底部指示器(小圆点)
@@ -408,69 +410,7 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
     @Override
     protected void onResume() {
         super.onResume();
-        if (WeatherContentUtil.APP_PRI_TESI.equalsIgnoreCase(WeatherContentUtil.APP_SETTING_TESI)) {
-            Log.e("minTmp", "fragment的长度----" + fragments.size());
-
-            if (fragments != null && fragments.size() > -1) {
-//                for (Fragment fragment : fragments) {
-//                    WeatherFragment weatherFragment = (WeatherFragment) fragment;
-//                    weatherFragment.changeTextSize();
-//                }
-            }
-            if ("small".equalsIgnoreCase(WeatherContentUtil.APP_SETTING_TESI)) {
-                tvLocation.setTextSize(15);
-            } else if ("large".equalsIgnoreCase(WeatherContentUtil.APP_SETTING_TESI)) {
-                tvLocation.setTextSize(17);
-            } else {
-                tvLocation.setTextSize(16);
-            }
-            WeatherContentUtil.APP_PRI_TESI = WeatherContentUtil.APP_SETTING_TESI;
-        }
-        if (WeatherContentUtil.CHANGE_LANG) {
-            if (WeatherContentUtil.SYS_LANG.equalsIgnoreCase("en")) {
-                changeLang(Lang.EN);
-            } else {
-                changeLang(Lang.ZH_HANS);
-            }
-            WeatherContentUtil.CHANGE_LANG = false;
-        }
-        if (WeatherContentUtil.CITY_CHANGE) {
-            initFragments(true);
-            WeatherContentUtil.CITY_CHANGE = false;
-        }
-        if (WeatherContentUtil.UNIT_CHANGE) {
-            Log.e("minTmp", "mhncvbnmcvbnxbn");
-//            for (Fragment fragment : fragments) {
-//                WeatherFragment weatherFragment = (WeatherFragment) fragment;
-//                weatherFragment.changeUnit();
-//            }
-            WeatherContentUtil.UNIT_CHANGE = false;
-        }
-    }
-
-
-    private void changeLang(final Lang lang) {
-        HeWeather.getGeoCityLookup(this, WeatherContentUtil.NOW_LON + "," + WeatherContentUtil.NOW_LAT, Mode.FUZZY, Range.WORLD, 3, lang, new HeWeather.OnResultGeoListener() {
-            @Override
-            public void onError(Throwable throwable) {
-            }
-
-            @Override
-            public void onSuccess(GeoBean search) {
-                GeoBean.LocationBean basic = search.getLocationBean().get(0);
-                String location = basic.getName();
-
-                if (lang == Lang.EN) {
-                    locaitonsEn.remove(0);
-                    locaitonsEn.add(0, location);
-                    tvLocation.setText(locaitonsEn.get(mNum));
-                } else if (lang == Lang.ZH_HANS) {
-                    locaitons.remove(0);
-                    locaitons.add(0, location);
-                    tvLocation.setText(locaitons.get(mNum));
-                }
-            }
-        });
+        Log.e("Weather", "onResume-----");
     }
 
     private void initPermission() {
@@ -558,6 +498,14 @@ public class WeatherActivity extends AppCompatActivity implements View.OnClickLi
             finish();
         }
         return false;
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        Log.e("Weather", "onRestart");
+        //在这刷新fragment
+        initFragments(true);
     }
 
 }

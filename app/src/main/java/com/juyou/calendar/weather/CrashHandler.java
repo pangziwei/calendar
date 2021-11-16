@@ -84,8 +84,6 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
      */
     @Override
     public void uncaughtException(Thread thread, Throwable ex) {
-        Log.e("函数来处理", "ex-------------- dzvv--------0"+new Gson().toJson(ex));
-        Log.e("函数来处理", "ex----------------------0"+new Gson().toJson(thread));
         if (!handleException(ex) && mDefaultHandler != null) {
             // 如果用户没有处理则让系统默认的异常处理器来处理  
             mDefaultHandler.uncaughtException(thread, ex);
@@ -95,7 +93,6 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             } catch (InterruptedException e) {
                 e.printStackTrace();
                 Log.e(TAG, "error : ", e);
-                Log.e("函数来处理", "ex----------------------0"+new Gson().toJson(e));
 
             }
 

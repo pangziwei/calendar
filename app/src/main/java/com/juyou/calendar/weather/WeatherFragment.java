@@ -138,7 +138,9 @@ public class WeatherFragment extends MyExFragment {
         args.putString(CITY_LAT, cityLat);
         args.putString(CITY_LON, cityLon);
         fragment.setArguments(args);
-        Log.e("fragment", "args-----------" + args);
+//        Log.e("HeWeather", "args-----------" + args);
+//        Log.e("HeWeather", "args---cityLat--------" + cityLat);
+//        Log.e("HeWeather", "args-----------" + cityLon);
         return fragment;
     }
 
@@ -175,7 +177,7 @@ public class WeatherFragment extends MyExFragment {
 
     private void init() {
         if (lon != null) {
-            Log.e("彩云天气", "--> " + location + " <--> " + lon + " <--> " + lat);
+//            Log.e("HeWeather", "--> " + location + " <-lon-> " + lon + " <-lat-> " + lat);
             initCaiYunNowDay();//天数
             initCaiYunNowHourly();//24小时数
             initCaiYunNowWeather();//实况天气
@@ -194,7 +196,6 @@ public class WeatherFragment extends MyExFragment {
         client.get(register, params, new AsyncHttpResponseHandler() {
             @Override
             public void onSuccess(String content) {
-                Log.e("BEASN", "---------------" + new Gson().toJson(content));
                 CaiYunNowWeatherBean caiYunNowWeatherBean = new Gson().fromJson(content, CaiYunNowWeatherBean.class);
                 getWeatherAir(caiYunNowWeatherBean);
 

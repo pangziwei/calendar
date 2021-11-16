@@ -69,7 +69,6 @@ public class VerCodeLoginActivity extends AppCompatActivity {
         if (getIntent() != null) {
             PhoneTel = getIntent().getStringExtra("PhoneTel");
             CodeVer = getIntent().getStringExtra("statusCode");
-            Log.e("GetVerCodeActivity", "PhoneTel------------------" + PhoneTel);
             tvVercodePhone.setText(PhoneTel);
 
 //             //发送短信
@@ -190,12 +189,9 @@ public class VerCodeLoginActivity extends AppCompatActivity {
 
 
     private void getVerCode(String phong, String smsType) {
-        Log.e("GetVerCodeActivity", "phone------------------" + phong);
-        Log.e("GetVerCodeActivity", "smsType-----验证码-----getVerCode--------" + smsType);
         LoveChallengeBo.SendSms(VerCodeLoginActivity.this, PhoneTel, smsType, new NetResultCallBack() {
             @Override
             public void onSuccess(int what, CurrentBean currentBean) {
-                Log.e("LoginActivity", "et_tel------------" + new Gson().toJson(currentBean));
                 if (currentBean.getCode().equals("200")) {
                     Toast.makeText(VerCodeLoginActivity.this, "验证码已发送", Toast.LENGTH_SHORT).show();
                     timeCountUtil = new TimeCountUtil(VerCodeLoginActivity.this, 60000, 1000, btnGetCode, "login");

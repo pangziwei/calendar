@@ -277,7 +277,6 @@ public class mTimePickerView extends MyBasePickerView implements View.OnClickLis
             try {
                 Date date = WheelTime.dateFormat.parse(wheelTime.getTime());
                 mPickerOptions.timeSelectListener.onTimeSelect(date, clickView);
-                Log.e("weather", "date------------------" + date);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
