@@ -192,7 +192,9 @@ public class MineFragment extends MyExFragment {
             }
         });
     }
+
     private final static int REQUESTCODE = 10; // 返回的结果码
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -200,12 +202,13 @@ public class MineFragment extends MyExFragment {
 
         } else if (resultCode == RESULT_OK && requestCode == IMAGE_OPEN) {
 //            imgPaht = ChangeHeadImg.getImgPaht(data.getData(), getActivity(), cvMineHead);
-            Log.e("data", "IMAGE_OPEN------相册--------"+data.getData().toString());
-            cvMineHead.setImageURI(data.getData());
+            Log.e("data", "IMAGE_OPEN------相册--------" + data.getData().toString());
+            cvMineHead.setImageURI(data.getData());//展示照片
         } else if (resultCode == RESULT_OK && requestCode == REQUEST_CODE_CAMERA) {//这个是拍照
             Bundle bundle = data.getExtras();
             Bitmap bitmap = (Bitmap) bundle.get("data");
-            Log.e("data", "REQUEST_CODE_CAMERA-------拍照-------"+data.getData().toString());
+            Log.e("data", "REQUEST_CODE_CAMERA-------拍照-------" + data.getData().toString());
+            cvMineHead.setImageURI(data.getData());//展示照片
 
 //            imgPaht = ChangeHeadImg.getImageFormCamera(bitmap, getActivity());
         } else if (requestCode == AppSettingsDialog.DEFAULT_SETTINGS_REQ_CODE) {

@@ -246,7 +246,7 @@ public class MyMainActivity extends BaseActivity {
 
     public void resImg() {
         mainCalendar.setTextColor(getResources().getColor(R.color.main_but));
-        setDradle(mainCalendar, getResources().getDrawable(R.mipmap.ic_cel));
+        setDradle(mainCalendar, getResources().getDrawable(R.mipmap.ic_calendar));
         mainYellow.setTextColor(getResources().getColor(R.color.main_but));
         setDradle(mainYellow, getResources().getDrawable(R.mipmap.ic_yello));
         mainStar.setTextColor(getResources().getColor(R.color.main_but));
@@ -276,7 +276,7 @@ public class MyMainActivity extends BaseActivity {
                 yellowCalendarFragment = new YellowCalendarFragment();
                 addFragment(yellowCalendarFragment, R.id.frame_layout);
                 mainYellow.setTextColor(getResources().getColor(R.color.main_but_down));
-                setDradle(mainYellow, getResources().getDrawable(R.mipmap.ic_yellow_down));
+                setDradle(mainYellow, getResources().getDrawable(R.mipmap.ic_yello_down));
                 Log.e("我是主要", "我是主要2222222222");
                 break;
             case 2:
@@ -284,7 +284,7 @@ public class MyMainActivity extends BaseActivity {
                 stareFragment = new StareFragment();
                 addFragment(stareFragment, R.id.frame_layout);
                 mainStar.setTextColor(getResources().getColor(R.color.main_but_down));
-                setDradle(mainStar, getResources().getDrawable(R.mipmap.ic_yellow_down));
+                setDradle(mainStar, getResources().getDrawable(R.mipmap.ic_star_down));
                 break;
             case 3:
 //                showFragment(R.id.main_my);
@@ -293,7 +293,7 @@ public class MyMainActivity extends BaseActivity {
                 weatherFragment = new WeatherFragment();
                 addFragment(weatherFragment, R.id.frame_layout);
                 mainWeather.setTextColor(getResources().getColor(R.color.main_but_down));
-                setDradle(mainWeather, getResources().getDrawable(R.mipmap.ic_yellow_down));
+                setDradle(mainWeather, getResources().getDrawable(R.mipmap.ic_weather_down));
                 Log.e("我是主要", "我是主要3333333333333");
                 break;
             case 4:
@@ -301,7 +301,7 @@ public class MyMainActivity extends BaseActivity {
                 mineFragment = new MineFragment();
                 addFragment(mineFragment, R.id.frame_layout);
                 mainMine.setTextColor(getResources().getColor(R.color.main_but_down));
-                setDradle(mainMine, getResources().getDrawable(R.mipmap.ic_yellow_down));
+                setDradle(mainMine, getResources().getDrawable(R.mipmap.ic_mine_down));
                 Log.e("我是主要", "我是主要3333333333333");
                 break;
 

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     android:orientation="vertical">
 
     <FrameLayout
@@ -44,6 +44,7 @@
             android:textSize="@dimen/sp_14"
 
             />
+
         <TextView
             android:id="@+id/main_star"
             android:layout_width="0dp"
@@ -58,6 +59,7 @@
             android:textSize="@dimen/sp_14"
 
             />
+
         <TextView
             android:id="@+id/main_weather"
             android:layout_width="0dp"
