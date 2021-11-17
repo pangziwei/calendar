@@ -252,7 +252,7 @@ public class MyMainActivity extends BaseActivity {
         mainStar.setTextColor(getResources().getColor(R.color.main_but));
         setDradle(mainStar, getResources().getDrawable(R.mipmap.ic_star));
         mainWeather.setTextColor(getResources().getColor(R.color.main_but));
-        setDradle(mainWeather, getResources().getDrawable(R.mipmap.ic_fortune));
+        setDradle(mainWeather, getResources().getDrawable(R.mipmap.ic_weather));
         mainMine.setTextColor(getResources().getColor(R.color.main_but));
         setDradle(mainMine, getResources().getDrawable(R.mipmap.ic_mine));
     }
