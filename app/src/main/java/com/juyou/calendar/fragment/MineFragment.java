@@ -87,7 +87,6 @@ public class MineFragment extends MyExFragment {
         switch (view.getId()) {
             case R.id.cv_mine_head:
                 onclickBtn();
-
                 break;
             case R.id.tv_mine_login:
                 break;

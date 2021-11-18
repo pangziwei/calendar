@@ -70,6 +70,8 @@
 
                 <RelativeLayout
                     android:id="@+id/parent_block"
+                    android:layout_marginLeft="@dimen/dp_6"
+                    android:layout_marginRight="@dimen/dp_6"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
             </LinearLayout>

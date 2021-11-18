@@ -195,6 +195,7 @@
 
             <ImageView
                 android:layout_width="@dimen/dp_50"
+                android:layout_marginLeft="@dimen/dp_10"
                 android:layout_height="match_parent"
                 android:src="@mipmap/ic_mine_fortune_qian" />
         </LinearLayout>
@@ -202,13 +203,12 @@
         <LinearLayout
             android:layout_width="@dimen/dp_0"
             android:layout_height="match_parent"
-            android:layout_marginLeft="-30dp"
-            android:layout_weight="1">
+            android:layout_marginLeft="@dimen/dp_10"
+            android:layout_weight="2">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="center"
                 android:text="管教刻日保平安
             万事诚求神佛佑
@@ -248,9 +248,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-10dp"
                 android:gravity="center"
-                android:text="当前中签 "
+                android:text="当前中签"
                 android:textColor="@color/color_E64646"
-                android:textSize="@dimen/sp_18" />
+                android:textSize="@dimen/sp_16" />
 
             <TextView
                 android:layout_width="match_parent"
