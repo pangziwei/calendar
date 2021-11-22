@@ -17,10 +17,16 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
+import com.bumptech.glide.Glide;
 import com.juyou.calendar.R;
 import com.juyou.calendar.base.MyExFragment;
+import com.juyou.calendar.eventbus.QQLoginEventBus;
 import com.juyou.calendar.mine.about.AboutActivity;
 import com.manggeek.android.geek.view.CircleImageView;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -64,6 +70,7 @@ public class MineFragment extends MyExFragment {
 
     @Override
     public void loadData() {
+
     }
 
     @Override
@@ -76,9 +83,12 @@ public class MineFragment extends MyExFragment {
 
     }
 
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        EventBus.getDefault().register(this);
+
     }
 
 
@@ -223,4 +233,18 @@ public class MineFragment extends MyExFragment {
 
     }
 
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onEventMainThread(QQLoginEventBus messageEvent) {
+        Log.e("TAG", "messageEvent---观察者的模式来进行数据变化-----" + messageEvent.getMessage());
+        if (!messageEvent.getMessage().equals("")) {
+            Glide.with(getActivity()).load(messageEvent.getMessage()).into(cvMineHead);
+        }
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 }

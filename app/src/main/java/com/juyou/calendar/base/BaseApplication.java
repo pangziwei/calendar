@@ -26,7 +26,7 @@ public class BaseApplication extends GeekApplication {
         instance = this;
         SharedPreferenceUtil.init(this);
        //腾讯qq登录初始化
-
+//        Tencent.setIsPermissionGranted(true);
 
 
     }

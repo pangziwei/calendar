@@ -166,5 +166,7 @@ dependencies {
 
     //    glide图片加载
     api 'com.github.bumptech.glide:glide:4.8.0'
+//    qq登录
+    implementation files('libs/open_sdk_3.5.7.4_r1bc9afe_lite.jar')
 
 }

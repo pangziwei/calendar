@@ -92,7 +92,6 @@ public class MyMainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_my_main);
-        Log.e("TAG", "onCreate-----onCreate---");
 
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -353,6 +352,11 @@ public class MyMainActivity extends BaseActivity {
                 this.resImg();
                 this.setSelect(2);
                 Log.e("返回键", "打副本是班");
+            }
+            else if (selectIndex == 4) {
+                Log.e("tag", "-----2");
+                this.resImg();
+                this.setSelect(4);
             }
         } else {
             return;
