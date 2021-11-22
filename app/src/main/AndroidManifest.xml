@@ -6,7 +6,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-feature android:name="android.hardware.camera" /> <!-- 相机权限 -->
     <uses-permission android:name="android.permission.CAMERA" /> <!-- 写入SD卡的权限：如果你希望保存相机拍照后的照片 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 读取SD卡的权限:打开相册选取图片所必须的权限 -->
@@ -15,16 +15,11 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" /> <!-- 用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" /> <!-- iBeancon 功能所需权限 -->
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-
-    <!-- 用于进行网络定位 -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <!-- 用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
-    <!-- 用于申请获取蓝牙信息进行室内定位 -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" /> <!-- 用于进行网络定位 -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- 用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" /> <!-- 用于申请获取蓝牙信息进行室内定位 -->
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
-<!--    android.Manifest.permission#BIND_CARRIER_MESSAGING_SERVICE-->
 
     <application
         android:name=".base.BaseApplication"
@@ -37,6 +32,7 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:allowBackup">
+        <activity android:name=".fragment.mine.OneClickLoginActivity"></activity>
         <activity android:name=".weather.WeatherActivity" />
         <activity android:name=".weather.ManageCityActivity" />
         <activity android:name=".weather.AddCityActivity" />
@@ -46,11 +42,13 @@
             android:required="false" />
 
         <activity android:name=".activity.SplashActivity">
-            <!--            <intent-filter>-->
-            <!--                <action android:name="android.intent.action.MAIN" />-->
 
-            <!--                <category android:name="android.intent.category.LAUNCHER" />-->
-            <!--            </intent-filter>-->
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
         <activity android:name=".mine.newlogin.VerCodeLoginActivity" />
         <activity android:name=".mine.newlogin.RegisteredActivity" />
@@ -62,7 +60,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activity.MyMainActivity"
             android:launchMode="singleTask"
@@ -76,21 +73,19 @@
         <!-- android:screenOrientation="fullSensor" -->
         <!-- android:theme="@style/CaptureTheme" /> -->
         <service android:name=".upapp.UpdateService" />
-        <activity android:name="com.juyou.calendar.activity.WebViewActivity" />
 
-        <!-- 高德 -->
-        <!-- 设置key 已换上自己的-->
+        <activity android:name=".activity.WebViewActivity" /> <!-- 高德 -->
+        <!-- 设置key 已换上自己的 -->
         <meta-data
             android:name="com.amap.api.v2.apikey"
             android:value="25d17d3cc90c5dad2299ba0c310e9b8d" />
 
         <service android:name="com.amap.api.location.APSService" />
         <service
-            android:name="com.juyou.calendar.weather.LocationService"
+            android:name=".weather.LocationService"
             android:enabled="true"
             android:exported="true"
             android:permission="android.permission.ACCESS_FINE_LOCATION" />
-
 
         <receiver
             android:name=".util.NetBroadcastReceiver"
@@ -98,8 +93,7 @@
             <intent-filter>
                 <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
             </intent-filter>
-        </receiver>
-        <!-- 百度广告页的配置 -->
+        </receiver> <!-- 百度广告页的配置 -->
         <activity
             android:name="com.baidu.mobads.sdk.api.AppActivity"
             android:configChanges="screenSize|keyboard|keyboardHidden|orientation"
@@ -123,6 +117,7 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/bd_file_paths" />
         </provider>
+
     </application>
 
 </manifest>

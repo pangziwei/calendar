@@ -6,9 +6,12 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.inputmethod.InputMethodManager;
+
 import androidx.multidex.MultiDex;
+
 import com.juyou.calendar.manage.SharedPreferenceUtil;
 import com.manggeek.android.geek.GeekApplication;
+import com.tencent.tauth.Tencent;
 
 import java.math.BigDecimal;
 
@@ -16,11 +19,14 @@ public class BaseApplication extends GeekApplication {
     private Activity topActivity;
     //获取屏幕的高，宽
     private static BaseApplication instance = null;
+
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
         SharedPreferenceUtil.init(this);
+       //腾讯qq登录初始化
+
 
 
     }

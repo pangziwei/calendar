@@ -1,4 +1,4 @@
-package com.juyou.calendar.fragment;
+package com.juyou.calendar.fragment.mine;
 
 import android.Manifest;
 import android.content.DialogInterface;
@@ -89,6 +89,8 @@ public class MineFragment extends MyExFragment {
                 onclickBtn();
                 break;
             case R.id.tv_mine_login:
+                Intent intent = new Intent(getActivity(), OneClickLoginActivity.class);
+                startActivity(intent);
                 break;
             case R.id.ll_mine_star_query:
                 break;

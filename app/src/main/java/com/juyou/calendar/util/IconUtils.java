@@ -371,67 +371,67 @@ public class IconUtils {
         int imageId;
         switch (icon) {
             case WeatherContentUtil.CLEAR_DAY:
-                imageId = R.mipmap.yun;
+                imageId = R.mipmap.ic_weather_clear;
                 break;
             case WeatherContentUtil.CLEAR_NIGHT:
-                imageId = R.mipmap.yun;
+                imageId = R.mipmap.ic_weather_qing_night;
                 break;
             case WeatherContentUtil.PARTLY_CLOUDY_DAY:
-                imageId = R.mipmap.yun;
+                imageId = R.mipmap.ic_weather_cloudy_day;
                 break;
             case WeatherContentUtil.PARTLY_CLOUDY_NIGHT:
-                imageId = R.mipmap.yun;
+                imageId = R.mipmap.ic_weather_cloudy_night;
                 break;
             case WeatherContentUtil.CLOUDY:
-                imageId = R.mipmap.yun;
+                imageId = R.mipmap.ic_weather_cloudy;
                 break;
             case WeatherContentUtil.LIGHT_HAZE:
-                imageId = R.mipmap.yun;
+                imageId = R.mipmap.ic_weather_light_haze;
                 break;
             case WeatherContentUtil.MODERATE_HAZE:
-                imageId = R.mipmap.yun;
+                imageId = R.mipmap.ic_weather_moderate_haze;
                 break;
             case WeatherContentUtil.HEAVY_HAZE:
-                imageId = R.mipmap.yun;
+                imageId = R.mipmap.ic_weather_heavy_haze;
                 break;
             case WeatherContentUtil.LIGHT_RAIN:
-                imageId = R.mipmap.yun;
+                imageId = R.mipmap.ic_weather_light_rain;
                 break;
             case WeatherContentUtil.MODERATE_RAIN:
-                imageId = R.mipmap.yun;
+                imageId = R.mipmap.ic_weather_moderate_rain;
                 break;
             case WeatherContentUtil.HEAVY_RAIN:
-                imageId = R.mipmap.yun;
+                imageId = R.mipmap.ic_weather_heavy_rain;
                 break;
             case WeatherContentUtil.STORM_RAIN:
-                imageId = R.mipmap.yun;
+                imageId = R.mipmap.ic_weather_storm_rain;
                 break;
             case WeatherContentUtil.FOG:
-                imageId = R.mipmap.yun;
+                imageId = R.mipmap.ic_weather_fog;
                 break;
             case WeatherContentUtil.LIGHT_SNOW:
-                imageId = R.mipmap.yun;
+                imageId = R.mipmap.ic_weather_light_snow;
                 break;
             case WeatherContentUtil.MODERATE_SNOW:
-                imageId = R.mipmap.yun;
+                imageId = R.mipmap.ic_weather_moderate_snow;
                 break;
             case WeatherContentUtil.HEAVY_SNOW:
-                imageId = R.mipmap.yun;
+                imageId = R.mipmap.ic_weather_heavy_snow;
                 break;
             case WeatherContentUtil.STORM_SNOW:
-                imageId = R.mipmap.yun;
+                imageId = R.mipmap.ic_weather_storm_snow;
                 break;
             case WeatherContentUtil.DUST:
-                imageId = R.mipmap.yun;
+                imageId = R.mipmap.ic_weather_dust;
                 break;
             case WeatherContentUtil.SAND:
-                imageId = R.mipmap.yun;
+                imageId = R.mipmap.ic_weather_sand;
                 break;
             case WeatherContentUtil.WIND:
-                imageId = R.mipmap.yun;
+                imageId = R.mipmap.ic_weather_wind;
                 break;
             default:
-                imageId = R.mipmap.icon_999d;
+                imageId = R.mipmap.ic_weather_clear;
                 break;
         }
         return imageId;

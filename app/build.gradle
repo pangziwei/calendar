@@ -150,6 +150,7 @@ dependencies {
 
     //日历的库
     implementation project(':calendarview')
+
     //圆弧的
     implementation project(':circleprogress')
 
@@ -162,4 +163,8 @@ dependencies {
     implementation files('libs/android-logging-log4j-1.0.3.jar')
     implementation files('libs/HeWeather_sdk.jar')
     implementation files('libs/log4j-1.2.17.jar')
+
+    //    glide图片加载
+    api 'com.github.bumptech.glide:glide:4.8.0'
+
 }
