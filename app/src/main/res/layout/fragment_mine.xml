@@ -54,12 +54,24 @@
                 android:text="登录查看更多内容"
                 android:textColor="@color/white" />
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
 
-        <ImageView
-            android:layout_width="@dimen/dp_100"
-            android:layout_height="@dimen/dp_100"
-            android:layout_gravity="center"
-            android:layout_weight="1" />
+
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/ic_login_wb"
+                android:layout_gravity="center"
+                />
+        </LinearLayout>
+
+
     </LinearLayout>
 
     <LinearLayout

@@ -3,31 +3,29 @@ package com.juyou.calendar.fragment.mine;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.SpannableStringBuilder;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
-import com.google.gson.Gson;
 import com.juyou.calendar.R;
-import com.juyou.calendar.activity.MyMainActivity;
 import com.juyou.calendar.dialog.ShowAllSpan;
 import com.juyou.calendar.eventbus.QQLoginEventBus;
-import com.juyou.calendar.mine.newlogin.NewLoginActivity;
 import com.juyou.calendar.util.H5UrlMananger;
 import com.juyou.calendar.util.WebUtils;
-import com.juyou.calendar.weather.WeatherActivity;
 import com.tencent.connect.UnionInfo;
 import com.tencent.connect.UserInfo;
 import com.tencent.connect.auth.QQToken;
@@ -39,8 +37,6 @@ import com.tencent.tauth.UiError;
 import com.zrq.spanbuilder.SpanBuilder;
 
 import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -49,74 +45,70 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import interfaces.heweather.com.interfacesmodule.bean.geo.GeoBean;
 
 public class OneClickLoginActivity extends AppCompatActivity {
     private static final String TAG = "OneClickLoginActivity";
+    private static final String APP_ID = "101980039";
 
-    @BindView(R.id.ll_qq_login)
-    LinearLayout llQqLogin;
+
+    public static Tencent mTencent;
+    //QQ包名
+    private static final String PACKAGE_QQ = "com.tencent.mobileqq";
+    @BindView(R.id.ll_title_left)
+    LinearLayout llTitleLeft;
     @BindView(R.id.ll_wx_login)
     LinearLayout llWxLogin;
+    @BindView(R.id.ll_qq_login)
+    LinearLayout llQqLogin;
+    @BindView(R.id.iv_wb_icon)
+    ImageView ivWbIcon;
+    @BindView(R.id.tv_wb)
+    TextView tvWb;
     @BindView(R.id.ll_wb_login)
     LinearLayout llWbLogin;
     @BindView(R.id.ck_agree_login)
     CheckBox ckAgreeLogin;
     @BindView(R.id.tv_link_login)
     TextView tvLinkLogin;
-    private static final String APP_ID = "101980039";
-    @BindView(R.id.tv_title_left)
-    TextView tvTitleLeft;
-    @BindView(R.id.go_back_calendar)
-    TextView goBackCalendar;
-    @BindView(R.id.ll_title_left)
-    LinearLayout llTitleLeft;
-    @BindView(R.id.view_actionBar_title)
-    TextView viewActionBarTitle;
-    @BindView(R.id.ll_center_title)
-    LinearLayout llCenterTitle;
-    @BindView(R.id.tv_date)
-    TextView tvDate;
-    @BindView(R.id.ll_date)
-    LinearLayout llDate;
-    @BindView(R.id.img_right)
-    ImageView imgRight;
-    @BindView(R.id.ll_right)
-    LinearLayout llRight;
-    @BindView(R.id.bill_toolbar)
-    Toolbar billToolbar;
-    @BindView(R.id.rl_pa)
-    LinearLayout rlPa;
-    @BindView(R.id.iv_wb_icon)
-    ImageView ivWbIcon;
-    @BindView(R.id.tv_wb)
-    TextView tvWb;
+    @BindView(R.id.ll_login_shake)
+    LinearLayout llLoginShake;
 
-    public static Tencent mTencent;
-    //QQ包名
-    private static final String PACKAGE_QQ = "com.tencent.mobileqq";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_one_click_login);
+//        全屏展示
+        try {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Window window = this.getWindow();
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                window.setStatusBarColor(this.getResources().getColor(R.color.textbarColor));
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         Tencent.setIsPermissionGranted(true);
         ButterKnife.bind(this);
         mTencent = Tencent.createInstance(APP_ID, this.getApplicationContext());
         SpannableStringBuilder stringBuilder = new SpannableStringBuilder();
-        stringBuilder.append(new SpanBuilder("《用户协议》", 14, getResources().getColor(R.color.textcoloeff9239)).setClick(tvLinkLogin, new ShowAllSpan(this, widget -> WebUtils.loadTitleWeb(this, H5UrlMananger.USER_AGGREMENT_URL, "用户协议"))))
+        stringBuilder.append(new SpanBuilder("登录即同意", 14, getResources().getColor(R.color.blackTrans)))
+                .append(new SpanBuilder("《用户协议》", 14, getResources().getColor(R.color.main_but_down)).setClick(tvLinkLogin, new ShowAllSpan(this, widget -> WebUtils.loadTitleWeb(this, H5UrlMananger.USER_AGGREMENT_URL, "用户协议"))))
                 .append(new SpanBuilder("和", 14, getResources().getColor(R.color.blackTrans)))
-                .append(new SpanBuilder("《隐私政策》", 14, getResources().getColor(R.color.textcoloeff9239)).setClick(tvLinkLogin, new ShowAllSpan(this, widget -> WebUtils.loadTitleWeb(this, H5UrlMananger.USER_PRIVACYPOLICY_URL, "隐私政策"))));
+                .append(new SpanBuilder("《隐私政策》", 14, getResources().getColor(R.color.main_but_down)).setClick(tvLinkLogin, new ShowAllSpan(this, widget -> WebUtils.loadTitleWeb(this, H5UrlMananger.USER_PRIVACYPOLICY_URL, "隐私政策"))));
         tvLinkLogin.setText(stringBuilder);
     }
 
 
-    @OnClick({R.id.ll_qq_login, R.id.ll_wx_login, R.id.ll_wb_login, R.id.ck_agree_login})
+    @OnClick({R.id.ll_qq_login, R.id.ll_wx_login, R.id.ll_wb_login, R.id.ck_agree_login, R.id.ll_title_left})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_qq_login:
                 if (!ckAgreeLogin.isChecked()) {
                     Toast.makeText(OneClickLoginActivity.this, "请同意并勾选用户协议与隐私政策", Toast.LENGTH_SHORT).show();
+                    initShake();
                     return;
                 }
 
@@ -133,23 +125,33 @@ public class OneClickLoginActivity extends AppCompatActivity {
                 break;
             case R.id.ll_wx_login:
                 if (!ckAgreeLogin.isChecked()) {
+                    initShake();
                     Toast.makeText(OneClickLoginActivity.this, "请同意并勾选用户协议与隐私政策", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 //注销登录
-                mTencent.logout(this);
+//                mTencent.logout(this);
 
                 break;
             case R.id.ll_wb_login:
-//                if (!ckAgreeLogin.isChecked()) {
-//                    Toast.makeText(OneClickLoginActivity.this, "请同意并勾选用户协议与隐私政策", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-                onClickShare();
+                if (!ckAgreeLogin.isChecked()) {
+                    Toast.makeText(OneClickLoginActivity.this, "请同意并勾选用户协议与隐私政策", Toast.LENGTH_SHORT).show();
+                    initShake();
+                    return;
+                }
+                onClickShare();//分享
 
+                break;
+            case R.id.ll_title_left:
+                finish();
                 break;
 
         }
+    }
+
+    private void initShake() {
+        Animation animation = AnimationUtils.loadAnimation(this, R.anim.translate_checkbox_shake);
+        llLoginShake.startAnimation(animation);
     }
 
     private void onClickShare() {
