@@ -80,16 +80,13 @@ public class WelActivity extends AppCompatActivity {
         TextView btnCancel = window.findViewById(R.id.btn_cancel);
         TextView btnSure = window.findViewById(R.id.btn_sure);
         SpannableStringBuilder stringBuilder = new SpannableStringBuilder();
-        stringBuilder.append(new SpanBuilder("我们依据最新的监管要求更新了XXXX\n", 14, getResources().getColor(R.color.blackTrans)))
-                .append(new SpanBuilder("《用户协议》", 14, getResources().getColor(R.color.textRedColor)).setTextStyle(TextStyle.BOLD).setClick(strNum, new ShowAllSpan(this, widget -> WebUtils.loadTitleWeb(this, "https://blog.csdn.net/qq_37328546?spm=1019.2139.3001.5343", "用户协议"))))
+        stringBuilder.append(new SpanBuilder("感谢您信任并且使用吉日万年历！\n", 14, getResources().getColor(R.color.blackTrans)))
+                .append(new SpanBuilder("我们非常重视您的隐私和个人信息保护。在您使用吉日万年历提供服务前，请必然认真阅读", 14, getResources().getColor(R.color.blackTrans)))
+                .append(new SpanBuilder("《隐私政策》", 14, getResources().getColor(R.color.textRedColor)).setTextStyle(TextStyle.BOLD).setClick(strNum, new ShowAllSpan(this, widget -> WebUtils.loadTitleWeb(this, "https://blog.csdn.net/qq_37328546?spm=1019.2139.3001.5343","隐私政策" ))))
                 .append(new SpanBuilder("和", 14, getResources().getColor(R.color.blackTrans)))
-                .append(new SpanBuilder("《隐私政策》", 14, getResources().getColor(R.color.textRedColor)).setTextStyle(TextStyle.BOLD).setClick(strNum, new ShowAllSpan(this, widget -> WebUtils.loadTitleWeb(this, "https://blog.csdn.net/qq_37328546?spm=1019.2139.3001.5343", "隐私政策"))))
-                .append(new SpanBuilder("特向您说明如下：\n", 14, getResources().getColor(R.color.blackTrans)))
-                .append(new SpanBuilder(" 1.我是要求1；\n", 14, getResources().getColor(R.color.blackTrans)))
-                .append(new SpanBuilder(" 2.我是要求2；\n", 14, getResources().getColor(R.color.blackTrans)))
-                .append(new SpanBuilder(" 3.我是要求3；\n", 14,getResources().getColor(R.color.blackTrans)))
-                .append(new SpanBuilder(" 4.我是要求4；\n", 14, getResources().getColor(R.color.blackTrans)))
-                .append(new SpanBuilder(" 5.我是要求5。\n", 14, getResources().getColor(R.color.blackTrans)));
+                .append(new SpanBuilder("《用户协议》", 14, getResources().getColor(R.color.textRedColor)).setTextStyle(TextStyle.BOLD).setClick(strNum, new ShowAllSpan(this, widget -> WebUtils.loadTitleWeb(this, "https://blog.csdn.net/qq_37328546?spm=1019.2139.3001.5343", "用户协议"))))
+                .append(new SpanBuilder(" 所有条款及内容。尤其是：我们对您账户个人信息的保护、保存、使用、对外提供、收集等规则条款，以及您的用户权利等条款。", 14, getResources().getColor(R.color.blackTrans)));
+
 
 
 

@@ -109,7 +109,6 @@ public class MineFragment extends MyExFragment {
                 break;
             case R.id.ll_mine_fortune_query:
                 WebUtils.loadTitleWeb(getActivity(), "https://www.77tianqi.com/h5/rules.html?hideCloseBtn=1", "今日运势");
-
                 break;
             case R.id.ll_mine_yellow_query:
                 break;
