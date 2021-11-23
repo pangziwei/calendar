@@ -32,6 +32,7 @@ import com.tencent.connect.UnionInfo;
 import com.tencent.connect.UserInfo;
 import com.tencent.connect.auth.QQToken;
 import com.tencent.connect.common.Constants;
+import com.tencent.connect.share.QQShare;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
@@ -118,7 +119,6 @@ public class OneClickLoginActivity extends AppCompatActivity {
                     Toast.makeText(OneClickLoginActivity.this, "请同意并勾选用户协议与隐私政策", Toast.LENGTH_SHORT).show();
                     return;
                 }
-//                getQQLogin();
 
                 if (!hasApp(PACKAGE_QQ)) {
                     Toast.makeText(OneClickLoginActivity.this, "未安装QQ应用",
@@ -126,24 +126,73 @@ public class OneClickLoginActivity extends AppCompatActivity {
                     return;
                 }
 //                //如果session无效，就开始做登录操作
-//                if (!mTencent.isSessionValid()) {
-//                    loginQQ();
-//                }
-                loginQQ();
+                if (!mTencent.isSessionValid()) {
+                    loginQQ();
+                }
+//                loginQQ();
                 break;
             case R.id.ll_wx_login:
                 if (!ckAgreeLogin.isChecked()) {
                     Toast.makeText(OneClickLoginActivity.this, "请同意并勾选用户协议与隐私政策", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                //注销登录
+                mTencent.logout(this);
 
                 break;
             case R.id.ll_wb_login:
-                if (!ckAgreeLogin.isChecked()) {
-                    Toast.makeText(OneClickLoginActivity.this, "请同意并勾选用户协议与隐私政策", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+//                if (!ckAgreeLogin.isChecked()) {
+//                    Toast.makeText(OneClickLoginActivity.this, "请同意并勾选用户协议与隐私政策", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+                onClickShare();
+
                 break;
+
+        }
+    }
+
+    private void onClickShare() {
+        final Bundle params = new Bundle();
+        params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_DEFAULT);
+        params.putString(QQShare.SHARE_TO_QQ_TITLE, "要分享的标题");
+        params.putString(QQShare.SHARE_TO_QQ_SUMMARY, "要分享的摘要");
+        params.putString(QQShare.SHARE_TO_QQ_TARGET_URL, "http://www.qq.com/news/1.html");
+        params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL, "http://imgcache.qq.com/qzone/space_item/pre/0/66768.gif");
+        params.putString(QQShare.SHARE_TO_QQ_APP_NAME, "测试应用发货单款");
+//        params.putInt(QQShare.SHARE_TO_QQ_EXT_INT,  "其他附加功能");
+        mTencent.shareToQQ(OneClickLoginActivity.this, params, new BaseUiListener());
+    }
+
+    private class BaseUiListener implements IUiListener {
+        //        @Override
+//        public void onComplete(JSONObject response) {
+//            mBaseMessageText.setText("onComplete:");
+//            mMessageText.setText(response.toString());
+//            doComplete(response);
+//        }
+        protected void doComplete(JSONObject values) {
+        }
+
+        @Override
+        public void onComplete(Object o) {
+
+        }
+
+        @Override
+        public void onError(UiError e) {
+
+            Log.e("onError:", "code:" + e.errorCode + ", msg:"
+                    + e.errorMessage + ", detail:" + e.errorDetail);
+        }
+
+        @Override
+        public void onCancel() {
+            Log.e("onError:", "onCancel");
+        }
+
+        @Override
+        public void onWarning(int i) {
 
         }
     }

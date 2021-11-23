@@ -9,6 +9,7 @@ import android.widget.Toolbar;
 
 import com.juyou.calendar.R;
 import com.juyou.calendar.base.MyExFragment;
+import com.juyou.calendar.util.WebUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,8 +41,9 @@ public class FortuneFragment extends MyExFragment {
     }
 
     private void init() {
-        viewActionBarTitle.setText("我是万年历首页");
+        viewActionBarTitle.setText("我是万年历");
 
+        WebUtils.loadTitleWeb(getActivity(), "https://www.77tianqi.com/h5/rules.html?hideCloseBtn=1", "dfsg");
     }
 
     @Override

@@ -22,6 +22,7 @@ import com.juyou.calendar.R;
 import com.juyou.calendar.base.MyExFragment;
 import com.juyou.calendar.eventbus.QQLoginEventBus;
 import com.juyou.calendar.mine.about.AboutActivity;
+import com.juyou.calendar.util.WebUtils;
 import com.manggeek.android.geek.view.CircleImageView;
 
 import org.greenrobot.eventbus.EventBus;
@@ -107,6 +108,8 @@ public class MineFragment extends MyExFragment {
             case R.id.ll_mine_jiri_query:
                 break;
             case R.id.ll_mine_fortune_query:
+                WebUtils.loadTitleWeb(getActivity(), "https://www.77tianqi.com/h5/rules.html?hideCloseBtn=1", "今日运势");
+
                 break;
             case R.id.ll_mine_yellow_query:
                 break;
