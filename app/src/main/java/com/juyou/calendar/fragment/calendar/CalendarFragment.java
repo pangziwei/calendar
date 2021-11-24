@@ -53,6 +53,8 @@ public class CalendarFragment extends MyExFragment implements GradationScrollVie
 
     @BindView(R.id.ll_title_left)
     LinearLayout llTitleLeft;
+    @BindView(R.id.ll_calendar_fortune)
+    LinearLayout llCalendarFortune;
     @BindView(R.id.view_actionBar_title)
     TextView viewActionBarTitle;
     @BindView(R.id.img_right)
@@ -306,15 +308,16 @@ public class CalendarFragment extends MyExFragment implements GradationScrollVie
         return R.layout.fragment_calendar;
     }
 
-    @OnClick({R.id.view_actionBar_title, R.id.tv_title_left, R.id.ll_right,  R.id.go_back_calendar})
+    @OnClick({R.id.view_actionBar_title, R.id.ll_calendar_fortune, R.id.ll_right,  R.id.go_back_calendar})
     public void onViewClicked(View view) {
         switch (view.getId()) {
 
             case R.id.view_actionBar_title:
                 chooseTime(viewActionBarTitle);
                 break;
-            case R.id.tv_title_left:
+            case R.id.ll_calendar_fortune:
                 Toast.makeText(getActivity(), "今日运势", Toast.LENGTH_SHORT).show();
+//                calendar.setWeekStarWithSun();
                 break;
             case R.id.ll_right:
                 Toast.makeText(getActivity(), "天气", Toast.LENGTH_SHORT).show();

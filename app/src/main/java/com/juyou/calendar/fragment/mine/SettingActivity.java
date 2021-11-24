@@ -2,6 +2,7 @@ package com.juyou.calendar.fragment.mine;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -10,11 +11,16 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
 import com.juyou.calendar.R;
 import com.juyou.calendar.activity.MyMainActivity;
 import com.juyou.calendar.bo.StringCache;
+import com.juyou.calendar.fragment.calendar.CalendarFragment;
 import com.juyou.calendar.mine.FeedbackActivity;
 import com.juyou.calendar.mine.about.AboutActivity;
+import com.manggeek.android.geek.GeekActivity;
+
+import java.lang.reflect.Field;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -44,6 +50,8 @@ public class SettingActivity extends AppCompatActivity {
     LinearLayout ll_title_left;
     @BindView(R.id.btn_exit)
     TextView btnExit;
+
+    Class clazz = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
