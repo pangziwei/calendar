@@ -1,6 +1,7 @@
 package com.juyou.calendar.fragment;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -41,14 +42,13 @@ public class YellowCalendarFragment extends MyExFragment {
 
     private void init() {
         viewActionBarTitle.setText("社区");
-        WebUtils.loadTitleWeb(getActivity(), "https://www.77tianqi.com/h5/rules.html?hideCloseBtn=1", "今日运势");
 
     }
 
 
     @Override
     public void loadData() {
-
+        Log.e("TAG", "sdufgsjadfg-----------");
     }
 
     @Override
@@ -62,4 +62,5 @@ public class YellowCalendarFragment extends MyExFragment {
         super.onDestroy();
 
     }
+
 }

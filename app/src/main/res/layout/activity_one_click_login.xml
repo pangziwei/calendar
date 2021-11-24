@@ -21,8 +21,8 @@
             android:layout_weight="1">
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/dp_11"
+                android:layout_height="@dimen/dp_21"
                 android:layout_gravity="center"
                 android:layout_marginLeft="@dimen/dp_20"
                 android:background="@mipmap/ic_login_black" />
@@ -62,7 +62,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dp_150"
+        android:layout_marginTop="@dimen/dp_100"
         android:orientation="horizontal">
 
         <LinearLayout
@@ -152,6 +152,7 @@
         android:layout_height="@dimen/dp_80"
         android:layout_gravity="center_horizontal"
         android:gravity="center"
+        android:layout_marginTop="@dimen/dp_30"
         android:orientation="horizontal">
 
         <CheckBox

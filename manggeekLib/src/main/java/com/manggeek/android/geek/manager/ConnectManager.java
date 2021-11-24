@@ -24,7 +24,7 @@ public class ConnectManager {
             ConnectivityManager mConnectivityManager = (ConnectivityManager) activity.getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo mNetworkInfo = mConnectivityManager.getActiveNetworkInfo();
             if (mNetworkInfo != null) {
-                Log.e("TAG", "mNetworkInfo.isAvailable()-------------"+mNetworkInfo.isAvailable());
+//                Log.e("TAG", "mNetworkInfo.isAvailable()-------------"+mNetworkInfo.isAvailable());
                 return mNetworkInfo.isAvailable();
             }
         }

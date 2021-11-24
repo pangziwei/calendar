@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
     <uses-feature android:name="android.hardware.camera" /> <!-- 相机权限 -->
     <uses-permission android:name="android.permission.CAMERA" /> <!-- 写入SD卡的权限：如果你希望保存相机拍照后的照片 -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 读取SD卡的权限:打开相册选取图片所必须的权限 -->
@@ -32,7 +33,8 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning"
         tools:replace="android:allowBackup">
-        <activity android:name=".fragment.mine.OneClickLoginActivity"></activity>
+        <activity android:name=".fragment.mine.SettingActivity"></activity>
+        <activity android:name=".fragment.mine.OneClickLoginActivity" />
         <activity android:name=".weather.WeatherActivity" />
         <activity android:name=".weather.ManageCityActivity" />
         <activity android:name=".weather.AddCityActivity" />
@@ -116,17 +118,17 @@
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/bd_file_paths" />
-        </provider>
-
-<!--        qq登录-->
+        </provider> <!-- qq登录 -->
         <activity
             android:name="com.tencent.tauth.AuthActivity"
-            android:noHistory="true"
-            android:launchMode="singleTask" >
+            android:launchMode="singleTask"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
+
                 <data android:scheme="tencent101980039" />
             </intent-filter>
         </activity>

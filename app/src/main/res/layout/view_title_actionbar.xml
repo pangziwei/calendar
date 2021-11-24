@@ -36,6 +36,7 @@
                     android:background="@mipmap/ic_day_fortune_bg"
                     android:padding="@dimen/dp_12"
                     android:text="@string/main_today_fortune"
+
                     android:textColor="@color/textcoloe3"
                     android:textSize="@dimen/sp_14" />
 
@@ -51,6 +52,14 @@
                     android:textColor="@color/textcoloe3"
                     android:textSize="@dimen/sp_14"
                     android:visibility="gone" />
+                <ImageView
+                    android:id="@+id/tv_lef_back"
+                    android:layout_width="@dimen/dp_11"
+                    android:layout_height="@dimen/dp_20"
+                    android:visibility="gone"
+                    android:layout_gravity="center"
+                    android:background="@mipmap/ic_login_black"
+                    android:padding="@dimen/dp_12" />
             </LinearLayout>
 
             <LinearLayout
@@ -69,6 +78,7 @@
                     android:textSize="@dimen/sp_18" />
 
                 <ImageView
+                    android:id="@+id/iv_title_right"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"

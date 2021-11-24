@@ -2,6 +2,7 @@ package com.juyou.calendar.fragment.stare;
 
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -54,4 +55,5 @@ public class StareFragment extends MyExFragment {
     @OnClick(R.id.view_actionBar_title)
     public void onViewClicked() {
     }
+
 }
