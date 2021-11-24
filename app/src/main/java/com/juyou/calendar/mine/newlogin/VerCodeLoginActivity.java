@@ -42,8 +42,7 @@ public class VerCodeLoginActivity extends AppCompatActivity {
     ImageView imgRight;
     @BindView(R.id.ll_right)
     LinearLayout llRight;
-    @BindView(R.id.bill_toolbar)
-    Toolbar billToolbar;
+
     @BindView(R.id.rl_pa)
     LinearLayout rlPa;
     @BindView(R.id.tv_vercode_phone)

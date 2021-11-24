@@ -64,6 +64,7 @@
 
 
             <ImageView
+                android:id="@+id/iv_mine_setting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_login_wb"

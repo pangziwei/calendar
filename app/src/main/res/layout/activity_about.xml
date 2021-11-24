@@ -103,22 +103,5 @@
 
     </LinearLayout>
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/btn_isExit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerInParent="true"
-            android:layout_margin="@dimen/dp_20"
-            android:background="@drawable/mine_business_bg_ff9239"
-            android:gravity="center"
-            android:padding="@dimen/sp_12"
-            android:text="退出登录"
-            android:textColor="@color/white"
-            android:textSize="@dimen/sp_14" />
-    </RelativeLayout>
 </LinearLayout>

@@ -26,8 +26,7 @@ public class YellowCalendarFragment extends MyExFragment {
     ImageView imgRight;
     @BindView(R.id.ll_right)
     LinearLayout llRight;
-    @BindView(R.id.bill_toolbar)
-    Toolbar billToolbar;
+
     @BindView(R.id.rl_pa)
     LinearLayout rlPa;
     @BindView(R.id.tv_study_title)

@@ -63,6 +63,8 @@ public class MineFragment extends MyExFragment {
     LinearLayout llMineStar;
     @BindView(R.id.btn_mine_about)
     TextView btnMineAbout;
+    @BindView(R.id.iv_mine_setting)
+    ImageView ivMineSetting;
 
 
     private AlertDialog.Builder builder;
@@ -93,7 +95,7 @@ public class MineFragment extends MyExFragment {
     }
 
 
-    @OnClick({R.id.cv_mine_head, R.id.tv_mine_login, R.id.ll_mine_star_query, R.id.ll_mine_jiri_query, R.id.ll_mine_fortune_query, R.id.ll_mine_yellow_query, R.id.ll_mine_jieqian, R.id.ll_mine_dream, R.id.ll_mine_day_weather, R.id.ll_mine_name_test, R.id.ll_mine_star, R.id.btn_mine_about})
+    @OnClick({R.id.cv_mine_head, R.id.tv_mine_login, R.id.ll_mine_star_query, R.id.ll_mine_jiri_query, R.id.ll_mine_fortune_query, R.id.ll_mine_yellow_query, R.id.ll_mine_jieqian, R.id.ll_mine_dream, R.id.ll_mine_day_weather, R.id.ll_mine_name_test, R.id.ll_mine_star, R.id.btn_mine_about,R.id.iv_mine_setting})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.cv_mine_head:
@@ -124,6 +126,9 @@ public class MineFragment extends MyExFragment {
                 break;
             case R.id.btn_mine_about:
                 startActivity(new Intent(getActivity(), AboutActivity.class));
+                break;
+            case R.id.iv_mine_setting:
+                startActivity(new Intent(getActivity(), SettingActivity.class));
                 break;
         }
     }
