@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".mine.FeedbackActivity">
+
+    <include layout="@layout/view_title_actionbar" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/dp_8"
+        android:padding="@dimen/dp_15"
+        android:text="反馈内容"
+        android:textColor="@color/textcoloe646464"
+        android:textSize="12sp" />
+
+    <EditText
+        android:id="@+id/et_feedbavk_describe"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_120"
+        android:layout_marginTop="@dimen/dp_10"
+        android:background="@color/white"
+        android:hint="请留下您的宝贵意见或建议、我们将继续努力改进！"
+        android:paddingLeft="@dimen/dp_15"
+        android:paddingRight="@dimen/dp_15"
+        android:textColor="@color/black"
+        android:textSize="12sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_15"
+        android:text="联系方式"
+        android:textColor="@color/textcoloe646464"
+        android:textSize="12sp" />
+
+    <EditText
+        android:id="@+id/et_feedback_contact"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dp_30"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingLeft="@dimen/dp_15"
+        android:hint="请输入QQ号、手机号、电子邮箱"
+        android:padding="@dimen/dp_8"
+        android:textColor="@color/black"
+        android:textSize="12sp">
+
+    </EditText>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/dp_15"
+        android:text="图片说明"
+        android:textColor="@color/textcoloe646464"
+        android:textSize="12sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_feedback_photo"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_150"
+            android:padding="@dimen/dp_15"
+            android:src="@mipmap/pzw" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:padding="@dimen/dp_15"
+            android:text="点击上传图片"
+            android:textColor="@color/black"
+            android:textSize="@dimen/sp_14" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/dp_80"
+        android:layout_marginRight="@dimen/dp_80"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/btn_feedback_sub"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="@dimen/dp_20"
+            android:background="@drawable/setting_outlogin"
+            android:gravity="center"
+            android:padding="@dimen/sp_12"
+            android:text="提交反馈"
+            android:textColor="@color/white"
+            android:textSize="@dimen/sp_14" />
+
+    </LinearLayout>
+</LinearLayout>

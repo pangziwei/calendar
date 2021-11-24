@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.juyou.calendar.R;
 import com.juyou.calendar.activity.MyMainActivity;
 import com.juyou.calendar.bo.StringCache;
+import com.juyou.calendar.mine.FeedbackActivity;
 import com.juyou.calendar.mine.about.AboutActivity;
 
 import butterknife.BindView;
@@ -82,6 +83,8 @@ public class SettingActivity extends AppCompatActivity {
                 tvWeekMon.setBackgroundResource(R.drawable.setting_choice_mun_bg);
                 break;
             case R.id.ll_setting_feed_back:
+                startActivity(new Intent(SettingActivity.this, FeedbackActivity.class));
+
                 break;
             case R.id.ll_setting_about_us:
                 startActivity(new Intent(SettingActivity.this, AboutActivity.class));
