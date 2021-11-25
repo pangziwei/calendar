@@ -1,4 +1,4 @@
-package com.othershe.calendarview.utils;
+package com.haibin.calendarview;
 
 import android.text.TextUtils;
 
@@ -59,11 +59,14 @@ public class SolarUtil {
             case 101:
                 holiday = "国庆节";
                 break;
-            case 1124:
-                holiday = "卫子";
+            case 1024:
+                holiday = "程序节";
                 break;
             case 1111:
                 holiday = "光棍节";
+                break;
+            case 1124:
+                holiday = "我是测试";
                 break;
             case 1224:
                 holiday = "平安夜";

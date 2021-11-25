@@ -20,7 +20,6 @@ import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.baidu.mobads.sdk.api.CPUWebAdRequestParam;
 import com.baidu.mobads.sdk.api.CpuAdView;
@@ -90,6 +89,10 @@ public class CalendarFragment extends MyExFragment implements GradationScrollVie
     TextView test_textview;
     @BindView(R.id.ll_date)
     LinearLayout llDate;
+    @BindView(R.id.calendar_iew)
+    com.haibin.calendarview.CalendarView calendarIew;
+    @BindView(R.id.ll_test)
+    LinearLayout llTest;
     private int[] cDate = CalendarUtil.getCurrentDate();
 
 
@@ -225,8 +228,6 @@ public class CalendarFragment extends MyExFragment implements GradationScrollVie
         addressDialog.setSelectAreaListener(selectAreaListener);//地址的弹框
 
 
-
-
     }
 
     private void initListeners() {
@@ -308,16 +309,20 @@ public class CalendarFragment extends MyExFragment implements GradationScrollVie
         return R.layout.fragment_calendar;
     }
 
-    @OnClick({R.id.view_actionBar_title, R.id.ll_calendar_fortune, R.id.ll_right,  R.id.go_back_calendar})
+    @OnClick({R.id.ll_test,R.id.view_actionBar_title, R.id.ll_calendar_fortune, R.id.ll_right, R.id.go_back_calendar})
     public void onViewClicked(View view) {
         switch (view.getId()) {
 
             case R.id.view_actionBar_title:
                 chooseTime(viewActionBarTitle);
                 break;
+            case R.id.ll_test:
+                calendarIew.setWeekStarWithMon();
+                break;
             case R.id.ll_calendar_fortune:
                 Toast.makeText(getActivity(), "今日运势", Toast.LENGTH_SHORT).show();
 //                calendar.setWeekStarWithSun();
+                calendarIew.setWeekStarWithSun();
                 break;
             case R.id.ll_right:
                 Toast.makeText(getActivity(), "天气", Toast.LENGTH_SHORT).show();
