@@ -1,3 +1,3 @@
-include ':app', ':manggeekLib', ':socialsdk', ':VerificationCodeInputView_Lib', ':calendarview', ':circleprogress', ':calendarviewLib'
+include ':app', ':manggeekLib', ':socialsdk', ':VerificationCodeInputView_Lib', ':circleprogress', ':calendarviewLib'
 rootProject.name='calendar'
 

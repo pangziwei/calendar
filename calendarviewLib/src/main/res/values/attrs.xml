@@ -28,16 +28,23 @@
         <attr name="scheme_month_text_color" format="color" />
         <attr name="scheme_lunar_text_color" format="color" />
         <attr name="scheme_theme_color" format="color" />
-
+        <!--选择的背景色-->
         <attr name="selected_theme_color" format="color" />
+        <!--        选中的日期，几月几号的那个-->
         <attr name="selected_text_color" format="color" />
+        <!--        选中的日期，几月初几号的那个-->
         <attr name="selected_lunar_text_color" format="color" />
-
+        <!--     current_day_text_color   日期的颜色，就是当前日期的几月几号-->
         <attr name="current_day_text_color" format="color" />
+        <!--     current_day_lunar_text_color   日期的颜色，就是当前日期的几月初几-->
         <attr name="current_day_lunar_text_color" format="color" />
+        <!--     current_month_text_color   日期的颜色，未选中的，几月几号-->
         <attr name="current_month_text_color" format="color" />
+
         <attr name="other_month_text_color" format="color" />
+        <!--     current_month_lunar_text_color   日期的颜色，，未选中的几月初几-->
         <attr name="current_month_lunar_text_color" format="color" />
+
         <attr name="other_month_lunar_text_color" format="color" />
 
 
@@ -109,7 +116,7 @@
         <attr name="min_select_range" format="integer" />
         <attr name="max_select_range" format="integer" />
 
-        <!-- auto select day -->
+        <!-- 默认日期选择auto select day -->
         <attr name="month_view_auto_select_day">
             <enum name="first_day_of_month" value="0" />
             <enum name="last_select_day" value="1" />

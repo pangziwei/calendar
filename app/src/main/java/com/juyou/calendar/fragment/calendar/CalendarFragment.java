@@ -1,5 +1,6 @@
 package com.juyou.calendar.fragment.calendar;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -24,6 +25,9 @@ import android.widget.Toast;
 import com.baidu.mobads.sdk.api.CPUWebAdRequestParam;
 import com.baidu.mobads.sdk.api.CpuAdView;
 import com.baidu.mobads.sdk.api.CpuLpFontSize;
+import com.haibin.calendarview.Calendar;
+import com.haibin.calendarview.CalendarUtil;
+import com.haibin.calendarview.CalendarView;
 import com.juyou.calendar.R;
 import com.juyou.calendar.base.MyExFragment;
 import com.juyou.calendar.dialog.AddressDialog;
@@ -31,11 +35,6 @@ import com.juyou.calendar.manage.GradationScrollView;
 import com.juyou.calendar.util.SharedPreUtils;
 import com.littlejie.circleprogress.CircleProgress;
 import com.manggeek.android.geek.GeekActivity;
-import com.othershe.calendarview.bean.DateBean;
-import com.othershe.calendarview.listener.OnPagerChangeListener;
-import com.othershe.calendarview.listener.OnSingleChooseListener;
-import com.othershe.calendarview.utils.CalendarUtil;
-import com.othershe.calendarview.weiget.CalendarView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -47,7 +46,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class CalendarFragment extends MyExFragment implements GradationScrollView.ScrollViewListener {
+public class CalendarFragment extends MyExFragment implements GradationScrollView.ScrollViewListener,
+        CalendarView.OnCalendarSelectListener {
 
 
     @BindView(R.id.ll_title_left)
@@ -63,10 +63,7 @@ public class CalendarFragment extends MyExFragment implements GradationScrollVie
 
     @BindView(R.id.rl_pa)
     LinearLayout rlPa;
-    @BindView(R.id.calendar)
-    CalendarView calendar;
-    @BindView(R.id.ll_calendar_out)
-    LinearLayout llCalendarOut;
+
     @BindView(R.id.channel)
     Spinner channel;
     @BindView(R.id.button)
@@ -156,6 +153,18 @@ public class CalendarFragment extends MyExFragment implements GradationScrollVie
 
     }
 
+    @Override
+    public void onCalendarOutOfRange(Calendar calendar) {
+        Log.e("calendar", "-----Calendar--------"+calendar);
+
+    }
+
+    @Override
+    public void onCalendarSelect(Calendar calendar, boolean isClick) {
+        Log.e("calendar", "-------------"+calendar);
+        Log.e("calendar", "---------isClick----"+isClick);
+    }
+
     public enum CpuChannel {
         /**
          * 娱乐频道
@@ -216,7 +225,6 @@ public class CalendarFragment extends MyExFragment implements GradationScrollVie
         ButterKnife.bind(this, view);
         init();
 
-        initCalendar();
 
         initAD();
 
@@ -227,21 +235,27 @@ public class CalendarFragment extends MyExFragment implements GradationScrollVie
         addressDialog = new AddressDialog((GeekActivity) getActivity());
         addressDialog.setSelectAreaListener(selectAreaListener);//地址的弹框
 
+        Log.e("干支年纪", "calendar-------------" );
 
     }
 
+
+
+
+
+
     private void initListeners() {
-        ViewTreeObserver vto = llCalendarOut.getViewTreeObserver();
+        ViewTreeObserver vto = calendarIew.getViewTreeObserver();
 
         vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
                 //移除监听
-                llCalendarOut.getViewTreeObserver().removeGlobalOnLayoutListener(
+                calendarIew.getViewTreeObserver().removeGlobalOnLayoutListener(
                         this);
 
                 //得到相对布局的高
-                height = llCalendarOut.getHeight();
+                height = calendarIew.getHeight();
 //                Log.e("llCalendOut", "llCalendOut-----该方法付付-------------" + height);
                 //设置ScrollView的滑动监听
                 gsScrollview.setScrollViewListener(CalendarFragment.this);
@@ -262,38 +276,39 @@ public class CalendarFragment extends MyExFragment implements GradationScrollVie
         });
     }
 
-    private void initCalendar() {
-        calendar
-                .setInitDate(cDate[0] + "." + cDate[1])//设置日历初始显示的年月
-                .setSingleDate(cDate[0] + "." + cDate[1] + "." + cDate[2])//设置单选时默认选中的日期
-                .init();
-
-        viewActionBarTitle.setText(cDate[0] + "." + cDate[1] + "." + cDate[2]);
-
-//        viewActionBarTitle.setText( year.getText() + "年" + month.getText() + "月" + day.getText() + "日");
-        calendar.setOnPagerChangeListener(new OnPagerChangeListener() {
-            @Override
-            public void onPagerChanged(int[] date) {
-                viewActionBarTitle.setText(date[0] + "." + date[1] + "." + date[2]);
-            }
-        });
-
-        calendar.setOnSingleChooseListener(new OnSingleChooseListener() {
-            @Override
-            public void onSingleChoose(View view, DateBean date) {
-                viewActionBarTitle.setText(date.getSolar()[0] + "." + date.getSolar()[1] + "." + date.getSolar()[2]);
-                if (date.getType() == 1) {
-
-                }
-            }
-        });
-
-
-    }
+//    private void initCalendar() {
+//        calendar
+//                .setInitDate(cDate[0] + "." + cDate[1])//设置日历初始显示的年月
+//                .setSingleDate(cDate[0] + "." + cDate[1] + "." + cDate[2])//设置单选时默认选中的日期
+//                .init();
+//
+//        viewActionBarTitle.setText(cDate[0] + "." + cDate[1] + "." + cDate[2]);
+//
+////        viewActionBarTitle.setText( year.getText() + "年" + month.getText() + "月" + day.getText() + "日");
+//        calendar.setOnPagerChangeListener(new OnPagerChangeListener() {
+//            @Override
+//            public void onPagerChanged(int[] date) {
+//                viewActionBarTitle.setText(date[0] + "." + date[1] + "." + date[2]);
+//            }
+//        });
+//
+//        calendar.setOnSingleChooseListener(new OnSingleChooseListener() {
+//            @Override
+//            public void onSingleChoose(View view, DateBean date) {
+//                viewActionBarTitle.setText(date.getSolar()[0] + "." + date.getSolar()[1] + "." + date.getSolar()[2]);
+//                if (date.getType() == 1) {
+//
+//                }
+//            }
+//        });
+//
+//
+//    }
 
 
     private void init() {
-        viewActionBarTitle.setText(cDate[0] + "." + cDate[1] + "." + cDate[2]);
+//        viewActionBarTitle.setText(cDate[0] + "." + cDate[1] + "." + cDate[2]);
+        viewActionBarTitle.setText(calendarIew.getCurYear() + "年" + calendarIew.getCurMonth() + "月" + calendarIew.getCurDay() + "日");
         circleProgress.setHint("76");//76
         circleProgress.setUnit("平淡");//平淡
         circleProgress.setValue(76);//这个是进度数---专业实况天气接口v63
@@ -309,7 +324,7 @@ public class CalendarFragment extends MyExFragment implements GradationScrollVie
         return R.layout.fragment_calendar;
     }
 
-    @OnClick({R.id.ll_test,R.id.view_actionBar_title, R.id.ll_calendar_fortune, R.id.ll_right, R.id.go_back_calendar})
+    @OnClick({R.id.ll_test, R.id.view_actionBar_title, R.id.ll_calendar_fortune, R.id.ll_right, R.id.go_back_calendar})
     public void onViewClicked(View view) {
         switch (view.getId()) {
 
@@ -336,7 +351,7 @@ public class CalendarFragment extends MyExFragment implements GradationScrollVie
             case R.id.go_back_calendar:
 //                Toast.makeText(getActivity(), "返回日历", Toast.LENGTH_SHORT).show();---gsScrollview
 
-                calendar.today();
+                calendarIew.scrollToCalendar(2018, 12, 30);
                 viewActionBarTitle.setText(cDate[0] + "." + cDate[1] + "." + cDate[2]);
                 gsScrollview.post(new Runnable() {
                     @Override
@@ -368,13 +383,13 @@ public class CalendarFragment extends MyExFragment implements GradationScrollVie
             timeView.setText(getTime(date));
 
 
-            boolean result = calendar.toSpecifyDate(Integer.valueOf(getTime(date).substring(0, 4)),
-                    Integer.valueOf(getTime(date).substring(5, 7)),
-                    Integer.valueOf(getTime(date).substring(8, 10)));
-            if (!result) {
-                Toast.makeText(getActivity(), "日期越界！", Toast.LENGTH_SHORT).show();
-            } else {
-            }
+//            boolean result = calendar.toSpecifyDate(Integer.valueOf(getTime(date).substring(0, 4)),
+//                    Integer.valueOf(getTime(date).substring(5, 7)),
+//                    Integer.valueOf(getTime(date).substring(8, 10)));
+//            if (!result) {
+//                Toast.makeText(getActivity(), "日期越界！", Toast.LENGTH_SHORT).show();
+//            } else {
+//            }
         })
                 .setType(new boolean[]{true, true, true, false, false, false})// 控制分别控制“年”“月”“日”“时”“分”“秒”的显示或隐藏。new boolean[]{true, true, true, false, false, false}
                 .isDialog(true)

@@ -148,8 +148,7 @@ dependencies {
     implementation files('libs/android-query-full.0.26.7.jar')
     implementation(name: 'Baidu_MobAds_SDK-release_v9.16', ext: 'aar')
 
-    //日历的库
-    implementation project(':calendarview')
+
 
     //圆弧的
     implementation project(':circleprogress')

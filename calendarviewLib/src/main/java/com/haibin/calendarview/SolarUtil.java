@@ -111,7 +111,7 @@ public class SolarUtil {
                 customs = "地藏王";
                 break;
 
-            case 1020:
+            case 1128:
                 customs = "倩";
                 break;
         }
