@@ -18,6 +18,7 @@
     <string-array name="tradition_festival" tools:ignore="InconsistentArrays">
         <item>除夕</item>
         <item>0101春节</item>
+        <item>0102卫子</item>
         <item>0115元宵</item>
         <item>0505端午</item>
         <item>0707七夕</item>

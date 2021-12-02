@@ -1,12 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <string name="app_name">聚友万年历</string>
+    <string name="app_name" translatable="false">聚友万年历</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="no_more_data">-没有更多了-</string>
-    <string name="no_data">暂无数据</string>
-    <string name="load_fail">加载出错，点击重新加载</string>
-    <string name="now">.  现在</string>
-    <string name="control_city">城市管理</string>
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <string name="no_more_data" translatable="false">-没有更多了-</string>
+    <string name="no_data" translatable="false">暂无数据</string>
+    <string name="load_fail" translatable="false">加载出错，点击重新加载</string>
+    <string name="now" translatable="false">.  现在</string>
+    <string name="control_city" translatable="false">城市管理</string>
     <string name="sun">日</string>
     <string name="mon">一</string>
     <string name="tue">二</string>
@@ -14,60 +14,59 @@
     <string name="thu">四</string>
     <string name="fri">五</string>
     <string name="sat">六</string>
-    <string name="today_title">今日详情</string>
-    <string name="car">洗车指数</string>
-    <string name="cold">感冒指数</string>
-    <string name="comfortable">舒适度指数</string>
-    <string name="dressing">穿衣指数</string>
-    <string name="ultraviolet">紫外线指数</string>
+    <string name="today_title" translatable="false">今日详情</string>
+    <string name="car" translatable="false">洗车指数</string>
+    <string name="cold" translatable="false">感冒指数</string>
+    <string name="comfortable" translatable="false">舒适度指数</string>
+    <string name="dressing" translatable="false">穿衣指数</string>
+    <string name="ultraviolet" translatable="false">紫外线指数</string>
 
-    <string name="hum">湿度</string>
-    <string name="pressure">气压</string>
-    <string name="visible">能见度</string>
+    <string name="hum" translatable="false">湿度</string>
+    <string name="pressure" translatable="false">气压</string>
+    <string name="visible" translatable="false">能见度</string>
 
 
-    <string name="air_quality">空气质量</string>
-    <string name="pm2_5">PM2.5</string>
-    <string name="so2">SO₂</string>
-    <string name="pm10">PM10</string>
-    <string name="no2">NO₂</string>
-    <string name="co">CO</string>
-    <string name="o3">O³</string>
-    <string name="forecast">预报</string>
-    <string name="today">今天</string>
-    <string name="tomorrow">明天</string>
-    <string name="after_t">后天</string>
-    <string name="add_city" tools:ignore="DuplicateDefinition">添加城市</string>
-    <string name="nearly_search">最近搜索</string>
-    <string name="Popular_Location">热门城市</string>
+    <string name="air_quality" translatable="false">空气质量</string>
+    <string name="pm2_5" translatable="false">PM2.5</string>
+    <string name="so2" translatable="false">SO₂</string>
+    <string name="pm10" translatable="false">PM10</string>
+    <string name="no2" translatable="false">NO₂</string>
+    <string name="co" translatable="false">CO</string>
+    <string name="o3" translatable="false">O³</string>
+    <string name="forecast" translatable="false">预报</string>
+    <string name="today" translatable="false">今天</string>
+    <string name="tomorrow" translatable="false">明天</string>
+    <string name="after_t" translatable="false">后天</string>
+    <string name="add_city" tools:ignore="DuplicateDefinition" translatable="false">添加城市</string>
+    <string name="nearly_search" translatable="false">最近搜索</string>
+    <string name="Popular_Location" translatable="false">热门城市</string>
 
-    <string name="beijing">北京</string>
-    <string name="shanghai">上海</string>
-    <string name="guangzhou">广州</string>
-    <string name="shenzhen">深圳</string>
-    <string name="hangzhou">杭州</string>
-    <string name="chongqing">重庆</string>
-    <string name="wuhan">武汉</string>
-    <string name="xian">西安</string>
-    <string name="Ner_York">纽约</string>
-    <string name="Paris">巴黎</string>
-    <string name="Moscow">莫斯科</string>
-    <string name="London">伦敦</string>
-    <string name="HongKong">香港</string>
-    <string name="Singapore">新加坡</string>
-    <string name="Sydney">悉尼</string>
-    <string name="Tokyo">东京</string>
-    <string name="Dubai">迪拜</string>
-    <string name="Berlin">柏林</string>
-    <string name="Amsterdam">阿姆斯特丹</string>
-    <string name="Seoul">首尔</string>
-    <string name="Zurich">苏黎世</string>
-    <string name="Toronto">多伦多</string>
-    <string name="Cape_Town">开普敦</string>
-    <string name="Bangkok">曼谷</string>
-    <string name="Madrid">马德里</string>
-    <string name="main_today_fortune">今日运势</string>
-    <string name="go_back_calendar">返回日历</string>
-
+    <string name="beijing" translatable="false">北京</string>
+    <string name="shanghai" translatable="false">上海</string>
+    <string name="guangzhou" translatable="false">广州</string>
+    <string name="shenzhen" translatable="false">深圳</string>
+    <string name="hangzhou" translatable="false">杭州</string>
+    <string name="chongqing" translatable="false">重庆</string>
+    <string name="wuhan" translatable="false">武汉</string>
+    <string name="xian" translatable="false">西安</string>
+    <string name="Ner_York" translatable="false">纽约</string>
+    <string name="Paris" translatable="false">巴黎</string>
+    <string name="Moscow" translatable="false">莫斯科</string>
+    <string name="London" translatable="false">伦敦</string>
+    <string name="HongKong" translatable="false">香港</string>
+    <string name="Singapore" translatable="false">新加坡</string>
+    <string name="Sydney" translatable="false">悉尼</string>
+    <string name="Tokyo" translatable="false">东京</string>
+    <string name="Dubai" translatable="false">迪拜</string>
+    <string name="Berlin" translatable="false">柏林</string>
+    <string name="Amsterdam" translatable="false">阿姆斯特丹</string>
+    <string name="Seoul" translatable="false">首尔</string>
+    <string name="Zurich" translatable="false">苏黎世</string>
+    <string name="Toronto" translatable="false">多伦多</string>
+    <string name="Cape_Town" translatable="false">开普敦</string>
+    <string name="Bangkok" translatable="false">曼谷</string>
+    <string name="Madrid" translatable="false">马德里</string>
+    <string name="main_today_fortune" translatable="false">今日运势</string>
+    <string name="go_back_calendar" translatable="false">返回日历</string>
 
 </resources>

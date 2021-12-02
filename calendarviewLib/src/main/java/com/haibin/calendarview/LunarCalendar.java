@@ -38,7 +38,7 @@ public final class LunarCalendar {
         SolarTermUtil.init(context);
         MONTH_STR = context.getResources().getStringArray(R.array.lunar_first_of_month);//农历月份第一天转写
         TRADITION_FESTIVAL_STR = context.getResources().getStringArray(R.array.tradition_festival);//传统农历节日
-        DAY_STR = context.getResources().getStringArray(R.array.lunar_str);//农历大写
+        DAY_STR = context.getResources().getStringArray(R.array.lunar_str);//农历初几
         SPECIAL_FESTIVAL_STR = context.getResources().getStringArray(R.array.special_festivals);// 特殊节日的数组，父亲节，母亲节
         SOLAR_CALENDAR = context.getResources().getStringArray(R.array.solar_festival);//公历节日
     }
@@ -246,6 +246,8 @@ public final class LunarCalendar {
     public static String getLunarText(int year, int month, int day) {
         String termText = LunarCalendar.getSolarTerm(year, month, day);
         String solar = LunarCalendar.gregorianFestival(month, day);
+        Log.e("solar", "termText--------24节气-------"+termText);
+        Log.e("solar", "solar--------不是24节气------"+solar);
         if (!TextUtils.isEmpty(solar))
             return solar;
         if (!TextUtils.isEmpty(termText))
@@ -342,24 +344,35 @@ public final class LunarCalendar {
         int year = calendar.getYear();
         int month = calendar.getMonth();
         int day = calendar.getDay();
+//        Log.e("日历", "CalendarUtil.isWeekend(calendar)---------------" + CalendarUtil.isWeekend(calendar));
+//        Log.e("日历", "CalendarUtil.getWeekFormCalendar(calendar)---------------" + CalendarUtil.getWeekFormCalendar(calendar));
         calendar.setWeekend(CalendarUtil.isWeekend(calendar));
         calendar.setWeek(CalendarUtil.getWeekFormCalendar(calendar));
 
         Calendar lunarCalendar = new Calendar();
         calendar.setLunarCalendar(lunarCalendar);
         int[] lunar = LunarUtil.solarToLunarMy(year, month, day);
+
         lunarCalendar.setYear(lunar[0]);
         lunarCalendar.setMonth(lunar[1]);
         lunarCalendar.setDay(lunar[2]);
         calendar.setLeapYear(CalendarUtil.isLeapYear(year));
+//        Log.e("日历", "lunarCalendar----------------------"+lunarCalendar);
+
         if (lunar[3] == 1) {//如果是闰月
             calendar.setLeapMonth(lunar[1]);
             lunarCalendar.setLeapMonth(lunar[1]);
         }
-        String solarTerm = LunarCalendar.getSolarTerm(year, month, day);
-        String gregorian = LunarCalendar.gregorianFestival(month, day);
-        String festival = getTraditionFestival(lunar[0], lunar[1], lunar[2]);
+        String solarTerm = LunarCalendar.getSolarTerm(year, month, day);//24节气
+        String gregorian = LunarCalendar.gregorianFestival(month, day);//获取公历节日------植树节
+        String festival = getTraditionFestival(lunar[0], lunar[1], lunar[2]);//返回传统农历节日
         String lunarText = LunarCalendar.numToChinese(lunar[1], lunar[2], lunar[3]);
+//        Log.e("日历", "solarTerm----------------------"+solarTerm);
+//        Log.e("日历", "gregorian----------------------"+gregorian);
+//        Log.e("日历", "festival----------------------"+festival);
+//        Log.e("日历", "lunarText----------------------"+lunarText);
+
+
         if (TextUtils.isEmpty(gregorian)) {
             gregorian = getSpecialFestival(year, month, day);
         }
@@ -368,10 +381,17 @@ public final class LunarCalendar {
         calendar.setTraditionFestival(festival);
         lunarCalendar.setTraditionFestival(festival);
         lunarCalendar.setSolarTerm(solarTerm);
+
         if (!TextUtils.isEmpty(solarTerm)) {
             calendar.setLunar(solarTerm);
         } else if (!TextUtils.isEmpty(gregorian)) {
             calendar.setLunar(gregorian);
+            calendar.getSchemeColor();
+//            gregorian.
+//            calendar.setSchemeColor(calendar.getSchemeColor());
+//            setSchemeColor(calendar.getSchemeColor());
+//            gregorian.
+            Log.e("TextUtils", "gregorian-------------"+calendar.getSchemeColor());
         } else if (!TextUtils.isEmpty(festival)) {
             calendar.setLunar(festival);
         } else {

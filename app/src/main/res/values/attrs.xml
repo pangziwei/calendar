@@ -15,7 +15,4 @@
         <attr name="titleColor" format="color" />
         <attr name="titleRightColor" format="color" />
     </declare-styleable>
-
-
-
 </resources>

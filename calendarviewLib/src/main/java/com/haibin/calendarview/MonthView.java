@@ -17,7 +17,12 @@ package com.haibin.calendarview;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.RectF;
+import android.util.Log;
 import android.view.View;
+
+import java.time.LocalDate;
 
 /**
  * 月视图基础控件,可自由继承实现
@@ -36,12 +41,13 @@ public abstract class MonthView extends BaseMonthView {
         mItemWidth = (getWidth() -
                 mDelegate.getCalendarPaddingLeft() -
                 mDelegate.getCalendarPaddingRight()) / 7;
-        onPreviewHook();
+        onPreviewHook();//计算
         int count = mLineCount * 7;
         int d = 0;
         for (int i = 0; i < mLineCount; i++) {
             for (int j = 0; j < 7; j++) {
                 Calendar calendar = mItems.get(d);
+//               月份显示模式  == 仅显示当前月份
                 if (mDelegate.getMonthViewShowMode() == CalendarViewDelegate.MODE_ONLY_CURRENT_MONTH) {
                     if (d > mItems.size() - mNextDiff) {
                         return;
@@ -74,9 +80,16 @@ public abstract class MonthView extends BaseMonthView {
     private void draw(Canvas canvas, Calendar calendar, int i, int j, int d) {
         int x = j * mItemWidth + mDelegate.getCalendarPaddingLeft();
         int y = i * mItemHeight;
-        onLoopStart(x, y);
-        boolean isSelected = d == mCurrentItem;
+        onLoopStart(x, y);//圆心坐标等都可以在这里实现
+        boolean isSelected = d == mCurrentItem;//当前点击项
         boolean hasScheme = calendar.hasScheme();
+//        Log.e("日历", "农历字符串-------------------"+calendar.getLunar());//几月初几的，包含24节气
+//        Log.e("日历", "24节气------有24节气------------"+calendar.getSolarTerm());
+//        Log.e("日历", "公历节日-------------------"+calendar.getGregorianFestival());
+//        Log.e("日历", "传统农历节日------------------"+calendar.getTraditionFestival());
+//        Log.e("日历", "计划，------------------"+calendar.getSchemes());
+
+
 
         if (hasScheme) {
             //标记的日子
@@ -113,13 +126,13 @@ public abstract class MonthView extends BaseMonthView {
                 !calendar.isCurrentMonth()) {
             return;
         }
-
+//        是否拦截日期，此设置续设置mCalendarInterceptListener
         if (onCalendarIntercept(calendar)) {
             mDelegate.mCalendarInterceptListener.onCalendarInterceptClick(calendar, true);
             return;
         }
 
-
+//        是否在日期范围内
         if (!isInRange(calendar)) {
             if (mDelegate.mCalendarSelectListener != null) {
                 mDelegate.mCalendarSelectListener.onCalendarOutOfRange(calendar);
@@ -224,6 +237,9 @@ public abstract class MonthView extends BaseMonthView {
         invalidate();
         return true;
     }
+
+
+
 
     /**
      * 绘制选中的日期

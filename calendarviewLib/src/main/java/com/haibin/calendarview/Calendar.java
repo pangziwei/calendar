@@ -16,6 +16,7 @@
 package com.haibin.calendarview;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -84,6 +85,7 @@ public final class Calendar implements Serializable, Comparable<Calendar> {
 
     /**
      * 传统农历节日
+     * 比如是春节啊，什么的
      */
     private String traditionFestival;
 

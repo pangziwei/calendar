@@ -114,4 +114,6 @@ public final class DefaultMonthView extends MonthView {
                             calendar.isCurrentMonth() ? mCurMonthLunarTextPaint : mOtherMonthLunarTextPaint);
         }
     }
+
+
 }
