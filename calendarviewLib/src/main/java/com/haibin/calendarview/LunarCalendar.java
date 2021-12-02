@@ -391,7 +391,7 @@ public final class LunarCalendar {
 //            calendar.setSchemeColor(calendar.getSchemeColor());
 //            setSchemeColor(calendar.getSchemeColor());
 //            gregorian.
-            Log.e("TextUtils", "gregorian-------------"+calendar.getSchemeColor());
+//            Log.e("TextUtils", "gregorian-------------"+calendar.getSchemeColor());
         } else if (!TextUtils.isEmpty(festival)) {
             calendar.setLunar(festival);
         } else {

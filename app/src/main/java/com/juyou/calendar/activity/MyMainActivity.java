@@ -433,7 +433,7 @@ public class MyMainActivity extends BaseActivity {
         UserBo.update(new NewResultCallBack() {
             @Override
             public void onResultSuccess(int what, CurrentBean currentBean) {
-//                Log.e("TAG", "更新app-----WelcomeActivity--------" + new Gson().toJson(currentBean));
+                Log.e("TAG", "更新app-----WelcomeActivity--------" + new Gson().toJson(currentBean));
                 if (currentBean.getCode().equals("200")) {
                     versionEntity = JSONUtil.getObj(String.valueOf(currentBean.getData()), VersionEntity.class);
 //                    Log.e("TAG", "更新app数据-----WelcomeActivity--------" + new Gson().toJson(versionEntity));
