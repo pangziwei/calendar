@@ -20,12 +20,18 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.juyou.calendar.R;
+import com.juyou.calendar.bean.LoginToApiBean;
+import com.juyou.calendar.bean.LoginbackBean;
+import com.juyou.calendar.bo.CurrentBean;
+import com.juyou.calendar.bo.LoveChallengeBo;
+import com.juyou.calendar.bo.NetResultCallBack;
 import com.juyou.calendar.dialog.ShowAllSpan;
 import com.juyou.calendar.eventbus.QQLoginEventBus;
 import com.juyou.calendar.util.H5UrlMananger;
 import com.juyou.calendar.util.WebUtils;
+import com.manggeek.android.geek.utils.JSONUtil;
 import com.tencent.connect.UnionInfo;
 import com.tencent.connect.UserInfo;
 import com.tencent.connect.auth.QQToken;
@@ -37,9 +43,10 @@ import com.tencent.tauth.UiError;
 import com.zrq.spanbuilder.SpanBuilder;
 
 import org.greenrobot.eventbus.EventBus;
-import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 
 import butterknife.BindView;
@@ -73,11 +80,20 @@ public class OneClickLoginActivity extends AppCompatActivity {
     @BindView(R.id.ll_login_shake)
     LinearLayout llLoginShake;
 
+    //登录参数
+    String LoginOpen;
+    String LoginToken;
+    String LoginUser;
+    private LoginToApiBean loginToApiBean;
+    private LoginbackBean loginbackBean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_one_click_login);
+
+
+        loginToApiBean = new LoginToApiBean();
 //        全屏展示
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -119,6 +135,7 @@ public class OneClickLoginActivity extends AppCompatActivity {
                 }
 //                //如果session无效，就开始做登录操作
                 if (!mTencent.isSessionValid()) {
+                    loginToApiBean.setWay("qq");
                     loginQQ();
                 }
 //                loginQQ();
@@ -130,7 +147,7 @@ public class OneClickLoginActivity extends AppCompatActivity {
                     return;
                 }
                 //注销登录
-//                mTencent.logout(this);
+                mTencent.logout(this);
 
                 break;
             case R.id.ll_wb_login:
@@ -139,7 +156,7 @@ public class OneClickLoginActivity extends AppCompatActivity {
                     initShake();
                     return;
                 }
-                onClickShare();//分享
+//                onClickShare();//分享
 
                 break;
             case R.id.ll_title_left:
@@ -216,8 +233,10 @@ public class OneClickLoginActivity extends AppCompatActivity {
                 public void onComplete(final Object response) {
                     if (response != null) {
                         JSONObject jsonObject = (JSONObject) response;
-
-                        Log.e(TAG, "--------dfvxcvX-----" + jsonObject.toString());
+                        LoginOpen = jsonObject.toString();
+                        loginToApiBean.setOpen(LoginOpen);
+                        Log.e(TAG, "-------登录参数open-----" + jsonObject.toString());
+                        Log.e(TAG, "-------登录参数LoginOpen----" + LoginOpen);
                         try {
                             String unionid = jsonObject.getString("unionid");
                             Log.e(TAG, "---cvcvxz ----------" + ((JSONObject) response).toString());
@@ -252,8 +271,10 @@ public class OneClickLoginActivity extends AppCompatActivity {
         listener = new IUiListener() {
             @Override
             public void onComplete(Object object) {
-
-                Log.e(TAG, "登录成功: " + object.toString());
+                LoginToken = object.toString();
+                loginToApiBean.setToken(LoginToken);
+                Log.e(TAG, "登录成功:--参数token-- " + object.toString());
+                Log.e(TAG, "登录成功:--参数LoginToken-- " + LoginToken);
 
                 JSONObject jsonObject = (JSONObject) object;
                 try {
@@ -315,23 +336,36 @@ public class OneClickLoginActivity extends AppCompatActivity {
         info.getUserInfo(new IUiListener() {
             @Override
             public void onComplete(Object object) {
-                try {
-                    Log.e(TAG, "个人信息：" + object.toString());
-                    //头像
-                    avatar = ((JSONObject) object).getString("figureurl_2");
-                    String nickName = ((JSONObject) object).getString("nickname");
+//                try {
+//
+                    LoginUser = object.toString();
+                    loginToApiBean.setUser(LoginUser);
+//                    Log.e(TAG, "个人信息：登录参数----user-----" + object.toString());
+//                    Log.e(TAG, "个人信息：登录参数----user---LoginUser--" + LoginUser);
+//                    //头像
+////                    avatar = ((JSONObject) object).getString("figureurl_2");
+////                    String nickName = ((JSONObject) object).getString("nickname");
+//
+////                    if (!avatar.equals("")) {
+////                        Glide.with(OneClickLoginActivity.this).load(avatar).into(ivWbIcon);
+////
+////                    }
+////                    tvWb.setText(nickName);
+//
+////                    finish();
+//
+//
+//                    goLogin();
+//
+//                    EventBus.getDefault().post(new QQLoginEventBus(avatar));
+//                } catch (JSONException e) {
+//                    e.printStackTrace();
+//                }
 
-                    if (!avatar.equals("")) {
-                        Glide.with(OneClickLoginActivity.this).load(avatar).into(ivWbIcon);
 
-                    }
-                    tvWb.setText(nickName);
+                goLogin();
 
-                    EventBus.getDefault().post(new QQLoginEventBus(avatar));
-                    finish();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+//                EventBus.getDefault().post(new QQLoginEventBus(avatar));
             }
 
             @Override
@@ -347,6 +381,38 @@ public class OneClickLoginActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+
+    private void goLogin() {
+        Log.e("测试登录接口", "参数测试登录接口----loginToApiBean--------------" + new Gson().toJson(loginToApiBean));
+        LoveChallengeBo.Login_third(this, new Gson().toJson(loginToApiBean), new NetResultCallBack() {
+            @Override
+            public void onSuccess(int what, CurrentBean currentBean) {
+                Log.e("测试登录接口", "--成功-----" + new Gson().toJson(currentBean));
+
+                loginbackBean = JSONUtil.getObj(String.valueOf(currentBean.getData()), LoginbackBean.class);
+//                Log.e("测试登录接口", "--成功-----" + new Gson().toJson(loginbackBean));
+                Log.e("测试登录接口", "loginbackBean---------getAvatar-------" + loginbackBean.getAvatar());
+                Log.e("测试登录接口", "loginbackBean----getNickname------------" + loginbackBean.getNickname());
+//                Log.e("测试登录接口", "loginbackBean----------getToken------" + loginbackBean.getToken());
+//                Log.e("测试登录接口", "loginbackBean-------getUuid---------" + loginbackBean.getUuid());
+                try {
+//                    URLDecoder.decode(loginbackBean.getNickname(), "utf-8");
+                    EventBus.getDefault().post(new QQLoginEventBus(loginbackBean.getAvatar(), URLDecoder.decode(loginbackBean.getNickname(), "utf-8")));
+                    finish();
+                } catch (UnsupportedEncodingException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFail(int what, CurrentBean currentBean) {
+                Log.e("测试登录接口", "------失败-的信息----" + new Gson().toJson(currentBean));
+                Log.e("测试登录接口", "------失败-----" + currentBean.getMsg());
+            }
+        });
+
     }
 
     /**

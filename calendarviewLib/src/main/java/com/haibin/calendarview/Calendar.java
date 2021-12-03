@@ -305,9 +305,11 @@ public final class Calendar implements Serializable, Comparable<Calendar> {
 
     public boolean hasScheme() {
         if (schemes != null && schemes.size() != 0) {
+            Log.e("日历", "000000-------"+schemes.size());
             return true;
         }
         if (!TextUtils.isEmpty(scheme)) {
+            Log.e("日历", "000000---的副董事长----"+schemes.size());
             return true;
         }
         return false;

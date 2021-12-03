@@ -6,25 +6,28 @@ package com.juyou.calendar.eventbus;
  * @detail :qq登录的eventBus的数据头像传递
  */
 public class QQLoginEventBus {
-    public String getMessage() {
-        return message;
+    public String avatar;
+    public String nickname;
+
+    public String getAvatar() {
+        return avatar;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
-    public String message;
-
-    public QQLoginEventBus(String message) {
-        this.message = message;
+    public String getNickname() {
+        return nickname;
     }
 
-
-    @Override
-    public String toString() {
-        return "QQLoginEventBus{" +
-                "message='" + message + '\'' +
-                '}';
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
+
+    public QQLoginEventBus(String avatar ,String nickname) {
+        this.avatar = avatar;
+        this.nickname = nickname;
+    }
+
 }

@@ -13,13 +13,40 @@
         android:background="@color/textbarColor"
         android:orientation="horizontal">
 
-        <com.manggeek.android.geek.view.CircleImageView
-            android:id="@+id/cv_mine_head"
-            android:layout_width="@dimen/dp_80"
-            android:layout_height="@dimen/dp_80"
-            android:layout_gravity="center"
-            android:layout_weight="2"
-            android:src="@mipmap/ic_mine_head" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_15" />
+
+            <com.manggeek.android.geek.view.CircleImageView
+                android:id="@+id/cv_mine_head"
+                android:layout_width="@dimen/dp_80"
+                android:layout_height="@dimen/dp_0"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="3"
+                android:gravity="center"
+                android:src="@mipmap/ic_mine_head" />
+
+            <TextView
+                android:id="@+id/tv_login_nicknome"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dp_10"
+                android:layout_weight="3"
+                android:gravity="center_horizontal"
+                android:text="昵称"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_15" />
+        </LinearLayout>
+
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -54,6 +81,7 @@
                 android:text="登录查看更多内容"
                 android:textColor="@color/white" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -61,15 +89,12 @@
             android:orientation="vertical">
 
 
-
-
             <ImageView
                 android:id="@+id/iv_mine_setting"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@mipmap/ic_login_wb"
                 android:layout_gravity="center"
-                />
+                android:src="@mipmap/ic_login_wb" />
         </LinearLayout>
 
 
@@ -208,8 +233,8 @@
 
             <ImageView
                 android:layout_width="@dimen/dp_50"
-                android:layout_marginLeft="@dimen/dp_10"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/dp_10"
                 android:src="@mipmap/ic_mine_fortune_qian" />
         </LinearLayout>
 
@@ -275,8 +300,8 @@
             android:layout_width="@dimen/dp_0"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:gravity="center">
 
             <ImageView
                 android:id="@+id/ll_mine_jieqian"

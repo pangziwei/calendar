@@ -83,27 +83,35 @@ public abstract class MonthView extends BaseMonthView {
         onLoopStart(x, y);//圆心坐标等都可以在这里实现
         boolean isSelected = d == mCurrentItem;//当前点击项
         boolean hasScheme = calendar.hasScheme();
-//        Log.e("日历", "农历字符串-------------------"+calendar.getLunar());//几月初几的，包含24节气
-//        Log.e("日历", "24节气------有24节气------------"+calendar.getSolarTerm());
-//        Log.e("日历", "公历节日-------------------"+calendar.getGregorianFestival());
-//        Log.e("日历", "传统农历节日------------------"+calendar.getTraditionFestival());
-//        Log.e("日历", "计划，------------------"+calendar.getSchemes());
+        Log.e("日历", "农历字符串----------"+calendar.getLunar());//几月初几的，包含24节气
+        Log.e("日历", "24节气------中国特有的24节气-------"+calendar.getSolarTerm());
+        Log.e("日历", "公历节日----国外节日，比我情人节，愚人节啥的-----只有，要么为“”------"+calendar.getGregorianFestival());
+        Log.e("日历", "传统农历节日----春节元宵端午的那种-----卫子---------"+calendar.getTraditionFestival());
 
-
-
+//        Log.e("日历", "000000-------"+hasScheme);
         if (hasScheme) {
+//            Log.e("日历", "111111111-------");
             //标记的日子
             boolean isDrawSelected = false;//是否继续绘制选中的onDrawScheme
             if (isSelected) {
+//                Log.e("日历", "2222222222-------");
+                      //绘制选中的日期
                 isDrawSelected = onDrawSelected(canvas, calendar, x, y, true);
             }
             if (isDrawSelected || !isSelected) {
+//                Log.e("日历", "33333333333-------");
+
                 //将画笔设置为标记颜色
+//                标记的日期背景颜色画笔
                 mSchemePaint.setColor(calendar.getSchemeColor() != 0 ? calendar.getSchemeColor() : mDelegate.getSchemeThemeColor());
-                onDrawScheme(canvas, calendar, x, y);
+                onDrawScheme(canvas, calendar, x, y);//绘制标记的日期,这里可以是背景色，标记色什么的
             }
         } else {
+//            Log.e("日历", "4444444444444-------");
+
             if (isSelected) {
+//                Log.e("日历", "--5555555-绘制选中的日期-");
+
                 onDrawSelected(canvas, calendar, x, y, false);
             }
         }
@@ -237,8 +245,6 @@ public abstract class MonthView extends BaseMonthView {
         invalidate();
         return true;
     }
-
-
 
 
     /**

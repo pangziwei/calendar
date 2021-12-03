@@ -4,12 +4,9 @@ import android.content.Context;
 import android.util.Log;
 
 import com.google.gson.Gson;
-import com.juyou.calendar.constant.WeatherContentUtil;
 import com.juyou.calendar.util.SystemUtil;
 import com.manggeek.android.geek.http.GeekHttp;
 import com.manggeek.android.geek.http.HttpParams;
-
-import java.util.List;
 
 
 public class LoveChallengeBo {
@@ -96,7 +93,17 @@ public class LoveChallengeBo {
         httpParams.put("password", password);
         httpParams.put("appid", appid);
         GeekHttp.getHttp().postJson(0, Api.BaseUrl + "user/login", httpParams, listener);
-        Log.e("测试登录接口", "登录的url---------" + Api.BaseUrl + "user/login");
+//        Log.e("测试登录接口", "登录的url---------" + Api.BaseUrl + "user/login");
+//        Log.e("测试登录接口", "登录的url---httpParams------" + httpParams);
+    }
+    // 判断是否有上级
+    //登录
+    public static void Login_third(Context context, String loginBean, NetResultCallBack listener) {
+        //参数
+        BaseParams httpParams = new BaseParams();
+        httpParams.put("data", loginBean);
+        GeekHttp.getHttp().postJson(0, Api.JY_HOST + "account/login_third", httpParams, listener);
+        Log.e("测试登录接口", "登录的测试---------" + Api.JY_HOST + "account/login_third");
         Log.e("测试登录接口", "登录的url---httpParams------" + httpParams);
     }
 }

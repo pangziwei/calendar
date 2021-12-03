@@ -16,5 +16,7 @@ public class Api {
 
     //h5页面地址
     public static final String H5_HOST = NETTYPE == 1 ? "https://h5.ailaila.com/" : NETTYPE == 2 ? "https://betah5.ailaila.com/" : "http://testh5.cupidbit.com/";
+    //h5页面地址
+    public static final String JY_HOST = NETTYPE == 1 ? "http://android.shiquanwanli.com/" : NETTYPE == 2 ? "http://android.shiquanwanli.com/" : "http://android.shiquanwanli.com/";
 
 }

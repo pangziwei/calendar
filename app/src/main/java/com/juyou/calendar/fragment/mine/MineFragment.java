@@ -1,21 +1,13 @@
 package com.juyou.calendar.fragment.mine;
 
-import android.Manifest;
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 
 import com.bumptech.glide.Glide;
 import com.juyou.calendar.R;
@@ -24,11 +16,14 @@ import com.juyou.calendar.eventbus.QQLoginEventBus;
 import com.juyou.calendar.mine.about.AboutActivity;
 import com.juyou.calendar.util.WebUtils;
 import com.manggeek.android.geek.view.CircleImageView;
+
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
+
 import butterknife.BindView;
 import butterknife.OnClick;
+
 public class MineFragment extends MyExFragment {
     public static final String TAG = "MineFragment";
     @BindView(R.id.tv_mine_login)
@@ -55,6 +50,10 @@ public class MineFragment extends MyExFragment {
     TextView btnMineAbout;
     @BindView(R.id.iv_mine_setting)
     ImageView ivMineSetting;
+    @BindView(R.id.cv_mine_head)
+    CircleImageView cvMineHead;
+    @BindView(R.id.tv_login_nicknome)
+    TextView tvLoginNicknome;
 
     @Override
     public void loadData() {
@@ -80,7 +79,7 @@ public class MineFragment extends MyExFragment {
     }
 
 
-    @OnClick({ R.id.tv_mine_login, R.id.ll_mine_star_query, R.id.ll_mine_jiri_query, R.id.ll_mine_fortune_query, R.id.ll_mine_yellow_query, R.id.ll_mine_jieqian, R.id.ll_mine_dream, R.id.ll_mine_day_weather, R.id.ll_mine_name_test, R.id.ll_mine_star, R.id.btn_mine_about,R.id.iv_mine_setting})
+    @OnClick({R.id.tv_mine_login, R.id.ll_mine_star_query, R.id.ll_mine_jiri_query, R.id.ll_mine_fortune_query, R.id.ll_mine_yellow_query, R.id.ll_mine_jieqian, R.id.ll_mine_dream, R.id.ll_mine_day_weather, R.id.ll_mine_name_test, R.id.ll_mine_star, R.id.btn_mine_about, R.id.iv_mine_setting})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.tv_mine_login:
@@ -114,11 +113,17 @@ public class MineFragment extends MyExFragment {
                 break;
         }
     }
+
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEventMainThread(QQLoginEventBus messageEvent) {
-        Log.e("TAG", "messageEvent---观察者的模式来进行数据变化-----" + messageEvent.getMessage());
-        if (!messageEvent.getMessage().equals("")) {
+//        if (!messageEvent.getMessage().equals("")) {
 //            Glide.with(getActivity()).load(messageEvent.getMessage()).into(cvMineHead);
+//        }
+        if (!messageEvent.getAvatar().equals("")) {
+            Glide.with(getActivity()).load(messageEvent.getAvatar()).into(cvMineHead);
+        }
+        if (!messageEvent.getNickname().equals("")) {
+            tvLoginNicknome.setText(messageEvent.getNickname());
         }
 
     }

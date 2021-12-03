@@ -145,7 +145,7 @@ public class MyMainActivity extends BaseActivity {
 
             @Override
             public void onFail(int what, CurrentBean currentBean) {
-                Log.e("测试登录接口", "------失败-----" + currentBean.getMsg());
+//                Log.e("测试登录接口", "------失败-----" + currentBean.getMsg());
             }
         });
     }
