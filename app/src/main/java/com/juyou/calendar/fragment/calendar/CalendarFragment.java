@@ -249,7 +249,6 @@ public class CalendarFragment extends MyExFragment implements
         addressDialog = new AddressDialog((GeekActivity) getActivity());
         addressDialog.setSelectAreaListener(selectAreaListener);//地址的弹框
 
-        Log.e("干支年纪", "calendar-------------");
         initCalendar();
     }
 
@@ -294,7 +293,6 @@ public class CalendarFragment extends MyExFragment implements
         calendar.setMonth(Integer.parseInt(month));
         calendar.setDay(Integer.parseInt(day));
         calendar.setSchemeColor(color);//如果单独标记颜色、则会使用这个颜色
-//        Log.e("color", "color------------------" + color);
         calendar.setScheme(text);
         calendar.addScheme(new Calendar.Scheme());
         calendar.addScheme(0xFF008800, "假");

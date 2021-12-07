@@ -1352,12 +1352,13 @@ public class CalendarView extends FrameLayout {
             int curMonthTextColor,
             int otherMonthColor,
             int curMonthLunarTextColor,
-            int otherMonthLunarTextColor) {
+            int otherMonthLunarTextColor,
+            int houlidyCurMonthLunarTextColor) {
         if (mDelegate == null || mMonthPager == null || mWeekPager == null) {
             return;
         }
         mDelegate.setTextColor(currentDayTextColor, curMonthTextColor,
-                otherMonthColor, curMonthLunarTextColor, otherMonthLunarTextColor);
+                otherMonthColor, curMonthLunarTextColor, otherMonthLunarTextColor,houlidyCurMonthLunarTextColor);
         mMonthPager.updateStyle();
         mWeekPager.updateStyle();
     }

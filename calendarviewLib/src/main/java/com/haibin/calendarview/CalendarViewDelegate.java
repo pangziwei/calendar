@@ -140,6 +140,7 @@ final class CalendarViewDelegate {
             mSelectedTextColor,
             mSelectedLunarTextColor,
             mCurMonthLunarTextColor,
+            mHoulidyCurMonthLunarTextColor,
             mOtherMonthLunarTextColor;
 
     private boolean preventLongPressedSelected;
@@ -293,7 +294,7 @@ final class CalendarViewDelegate {
     /**
      * 日期和农历文本大小
      */
-    private int mDayTextSize, mLunarTextSize;
+    private int mDayTextSize, mLunarTextSize, mhoulidyLunarTextSize;
 
     /**
      * 日历卡的项高度
@@ -481,6 +482,7 @@ final class CalendarViewDelegate {
         mOtherMonthTextColor = array.getColor(R.styleable.CalendarView_other_month_text_color, 0xFFe1e1e1);
 
         mCurMonthLunarTextColor = array.getColor(R.styleable.CalendarView_current_month_lunar_text_color, 0xffe1e1e1);
+        mHoulidyCurMonthLunarTextColor = array.getColor(R.styleable.CalendarView_houlidy_current_month_lunar_text_color, 0xffe1e1e1);
         mOtherMonthLunarTextColor = array.getColor(R.styleable.CalendarView_other_month_lunar_text_color, 0xffe1e1e1);
         mMinYear = array.getInt(R.styleable.CalendarView_min_year, 1971);
         mMaxYear = array.getInt(R.styleable.CalendarView_max_year, 2055);
@@ -493,6 +495,10 @@ final class CalendarViewDelegate {
                 CalendarUtil.dipToPx(context, 16));
         mLunarTextSize = array.getDimensionPixelSize(R.styleable.CalendarView_lunar_text_size,
                 CalendarUtil.dipToPx(context, 10));
+//        节假日的大小平安夜
+        mhoulidyLunarTextSize = array.getDimensionPixelSize(R.styleable.CalendarView_houlidy_text_size,
+                CalendarUtil.dipToPx(context, 10));
+
         mCalendarItemHeight = (int) array.getDimension(R.styleable.CalendarView_calendar_height,
                 CalendarUtil.dipToPx(context, 56));
         isFullScreenCalendar = array.getBoolean(R.styleable.CalendarView_calendar_match_parent, false);
@@ -659,6 +665,10 @@ final class CalendarViewDelegate {
         return mCurMonthLunarTextColor;
     }
 
+    int getHoulidyCurrentMonthLunarTextColor() {
+        return mHoulidyCurMonthLunarTextColor;
+    }
+
     int getOtherMonthLunarTextColor() {
         return mOtherMonthLunarTextColor;
     }
@@ -725,6 +735,10 @@ final class CalendarViewDelegate {
 
     int getLunarTextSize() {
         return mLunarTextSize;
+    }
+
+    int getHoulidyLunarTextSize() {
+        return mhoulidyLunarTextSize;
     }
 
     int getCalendarItemHeight() {
@@ -826,12 +840,13 @@ final class CalendarViewDelegate {
         this.mMonthViewShowMode = monthViewShowMode;
     }
 
-    void setTextColor(int curDayTextColor, int curMonthTextColor, int otherMonthTextColor, int curMonthLunarTextColor, int otherMonthLunarTextColor) {
+    void setTextColor(int curDayTextColor, int curMonthTextColor, int otherMonthTextColor, int curMonthLunarTextColor, int otherMonthLunarTextColor, int houlidyCurMonthLunarTextColor) {
         mCurDayTextColor = curDayTextColor;
         mOtherMonthTextColor = otherMonthTextColor;
         mCurrentMonthTextColor = curMonthTextColor;
         mCurMonthLunarTextColor = curMonthLunarTextColor;
         mOtherMonthLunarTextColor = otherMonthLunarTextColor;
+        mHoulidyCurMonthLunarTextColor = houlidyCurMonthLunarTextColor;
     }
 
     void setSchemeColor(int schemeColor, int schemeTextColor, int schemeLunarTextColor) {

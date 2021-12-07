@@ -42,7 +42,7 @@ public class FortuneFragment extends MyExFragment {
     private void init() {
         viewActionBarTitle.setText("我是万年历");
 
-        WebUtils.loadTitleWeb(getActivity(), "https://www.77tianqi.com/h5/rules.html?hideCloseBtn=1", "dfsg");
+//        WebUtils.loadTitleWeb(getActivity(), "https://www.77tianqi.com/h5/rules.html?hideCloseBtn=1", "dfsg");
     }
 
     @Override

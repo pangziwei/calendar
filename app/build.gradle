@@ -170,4 +170,7 @@ dependencies {
     //日历的库
     implementation project(':calendarviewLib')
 
+    //TabLayout
+//    https://blog.csdn.net/qq_36388797/article/details/81942503
+    implementation project(':FlycoTabLayout_Lib')
 }

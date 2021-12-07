@@ -2,27 +2,31 @@ package com.juyou.calendar.fragment.stare;
 
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toolbar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
 
+import com.flyco.tablayout.SegmentTabLayout;
+import com.flyco.tablayout.listener.OnTabSelectListener;
 import com.juyou.calendar.R;
 import com.juyou.calendar.base.MyExFragment;
-import com.juyou.calendar.util.WebUtils;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 
 public class StareFragment extends MyExFragment {
+    private ArrayList<Fragment> fragments;
+    private String[] mTitles = {"天蝎运势", "天蝎档案", "星座测试"};//服务器获取
 
-    @BindView(R.id.view_actionBar_title)
-    TextView viewActionBarTitle;
+    @BindView(R.id.stare_title)
+    SegmentTabLayout segmentTabLayoutTitle;
+    @BindView(R.id.stare_viewpager)
+    ViewPager stareViewPager;
+
 
 
     @Override
@@ -42,18 +46,50 @@ public class StareFragment extends MyExFragment {
     }
 
     private void init() {
-        viewActionBarTitle.setText("我是万年历首页");
-        WebUtils.loadTitleWeb(getActivity(), "https://www.77tianqi.com/h5/rules.html?hideCloseBtn=1", "今日运势");
+        initViewPageData();
+    }
 
-        //使用AsyncHttpClient，实现联网的声明
+
+    private void initViewPageData() {
+        fragments = new ArrayList<>();
+        fragments.add(new StareFortuneFragment());//星座运势
+        fragments.add(new StareArchivesFragment());//星座档案
+        fragments.add(new StareTextFragment());//星座测试
+
+        stareViewPager.setAdapter(new FrgViewPagerAdapter(getChildFragmentManager(), fragments));
+        segmentTabLayoutTitle.setTabData(mTitles);
+        segmentTabLayoutTitle.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelect(int position) {
+                stareViewPager.setCurrentItem(position);
+            }
+
+            @Override
+            public void onTabReselect(int position) {
+            }
+        });
+        stareViewPager.setOffscreenPageLimit(fragments.size());
+        stareViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                segmentTabLayoutTitle.setCurrentTab(position);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
     }
 
     @Override
     public void loadData() {
     }
 
-    @OnClick(R.id.view_actionBar_title)
-    public void onViewClicked() {
-    }
 
 }

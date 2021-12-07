@@ -22,8 +22,10 @@
         <attr name="scheme_text" format="string" />
         <attr name="day_text_size" format="dimension" />
         <attr name="lunar_text_size" format="dimension" />
+        <attr name="houlidy_text_size" format="dimension" />
         <attr name="calendar_height" format="dimension" />
         <attr name="calendar_match_parent" format="boolean" /> <!-- 全屏日历 -->
+
         <attr name="scheme_text_color" format="color" />
         <attr name="scheme_month_text_color" format="color" />
         <attr name="scheme_lunar_text_color" format="color" />
@@ -44,6 +46,8 @@
         <attr name="other_month_text_color" format="color" />
         <!--     current_month_lunar_text_color   日期的颜色，，未选中的几月初几-->
         <attr name="current_month_lunar_text_color" format="color" />
+        <!--     houlidy_current_month_lunar_text_color   平安节-->
+        <attr name="houlidy_current_month_lunar_text_color" format="color" />
 
         <attr name="other_month_lunar_text_color" format="color" />
 

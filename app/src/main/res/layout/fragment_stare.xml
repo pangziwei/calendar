@@ -1,19 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tl="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".fragment.calendar.CalendarFragment">
 
-    <include layout="@layout/view_title_actionbar" />
-
-
-    <ImageView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/pzw" />
+        android:layout_height="match_parent">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/pzw" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/dp_20"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:background="@mipmap/ic_login_black">
+
+                </ImageView>
+
+            </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/dp_30"
+                android:layout_marginTop="@dimen/dp_20"
+                android:layout_marginRight="@dimen/dp_30"
+                android:background="@drawable/stare_text_bg"
+                android:gravity="center"
+                android:padding="@dimen/dp_15"
+                android:text="出生于阳历10月24日一11月22日，这个星座的人 有着强烈的第六感、神秘的探视能力及吸引力，做 事常凭直觉；虽然有着敏锐的观"
+                android:textColor="@color/white"
+                android:textSize="@dimen/sp_14" />
+                <com.flyco.tablayout.SegmentTabLayout
+                    android:id="@+id/stare_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/dp_20"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    tl:tl_bar_color="#ffffff"
+                    tl:tl_indicator_color="#EC7263"
+                    tl:tl_indicator_margin_bottom="2dp"
+                    tl:tl_indicator_margin_left="2dp"
+                    tl:tl_indicator_margin_right="2dp"
+                    tl:tl_indicator_margin_top="2dp"
+                    tl:tl_tab_width="80dp"
+                    tl:tl_textBold="BOTH" />
+
+                <androidx.viewpager.widget.ViewPager
+                    android:id="@+id/stare_viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

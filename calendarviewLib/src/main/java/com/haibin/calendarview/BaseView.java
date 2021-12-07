@@ -53,6 +53,11 @@ public abstract class BaseView extends View implements View.OnClickListener, Vie
     protected Paint mCurMonthLunarTextPaint = new Paint();
 
     /**
+     * 当前月份平安夜文本颜色
+     */
+    protected Paint mHoulidyCurMonthLunarTextPaint = new Paint();
+
+    /**
      * 当前月份农历文本颜色
      */
     protected Paint mSelectedLunarTextPaint = new Paint();
@@ -177,6 +182,9 @@ public abstract class BaseView extends View implements View.OnClickListener, Vie
         mCurMonthLunarTextPaint.setAntiAlias(true);
         mCurMonthLunarTextPaint.setTextAlign(Paint.Align.CENTER);
 
+        mHoulidyCurMonthLunarTextPaint.setAntiAlias(true);
+        mHoulidyCurMonthLunarTextPaint.setTextAlign(Paint.Align.CENTER);
+
         mSelectedLunarTextPaint.setAntiAlias(true);
         mSelectedLunarTextPaint.setTextAlign(Paint.Align.CENTER);
 
@@ -250,6 +258,9 @@ public abstract class BaseView extends View implements View.OnClickListener, Vie
         this.mCurMonthTextPaint.setColor(mDelegate.getCurrentMonthTextColor());
         this.mOtherMonthTextPaint.setColor(mDelegate.getOtherMonthTextColor());
         this.mCurMonthLunarTextPaint.setColor(mDelegate.getCurrentMonthLunarTextColor());
+
+        this.mHoulidyCurMonthLunarTextPaint.setColor(mDelegate.getHoulidyCurrentMonthLunarTextColor());
+
         this.mSelectedLunarTextPaint.setColor(mDelegate.getSelectedLunarTextColor());
         this.mSelectTextPaint.setColor(mDelegate.getSelectedTextColor());
         this.mOtherMonthLunarTextPaint.setColor(mDelegate.getOtherMonthLunarTextColor());
@@ -263,6 +274,9 @@ public abstract class BaseView extends View implements View.OnClickListener, Vie
         this.mSelectTextPaint.setTextSize(mDelegate.getDayTextSize());
 
         this.mCurMonthLunarTextPaint.setTextSize(mDelegate.getLunarTextSize());
+
+        this.mHoulidyCurMonthLunarTextPaint.setTextSize(mDelegate.getHoulidyLunarTextSize());
+
         this.mSelectedLunarTextPaint.setTextSize(mDelegate.getLunarTextSize());
         this.mCurDayLunarTextPaint.setTextSize(mDelegate.getLunarTextSize());
         this.mOtherMonthLunarTextPaint.setTextSize(mDelegate.getLunarTextSize());
