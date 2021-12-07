@@ -259,7 +259,7 @@ public class AppUtils {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "com.ailaila.love";
+        return "com.juyou.calendar";
 
     }
     public static Dialog dialogTip(Context context, String text, String posText, DialogInterface.OnClickListener posListener,

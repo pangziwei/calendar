@@ -9,7 +9,7 @@ import com.manggeek.android.geek.http.GeekHttp;
 import com.manggeek.android.geek.http.HttpParams;
 
 
-public class LoveChallengeBo {
+public class JuYouBo {
 
     //登录
     public static void Login(Context context, String telephone, String captcha, NetResultCallBack listener) {
@@ -24,9 +24,6 @@ public class LoveChallengeBo {
         Log.e("TAG", "登录的url---httpParams------" + httpParams);
     }
 
-
-
-    //58账号密码登陆
     //code返回455--没有该用户请注册 code返回456--该用户没有设置密码请设置密码 code返回451--账号已被禁用 code 返回500 内部服务错误
     public static void pwdLogin(Context context, String telephone, String pwd, NetResultCallBack listener) {
         BaseParams httpParams = new BaseParams();
@@ -36,9 +33,6 @@ public class LoveChallengeBo {
         GeekHttp.getHttp().postJson(0, Api.BaseUrl + "api/v2/login", httpParams, headParams, listener);
     }
 
-
-
-
     public static void SendSms(Context context, String telephone, String smsType, NetResultCallBack listener) {
         HttpParams httpParams = new HttpParams();
         httpParams.put("telephone", telephone);
@@ -47,14 +41,6 @@ public class LoveChallengeBo {
         GeekHttp.getHttp().get(0, Api.BaseUrl + "sms/send", httpParams, listener);
 
     }
-
-
-
-
-
-
-
-
 
     // 设置用户推送cid
     public static void SubmitCid(Context context, String cid, NetResultCallBack listener) {
@@ -66,13 +52,6 @@ public class LoveChallengeBo {
         GeekHttp.getHttp().postJson(0, Api.BaseUrl + "users/set_push_cid", httpParams, headParams, listener);
     }
 
-
-
-
-
-
-
-
     //60判断用户是否设置密码或者是否注册
     /*判断用户状态 0未注册 1未设置密码 2设置密码*/
     public static void isRegistered(Context context, String telephone, NetResultCallBack listener) {
@@ -82,9 +61,6 @@ public class LoveChallengeBo {
         GeekHttp.getHttp().get(context, 0, Api.BaseUrl + "userWhetherExist", httpParams, headParams, listener);
     }
 
-
-
-    // 判断是否有上级
     //登录
     public static void TestLogin(String username, String password, String appid, NetResultCallBack listener) {
         //参数
@@ -96,7 +72,7 @@ public class LoveChallengeBo {
 //        Log.e("测试登录接口", "登录的url---------" + Api.BaseUrl + "user/login");
 //        Log.e("测试登录接口", "登录的url---httpParams------" + httpParams);
     }
-    // 判断是否有上级
+
     //登录
     public static void Login_third(Context context, String loginBean, NetResultCallBack listener) {
         //参数
@@ -105,5 +81,17 @@ public class LoveChallengeBo {
         GeekHttp.getHttp().postJson(0, Api.JY_HOST + "account/login_third", httpParams, listener);
         Log.e("测试登录接口", "登录的测试---------" + Api.JY_HOST + "account/login_third");
         Log.e("测试登录接口", "登录的url---httpParams------" + httpParams);
+    }
+
+    //阴历转农历Lunar{{host3}}api/calendar/tonongli
+    public static void LunarToNongLi(Context context, int year, int month, int day, NetResultCallBack listener) {
+        //参数
+        BaseParams httpParams = new BaseParams();
+        httpParams.put("year", year);
+        httpParams.put("month", month);
+        httpParams.put("day", day);
+        GeekHttp.getHttp().postJson(0, Api.JY_HOST + "api/calendar/tonongli", httpParams, listener);
+        Log.e("测试接口", "农历数据的测试---------" + Api.JY_HOST + "api/calendar/tonongli");
+        Log.e("测试接口", "农历数据-httpParams------" + httpParams);
     }
 }

@@ -8,7 +8,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,7 +16,7 @@ import com.juyou.calendar.R;
 import com.juyou.calendar.activity.MyMainActivity;
 import com.juyou.calendar.bean.LoginInfo;
 import com.juyou.calendar.bo.CurrentBean;
-import com.juyou.calendar.bo.LoveChallengeBo;
+import com.juyou.calendar.bo.JuYouBo;
 import com.juyou.calendar.bo.NetResultCallBack;
 import com.juyou.calendar.bo.StringCache;
 import com.juyou.calendar.util.TimeCountUtil;
@@ -126,7 +125,7 @@ public class VerCodeLoginActivity extends AppCompatActivity {
 
     private void login(String VerCode) {
 
-        LoveChallengeBo.Login(VerCodeLoginActivity.this, PhoneTel, VerCode, new NetResultCallBack() {
+        JuYouBo.Login(VerCodeLoginActivity.this, PhoneTel, VerCode, new NetResultCallBack() {
             @Override
             public void onSuccess(int what, CurrentBean currentBean) {
                 if (currentBean.getCode().equals("200")) {
@@ -138,7 +137,7 @@ public class VerCodeLoginActivity extends AppCompatActivity {
                         StringCache.put("telPhone", PhoneTel);
                         String clientid = StringCache.get("GTCID");
 
-                        LoveChallengeBo.SubmitCid(VerCodeLoginActivity.this, clientid, new NetResultCallBack() {
+                        JuYouBo.SubmitCid(VerCodeLoginActivity.this, clientid, new NetResultCallBack() {
                             @Override
                             public void onSuccess(int what, CurrentBean currentBean) {
                                 Log.e("CID", "验证码的VerCodeLoginActivity-----成功-----clientid--------------" + clientid);
@@ -188,7 +187,7 @@ public class VerCodeLoginActivity extends AppCompatActivity {
 
 
     private void getVerCode(String phong, String smsType) {
-        LoveChallengeBo.SendSms(VerCodeLoginActivity.this, PhoneTel, smsType, new NetResultCallBack() {
+        JuYouBo.SendSms(VerCodeLoginActivity.this, PhoneTel, smsType, new NetResultCallBack() {
             @Override
             public void onSuccess(int what, CurrentBean currentBean) {
                 if (currentBean.getCode().equals("200")) {

@@ -18,6 +18,7 @@ package com.haibin.calendarview;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.TypedValue;
 
 import java.text.SimpleDateFormat;
@@ -109,9 +110,9 @@ public final class CalendarUtil {
      * 获取月视图的确切高度
      * Test pass
      *
-     * @param year       年
-     * @param month      月
-     * @param itemHeight 每项的高度
+     * @param year          年
+     * @param month         月
+     * @param itemHeight    每项的高度
      * @param weekStartWith 周起始
      * @return 不需要多余行的高度
      */
@@ -128,11 +129,11 @@ public final class CalendarUtil {
      * 获取月视图的确切高度
      * Test pass
      *
-     * @param year       年
-     * @param month      月
-     * @param itemHeight 每项的高度
+     * @param year          年
+     * @param month         月
+     * @param itemHeight    每项的高度
      * @param weekStartWith weekStartWith
-     * @param mode  mode
+     * @param mode          mode
      * @return 不需要多余行的高度
      */
     public static int getMonthViewHeight(int year, int month, int itemHeight, int weekStartWith, int mode) {
@@ -181,9 +182,25 @@ public final class CalendarUtil {
         return preCalendar;
     }
 
+    //    public static Calendar getNextCalendar(Calendar calendar) {
+//        java.util.Calendar date = java.util.Calendar.getInstance();
+//
+//        date.set(calendar.getYear(), calendar.getMonth() - 1, calendar.getDay(), 12, 0, 0);//
+//
+//        long timeMills = date.getTimeInMillis();//获得起始时间戳
+//
+//        date.setTimeInMillis(timeMills + ONE_DAY);
+//
+//        Calendar nextCalendar = new Calendar();
+//        nextCalendar.setYear(date.get(java.util.Calendar.YEAR));
+//        nextCalendar.setMonth(date.get(java.util.Calendar.MONTH) + 1);
+//        nextCalendar.setDay(date.get(java.util.Calendar.DAY_OF_MONTH));
+//
+//        return nextCalendar;
+//    }
     public static Calendar getNextCalendar(Calendar calendar) {
         java.util.Calendar date = java.util.Calendar.getInstance();
-
+        Log.e("获取当前日期时间", "dsfasdfasdrf" + calendar.getYear() + calendar.getMonth());
         date.set(calendar.getYear(), calendar.getMonth() - 1, calendar.getDay(), 12, 0, 0);//
 
         long timeMills = date.getTimeInMillis();//获得起始时间戳
@@ -419,7 +436,7 @@ public final class CalendarUtil {
      * @param minYearMonth maxYear 最小年份月份，like : 2017-07
      * @param minYearDay   最小年份天
      * @param week         从最小年份minYear月minYearMonth 日1 开始的第几周 week > 0
-     * @param weekStart 周起始
+     * @param weekStart    周起始
      * @return 该星期的第一天日期
      */
     public static Calendar getFirstCalendarStartWithMinCalendar(int minYear, int minYearMonth, int minYearDay, int week, int weekStart) {
@@ -818,8 +835,6 @@ public final class CalendarUtil {
     }
 
 
-
-
     /**
      * 获得当月显示的日期（上月 + 当月 + 下月）
      *
@@ -996,6 +1011,7 @@ public final class CalendarUtil {
     public static List<String> getWorkdayList() {
         return workdayList;
     }
+
     //法定节假日 休息的日期
     public static List<String> holidayList = Arrays.asList(
             "2017-12-30", "2017-12-31", "2018-01-01", "2018-02-15", "2018-02-16", "2018-02-17", "2018-02-18", "2018-02-19", "2018-02-20", "2018-02-21", "2018-04-05",

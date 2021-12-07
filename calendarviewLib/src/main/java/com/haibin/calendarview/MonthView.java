@@ -83,10 +83,10 @@ public abstract class MonthView extends BaseMonthView {
         onLoopStart(x, y);//圆心坐标等都可以在这里实现
         boolean isSelected = d == mCurrentItem;//当前点击项
         boolean hasScheme = calendar.hasScheme();
-        Log.e("日历", "农历字符串----------"+calendar.getLunar());//几月初几的，包含24节气
-        Log.e("日历", "24节气------中国特有的24节气-------"+calendar.getSolarTerm());
-        Log.e("日历", "公历节日----国外节日，比我情人节，愚人节啥的-----只有，要么为“”------"+calendar.getGregorianFestival());
-        Log.e("日历", "传统农历节日----春节元宵端午的那种-----卫子---------"+calendar.getTraditionFestival());
+//        Log.e("日历", "农历字符串----------"+calendar.getLunar());//几月初几的，包含24节气
+//        Log.e("日历", "24节气------中国特有的24节气-------"+calendar.getSolarTerm());
+//        Log.e("日历", "公历节日----国外节日，比我情人节，愚人节啥的-----只有，要么为“”------"+calendar.getGregorianFestival());
+//        Log.e("日历", "传统农历节日----春节元宵端午的那种-----卫子---------"+calendar.getTraditionFestival());
 
 //        Log.e("日历", "000000-------"+hasScheme);
         if (hasScheme) {

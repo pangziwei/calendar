@@ -25,7 +25,7 @@ import com.juyou.calendar.R;
 import com.juyou.calendar.bean.LoginToApiBean;
 import com.juyou.calendar.bean.LoginbackBean;
 import com.juyou.calendar.bo.CurrentBean;
-import com.juyou.calendar.bo.LoveChallengeBo;
+import com.juyou.calendar.bo.JuYouBo;
 import com.juyou.calendar.bo.NetResultCallBack;
 import com.juyou.calendar.dialog.ShowAllSpan;
 import com.juyou.calendar.eventbus.QQLoginEventBus;
@@ -386,7 +386,7 @@ public class OneClickLoginActivity extends AppCompatActivity {
 
     private void goLogin() {
         Log.e("测试登录接口", "参数测试登录接口----loginToApiBean--------------" + new Gson().toJson(loginToApiBean));
-        LoveChallengeBo.Login_third(this, new Gson().toJson(loginToApiBean), new NetResultCallBack() {
+        JuYouBo.Login_third(this, new Gson().toJson(loginToApiBean), new NetResultCallBack() {
             @Override
             public void onSuccess(int what, CurrentBean currentBean) {
                 Log.e("测试登录接口", "--成功-----" + new Gson().toJson(currentBean));

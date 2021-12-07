@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -17,7 +16,7 @@ import com.google.gson.Gson;
 import com.juyou.calendar.R;
 import com.juyou.calendar.activity.MyMainActivity;
 import com.juyou.calendar.bo.CurrentBean;
-import com.juyou.calendar.bo.LoveChallengeBo;
+import com.juyou.calendar.bo.JuYouBo;
 import com.juyou.calendar.bo.NetResultCallBack;
 import com.juyou.calendar.bo.StringCache;
 
@@ -92,7 +91,7 @@ public class RegisteredActivity extends AppCompatActivity {
 
 
     private void pwdLogin() {
-        LoveChallengeBo.pwdLogin(RegisteredActivity.this, PhoneTel, etLogpawGetPaw.getText().toString(), new NetResultCallBack() {
+        JuYouBo.pwdLogin(RegisteredActivity.this, PhoneTel, etLogpawGetPaw.getText().toString(), new NetResultCallBack() {
             @Override
             public void onSuccess(int what, CurrentBean currentBean) {
                 if (currentBean.getCode().equals("200")) {
@@ -106,7 +105,7 @@ public class RegisteredActivity extends AppCompatActivity {
                         String clientid = StringCache.get("GTCID");
                         Log.e("RegisteredActivity", "token--------LoginActivity-------" + clientid);
 
-                        LoveChallengeBo.SubmitCid(RegisteredActivity.this, clientid, new NetResultCallBack() {
+                        JuYouBo.SubmitCid(RegisteredActivity.this, clientid, new NetResultCallBack() {
                             @Override
                             public void onSuccess(int what, CurrentBean currentBean) {
                                 Log.e("CID", "密码登录的 cid----------onSuccess------clientid-------------" + new Gson().toJson(currentBean));

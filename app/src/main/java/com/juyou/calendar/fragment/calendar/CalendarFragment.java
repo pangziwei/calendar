@@ -1,5 +1,6 @@
 package com.juyou.calendar.fragment.calendar;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -32,6 +33,7 @@ import com.google.gson.Gson;
 import com.haibin.calendarview.Calendar;
 import com.haibin.calendarview.CalendarUtil;
 import com.haibin.calendarview.CalendarView;
+import com.haibin.calendarview.TrunkBranchAnnals;
 import com.juyou.calendar.R;
 import com.juyou.calendar.base.MyExFragment;
 import com.juyou.calendar.dialog.AddressDialog;
@@ -172,10 +174,13 @@ public class CalendarFragment extends MyExFragment implements
 
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onCalendarSelect(Calendar calendar, boolean isClick) {
         Log.e("calendar", "-------------" + calendar);
         Log.e("calendar", "---------isClick----" + isClick);
+        viewActionBarTitle.setText(calendar.getYear() + "年" + calendar.getMonth() + "月" + calendar.getDay() + "日");
+        tvDate.setText(calendar.getYear() + "年" + calendar.getMonth() + "月" + calendar.getDay() + "日");
     }
 
 
@@ -340,6 +345,18 @@ public class CalendarFragment extends MyExFragment implements
         circleProgress.setUnit("平淡");//平淡
         circleProgress.setValue(76);//这个是进度数---专业实况天气接口v63
         tvDate.setText(cDate[0] + "年" + cDate[1] + "月" + cDate[2] + "日" + " ");
+
+//        calendarView.setOnYearChangeListener(this);
+        calendarView.setOnCalendarSelectListener(this);
+//        calendarView.setOnMonthChangeListener(this);
+//        calendarView.setOnCalendarLongClickListener(this, true);
+//        calendarView.setOnWeekChangeListener(this);
+//        calendarView.setOnYearViewChangeListener(this);
+
+//        //设置日期拦截事件，仅适用单选模式，当前无效
+//        calendarView.setOnCalendarInterceptListener(this);
+//
+//        calendarView.setOnViewChangeListener(this);
     }
 
     @Override
@@ -606,4 +623,6 @@ public class CalendarFragment extends MyExFragment implements
 
         }
     };
+
+
 }

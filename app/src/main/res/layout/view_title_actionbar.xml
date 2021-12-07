@@ -96,7 +96,7 @@
                 android:layout_height="match_parent"
                 android:layout_marginRight="@dimen/dp_20"
                 android:gravity="center_vertical|end"
-                android:text="2022年12月31日星期二"
+                android:text=""
                 android:textColor="@color/white"
                 android:textSize="@dimen/sp_18"
                 android:textStyle="bold" />

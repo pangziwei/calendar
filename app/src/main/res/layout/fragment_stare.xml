@@ -67,7 +67,7 @@
                 <androidx.viewpager.widget.ViewPager
                     android:id="@+id/stare_viewpager"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="900dp" />
 
         </LinearLayout>
     </ScrollView>

@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.SpannableStringBuilder;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -13,13 +12,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.google.gson.Gson;
 import com.juyou.calendar.R;
 import com.juyou.calendar.base.MyBaseActivity;
 import com.juyou.calendar.bo.CurrentBean;
-import com.juyou.calendar.bo.LoveChallengeBo;
+import com.juyou.calendar.bo.JuYouBo;
 import com.juyou.calendar.bo.NetResultCallBack;
 import com.juyou.calendar.dialog.ShowAllSpan;
 import com.juyou.calendar.util.H5UrlMananger;
@@ -130,7 +128,7 @@ public class NewLoginActivity extends MyBaseActivity {
     }
 
     private void isRegisteredUser() {
-        LoveChallengeBo.isRegistered(NewLoginActivity.this, etPawloginGetTel.getText().toString(), new NetResultCallBack() {
+        JuYouBo.isRegistered(NewLoginActivity.this, etPawloginGetTel.getText().toString(), new NetResultCallBack() {
             @Override
             public void onSuccess(int what, CurrentBean currentBean) {
                 if (currentBean.getCode().equals("200")) {

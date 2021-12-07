@@ -36,7 +36,7 @@ import com.juyou.calendar.base.MyExFragment;
 import com.juyou.calendar.bean.MyTestLoginBean;
 import com.juyou.calendar.bean.VersionEntity;
 import com.juyou.calendar.bo.CurrentBean;
-import com.juyou.calendar.bo.LoveChallengeBo;
+import com.juyou.calendar.bo.JuYouBo;
 import com.juyou.calendar.bo.NetResultCallBack;
 import com.juyou.calendar.bo.NewResultCallBack;
 import com.juyou.calendar.bo.StringCache;
@@ -136,7 +136,7 @@ public class MyMainActivity extends BaseActivity {
     public MyTestLoginBean myTestLoginBean;
 
     private void initLogin() {
-        LoveChallengeBo.TestLogin("admin", "123456", "10001", new NetResultCallBack() {
+        JuYouBo.TestLogin("admin", "123456", "10001", new NetResultCallBack() {
             @Override
             public void onSuccess(int what, CurrentBean currentBean) {
                 Log.e("测试登录接口", "--成功-----" + new Gson().toJson(currentBean));
