@@ -55,7 +55,6 @@
                 android:id="@+id/tv_fortune_lunar_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="农历八月初九"
                 android:textColor="#F04646"
                 android:textSize="32sp"
                 android:textStyle="bold">
@@ -75,7 +74,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/dp_10"
-                    android:text="辛丑牛年"
                     android:textColor="#F04646"
                     android:textSize="@dimen/sp_14"
                     android:textStyle="bold" />
@@ -85,18 +83,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/dp_10"
-                    android:text="丁酉月"
                     android:textColor="#F04646"
                     android:textSize="@dimen/sp_14"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tv_fortune_tgdz_day"
-
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="@dimen/dp_10"
-                    android:text="丙寅日"
                     android:textColor="#F04646"
                     android:textSize="@dimen/sp_14"
                     android:textStyle="bold" />
@@ -105,7 +100,6 @@
                     android:id="@+id/tv_fortune_week"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="星期三"
                     android:textColor="#F04646"
                     android:textSize="@dimen/sp_14"
                     android:textStyle="bold" />
@@ -160,7 +154,7 @@
                         android:layout_marginTop="@dimen/dp_8"
                         android:layout_marginRight="@dimen/dp_10"
                         android:layout_marginBottom="@dimen/dp_8"
-                        android:background="@drawable/calendar_fortune_festival_bg"
+                        android:background="@drawable/yellow_yi_bg"
                         android:gravity="center"
                         android:text="宜"
                         android:textColor="@color/white"
@@ -170,6 +164,7 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_yi_recycle"
                         android:layout_width="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
 
@@ -233,6 +228,8 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_ji_recycle"
                         android:layout_width="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="@dimen/dp_25"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
 
@@ -264,8 +261,7 @@
                             android:layout_gravity="center"
                             android:text="时辰"
                             android:textColor="@color/color_F04646"
-                            android:textSize="@dimen/sp_17"
-                            android:textStyle="bold" />
+                            android:textSize="@dimen/sp_17" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -281,6 +277,8 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_time_yiji_recycle"
                         android:layout_width="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginRight="@dimen/dp_25"
                         android:layout_height="wrap_content" />
                 </LinearLayout>
 
@@ -518,7 +516,6 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginTop="@dimen/dp_5"
-                            android:text="炉中火"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_14" />
 
@@ -643,21 +640,9 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
                             android:layout_marginTop="@dimen/dp_5"
-                            android:text="西方参水猿"
+                            android:gravity="center"
                             android:textColor="@color/black"
                             android:textSize="@dimen/sp_14" />
-
-                        <TextView
-                            android:id="@+id/yellow_constellation_down"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center"
-                            android:layout_marginTop="@dimen/dp_5"
-                            android:text="凶"
-                            android:textColor="@color/black"
-                            android:textSize="@dimen/sp_14" />
-
-
                     </LinearLayout>
                 </LinearLayout>
 

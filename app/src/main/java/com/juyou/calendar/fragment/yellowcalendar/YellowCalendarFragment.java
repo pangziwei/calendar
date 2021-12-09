@@ -1,8 +1,13 @@
 package com.juyou.calendar.fragment.yellowcalendar;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -18,10 +23,13 @@ import com.haibin.calendarview.CalendarUtil;
 import com.juyou.calendar.R;
 import com.juyou.calendar.base.MyExFragment;
 import com.juyou.calendar.bean.DateChangeBean;
+import com.juyou.calendar.bean.LunarChangeDateBean;
 import com.juyou.calendar.bean.LunarDateBean;
 import com.juyou.calendar.bo.CurrentBean;
 import com.juyou.calendar.bo.JuYouBo;
 import com.juyou.calendar.bo.NetResultCallBack;
+import com.juyou.calendar.fragment.calendar.mTimePickerBuilder;
+import com.juyou.calendar.fragment.calendar.mTimePickerView;
 import com.juyou.calendar.fragment.yellowcalendar.adapter.YellowCalendarJiAdapter;
 import com.juyou.calendar.fragment.yellowcalendar.adapter.YellowCalendarTimeAdapter;
 import com.juyou.calendar.fragment.yellowcalendar.adapter.YellowCalendarYiAdapter;
@@ -31,9 +39,11 @@ import com.juyou.calendar.fragment.yellowcalendar.bean.YellowLunarYiListBean;
 import com.juyou.calendar.weather.bean.CaiYunhourlysListBean;
 import com.manggeek.android.geek.utils.JSONUtil;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -121,8 +131,7 @@ public class YellowCalendarFragment extends MyExFragment {
     TextView yellowPeZuDown;
     @BindView(R.id.yellow_constellation_up)
     TextView yellowConstellationUp;
-    @BindView(R.id.yellow_constellation_down)
-    TextView yellowConstellationDown;
+
     private int[] cDate = CalendarUtil.getCurrentDate();
     Calendar calendar;
     DateChangeBean dateChangeBean;//变换后的日期
@@ -140,16 +149,28 @@ public class YellowCalendarFragment extends MyExFragment {
     }
 
     private void initData() {
-//        JuYouBo.LunarToNongLi(getActivity(), cDate[0], cDate[1], cDate[2], new NetResultCallBack() {
-        JuYouBo.LunarToNongLi(getActivity(), 1900, 1, 8, new NetResultCallBack() {
+        JuYouBo.LunarToNongLi(getActivity(), cDate[0], cDate[1], cDate[2], new NetResultCallBack() {
             @Override
             public void onSuccess(int what, CurrentBean currentBean) {
                 lunarDateBean = JSONUtil.getObj(String.valueOf(currentBean.getData()), LunarDateBean.class);
-                Log.e(TAG, "lunarDateBean-----yi----------" + lunarDateBean.getYi());
-                Log.e(TAG, "lunarDateBean-----initDataToLunar--ji----------" + lunarDateBean.getJi());
                 showJiDateYi(lunarDateBean.getYi());//黄历上的宜
                 showJiDate(lunarDateBean.getJi());//黄历上的忌
-                showTimeDate(lunarDateBean.getJi());//黄历上的时辰宜忌
+                showTimeDate(lunarDateBean.getYi());//黄历上的时辰宜忌
+                tvFortuneLunarDate.setText("农历" + lunarDateBean.getNl_yue() + lunarDateBean.getNl_ri());
+                tvFortuneTgdzYear.setText(lunarDateBean.getGz_nian() + lunarDateBean.getShengxiao() + "年");
+                tvFortuneTgdzMonth.setText(lunarDateBean.getGz_yue() + "月");
+                tvFortuneTgdzDay.setText(lunarDateBean.getGz_ri() + "日");
+                tvFortuneWeek.setText(lunarDateBean.getWeek_3());
+                yellowFive.setText(lunarDateBean.getWx_ri()); //五行日
+                char ch;
+                String str;
+                for (int i = 0; i < lunarDateBean.getXingxiu().length(); i++) {
+                    ch = lunarDateBean.getXingxiu().charAt(i);
+                    if (ch == '-') {
+                        str = lunarDateBean.getXingxiu().replaceAll("-", "\r\n");//正则替换;
+                        yellowConstellationUp.setText(str);
+                    }
+                }
             }
 
             @Override
@@ -250,14 +271,15 @@ public class YellowCalendarFragment extends MyExFragment {
     }
 
 
-    @OnClick({R.id.iv_title_right, R.id.ll_center_title, R.id.iv_fortune_last_day, R.id.iv_fortune_next_day, R.id.ll_ic_fortune_read, R.id.ll_yellow_jiri_query})
+    @OnClick({R.id.ll_right, R.id.ll_center_title, R.id.iv_fortune_last_day, R.id.iv_fortune_next_day, R.id.ll_ic_fortune_read, R.id.ll_yellow_jiri_query})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.iv_title_right:
+            case R.id.ll_right:
                 Toast.makeText(getActivity(), "右上角分享", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.ll_center_title:
                 Toast.makeText(getActivity(), "选择日期", Toast.LENGTH_SHORT).show();
+                chooseTime(viewActionBarTitle);
                 break;
             case R.id.iv_fortune_last_day:
 //                Toast.makeText(getActivity(), "上一天", Toast.LENGTH_SHORT).show();
@@ -272,7 +294,7 @@ public class YellowCalendarFragment extends MyExFragment {
 
                 break;
             case R.id.iv_fortune_next_day:
-                Toast.makeText(getActivity(), "下一天", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "下一天", Toast.LENGTH_SHORT).show();
                 calendar.set(Calendar.MILLISECOND, 0);
                 calendar.set(Calendar.SECOND, 0);
                 calendar.set(Calendar.MINUTE, 0);
@@ -285,25 +307,121 @@ public class YellowCalendarFragment extends MyExFragment {
                 Toast.makeText(getActivity(), "现在文阅读", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.ll_yellow_jiri_query:
-                Toast.makeText(getActivity(), "吉日查询", Toast.LENGTH_SHORT).show();
+                if (null == dateChangeBean) {
+                    Toast.makeText(getActivity(), "-我是当天-吉日查询--" + cDate[0] + cDate[1] + cDate[2], Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getActivity(), "吉日查询--我不是当天--" + dateChangeBean.getYear() + (dateChangeBean.getMonth() + 1) + dateChangeBean.getDayOfMonth(), Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
     }
 
     private void initDataToLunar(int year, int month, int dayOfMonth) {
+
         JuYouBo.LunarToNongLi(getActivity(), year, month, dayOfMonth, new NetResultCallBack() {
             @Override
             public void onSuccess(int what, CurrentBean currentBean) {
-                Log.e("测试接口", "currentBean------------------" + currentBean);
-                lunarDateBean = JSONUtil.getObj(String.valueOf(currentBean.getData()), LunarDateBean.class);
-//                Log.e(TAG, "lunarDateBean-----initDataToLunar------------" + new Gson().toJson(lunarDateBean));
-                Log.e(TAG, "lunarDateBean-----initDataToLunar--ji----------" + lunarDateBean.getJi());
-//                Log.e(TAG, "lunarDateBean-----initDataToLunar---yi---------" + lunarDateBean.getYi());
-//                Log.e(TAG, "lunarDateBean------initDataToLunar--jieri---------" + lunarDateBean.getJieri());
 
-//                showYiDate(lunarDateBean.getYi());
-//                showJiDate(lunarDateBean.getJi());
-//                showTimeDate(lunarDateBean.getYi());
+                Log.e(TAG, "lunarDateBean------currentBean---currentBean----" + new Gson().toJson(currentBean));
+                lunarDateBean = JSONUtil.getObj(String.valueOf(currentBean.getData()), LunarDateBean.class);
+//                Log.e(TAG, "lunarDateBean-------------" + lunarDateBean);
+                showJiDateYi(lunarDateBean.getYi());//黄历上的宜
+                showJiDate(lunarDateBean.getJi());//黄历上的忌
+                showTimeDate(lunarDateBean.getYi());//黄历上的时辰宜忌
+
+                tvFortuneLunarDate.setText("农历" + lunarDateBean.getNl_yue() + lunarDateBean.getNl_ri());
+                tvFortuneTgdzYear.setText(lunarDateBean.getGz_nian() + lunarDateBean.getShengxiao() + "年");
+                tvFortuneTgdzMonth.setText(lunarDateBean.getGz_yue() + "月");
+                tvFortuneTgdzDay.setText(lunarDateBean.getGz_ri() + "日");
+                tvFortuneWeek.setText(lunarDateBean.getWeek_3());
+                yellowFive.setText(lunarDateBean.getWx_ri()); //五行日
+                char ch;
+                String str;
+                for (int i = 0; i < lunarDateBean.getXingxiu().length(); i++) {
+                    ch = lunarDateBean.getXingxiu().charAt(i);
+                    if (ch == '-') {
+                        str = lunarDateBean.getXingxiu().replaceAll("-", "\r\n");//正则替换;
+                        yellowConstellationUp.setText(str);
+                    }
+                }
+            }
+
+            @Override
+            public void onFail(int what, CurrentBean currentBean) {
+
+            }
+        });
+    }
+
+    int yead;
+    int month;
+    int day;
+
+    /**
+     * 选择时间
+     */
+    private void chooseTime(TextView timeView) {
+        //时间选择器
+        mTimePickerView pTime = new mTimePickerBuilder(getActivity(), (date, v) -> {
+            timeView.setText(getTime(date));
+
+            yead = Integer.parseInt(getNeedTime(date).substring(0, 4));
+            month = Integer.parseInt(getNeedTime(date).substring(4, 6));
+            day = Integer.parseInt(getNeedTime(date).substring(6, 8));
+            Log.e(TAG, "yead, month, day-----------" + yead + month + day);
+
+            initChangeLunar(yead, month, day);
+
+
+        })
+                .setType(new boolean[]{true, true, true, false, false, false})// 控制分别控制“年”“月”“日”“时”“分”“秒”的显示或隐藏。new boolean[]{true, true, true, false, false, false}
+                .isDialog(true)
+                .build();
+        Dialog mDialog = pTime.getDialog();
+        if (mDialog != null) {
+            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    Gravity.BOTTOM);
+            params.leftMargin = 0;
+            params.rightMargin = 0;
+            pTime.getDialogContainerLayout().setLayoutParams(params);
+            Window dialogWindow = mDialog.getWindow();
+            if (dialogWindow != null) {
+                dialogWindow.setWindowAnimations(com.bigkoo.pickerview.R.style.picker_view_slide_anim);//修改动画样式
+                dialogWindow.setGravity(Gravity.BOTTOM);//改成Bottom,底部显示
+            }
+            mDialog.show();
+        }
+    }
+
+    private void initChangeLunar(int yead, int month, int day) {
+        JuYouBo.LunarToNongLi(getActivity(), yead, month, day, new NetResultCallBack() {
+            @Override
+            public void onSuccess(int what, CurrentBean currentBean) {
+
+                Log.e(TAG, "initChangeLunar------initChangeLunar---initChangeLunar----" + new Gson().toJson(currentBean));
+                LunarChangeDateBean lunarChangeDateBean = JSONUtil.getObj(String.valueOf(currentBean.getData()), LunarChangeDateBean.class);
+                Log.e(TAG, "initChangeLunar-------------" + lunarChangeDateBean);
+                showJiDateYi(lunarChangeDateBean.getYi());//黄历上的宜
+                showJiDate(lunarChangeDateBean.getJi());//黄历上的忌
+                showTimeDate(lunarChangeDateBean.getYi());//黄历上的时辰宜忌
+
+                tvFortuneLunarDate.setText("农历" + lunarChangeDateBean.getNl_yue() + lunarChangeDateBean.getNl_ri());
+                tvFortuneTgdzYear.setText(lunarChangeDateBean.getGz_nian() + lunarChangeDateBean.getShengxiao() + "年");
+                tvFortuneTgdzMonth.setText(lunarChangeDateBean.getGz_yue() + "月");
+                tvFortuneTgdzDay.setText(lunarChangeDateBean.getGz_ri() + "日");
+                tvFortuneWeek.setText(lunarChangeDateBean.getWeek_3());
+                yellowFive.setText(lunarChangeDateBean.getWx_ri()); //五行日
+                char ch;
+                String str;
+                for (int i = 0; i < lunarChangeDateBean.getXingxiu().length(); i++) {
+                    ch = lunarChangeDateBean.getXingxiu().charAt(i);
+                    if (ch == '-') {
+                        str = lunarChangeDateBean.getXingxiu().replaceAll("-", "\r\n");//正则替换;
+                        yellowConstellationUp.setText(str);
+                    }
+                }
             }
 
             @Override
@@ -314,4 +432,15 @@ public class YellowCalendarFragment extends MyExFragment {
     }
 
 
+    private String getTime(Date date) {//可根据需要自行截取数据显示
+        SimpleDateFormat format = (SimpleDateFormat) SimpleDateFormat.getDateInstance();
+        format.applyPattern("yyyy年MM月dd日");
+        return format.format(date);
+    }
+
+    private String getNeedTime(Date date) {//可根据需要自行截取数据显示
+        SimpleDateFormat format = (SimpleDateFormat) SimpleDateFormat.getDateInstance();
+        format.applyPattern("yyyyMMdd");
+        return format.format(date);
+    }
 }

@@ -26,16 +26,20 @@ import android.widget.Toast;
 import com.baidu.mobads.sdk.api.CPUWebAdRequestParam;
 import com.baidu.mobads.sdk.api.CpuAdView;
 import com.baidu.mobads.sdk.api.CpuLpFontSize;
+import com.google.gson.Gson;
 import com.haibin.calendarview.Calendar;
 import com.haibin.calendarview.CalendarUtil;
 import com.haibin.calendarview.CalendarView;
 import com.juyou.calendar.R;
 import com.juyou.calendar.base.MyExFragment;
-import com.juyou.calendar.dialog.AddressDialog;
+import com.juyou.calendar.bean.LunarChangeDateBean;
+import com.juyou.calendar.bo.CurrentBean;
+import com.juyou.calendar.bo.JuYouBo;
+import com.juyou.calendar.bo.NetResultCallBack;
 import com.juyou.calendar.manage.GradationScrollView;
 import com.juyou.calendar.util.SharedPreUtils;
 import com.littlejie.circleprogress.CircleProgress;
-import com.manggeek.android.geek.GeekActivity;
+import com.manggeek.android.geek.utils.JSONUtil;
 
 import org.joda.time.LocalDate;
 
@@ -104,8 +108,6 @@ public class CalendarFragment extends MyExFragment implements
     TextView tvCalendarLunarMonth;
     @BindView(R.id.tv_calendar_lunar_day)
     TextView tvCalendarLunarDay;
-    @BindView(R.id.tv_calendar_lunar_hour)
-    TextView tvCalendarLunarHour;
     @BindView(R.id.tv_calendar_lunar_week)
     TextView tvCalendarLunarWeek;
     @BindView(R.id.tv_yi_one)
@@ -169,7 +171,6 @@ public class CalendarFragment extends MyExFragment implements
             llCenterTitle.setVisibility(View.VISIBLE);
             goBackCalendar.setVisibility(View.GONE);
             llDate.setVisibility(View.GONE);
-            Log.e("llCalendOut", "height-----at fags gbas dfv asaest va--设置标题的背景颜色-----");
         } else if (y > 0 && y <= height) { //滑动距离小于banner图的高度时，设置背景和字体颜色颜色透明度渐变
             //滑动的距离：最大距离（相对布局高度） = 透明的改变 ： 最大透明度
             //透明的改变 =  (滑动的距离/最大距离)*255
@@ -183,16 +184,13 @@ public class CalendarFragment extends MyExFragment implements
             llCenterTitle.setVisibility(View.VISIBLE);
             goBackCalendar.setVisibility(View.GONE);
             llDate.setVisibility(View.GONE);
-            Log.e("llCalendOut", "height-----at fags gbas dfv asaest va-------");
 //            calendar.setBackgroundColor(Color.argb((int) alpha, 255, 0, 0));
         } else {    //滑动到banner下面设置普通颜色
             //y>height
             //透明度：0~255
 //            rlOut.setVisibility(View.GONE);
-            Log.e("llCalendOut", "height------------");
             //y>height
             //透明度：0~255
-            Log.e("llCalendOut", "height-----at fags gbas dfv asaest va-------");
 //            calendar.setBackgroundColor(Color.argb((int) alpha, 255, 0, 0));
 //            rlOut.setBackgroundColor(Color.argb((int) 255, 255, 0, 0));
             tvTitleLeft.setVisibility(View.GONE);
@@ -206,15 +204,12 @@ public class CalendarFragment extends MyExFragment implements
 
     @Override
     public void onCalendarOutOfRange(Calendar calendar) {
-        Log.e("calendar", "-----Calendar--------" + calendar);
 
     }
 
     @SuppressLint("SetTextI18n")
     @Override
     public void onCalendarSelect(Calendar calendar, boolean isClick) {
-        Log.e("calendar", "-------------" + calendar);
-        Log.e("calendar", "---------isClick----" + isClick);
         viewActionBarTitle.setText(calendar.getYear() + "年" + calendar.getMonth() + "月" + calendar.getDay() + "日");
         tvDate.setText(calendar.getYear() + "年" + calendar.getMonth() + "月" + calendar.getDay() + "日");
     }
@@ -287,8 +282,6 @@ public class CalendarFragment extends MyExFragment implements
 
         initListeners();//渐变的高度监听
 
-        addressDialog = new AddressDialog((GeekActivity) getActivity());
-        addressDialog.setSelectAreaListener(selectAreaListener);//地址的弹框
 
         initCalendar();
     }
@@ -393,6 +386,10 @@ public class CalendarFragment extends MyExFragment implements
 //        calendarView.setOnCalendarInterceptListener(this);
 //
 //        calendarView.setOnViewChangeListener(this);
+
+
+        initChangeLunar(cDate[0], cDate[1], cDate[2]);//农历日期
+
     }
 
     @Override
@@ -409,6 +406,7 @@ public class CalendarFragment extends MyExFragment implements
                 break;
             case R.id.ll_test:
                 calendarView.setWeekStarWithMon();
+
                 break;
             case R.id.ll_calendar_fortune:
                 Toast.makeText(getActivity(), "今日运势", Toast.LENGTH_SHORT).show();
@@ -417,7 +415,6 @@ public class CalendarFragment extends MyExFragment implements
             case R.id.ll_right:
                 Toast.makeText(getActivity(), "天气", Toast.LENGTH_SHORT).show();
 //                WebUtils.loadTitleWeb(getActivity(), "https://www.77tianqi.com/h5/rules.html?hideCloseBtn=1", "dfsg");
-                addressDialog.show();
                 break;
 //            case R.id.ll_calendar_to_weather:
 //                startActivity(new Intent(getActivity(), WeatherActivity.class));
@@ -456,6 +453,11 @@ public class CalendarFragment extends MyExFragment implements
         mTimePickerView pTime = new mTimePickerBuilder(getActivity(), (date, v) -> {
             timeView.setText(getTime(date));
 
+            int yead = Integer.parseInt(getNeedTime(date).substring(0, 4));
+            int month = Integer.parseInt(getNeedTime(date).substring(4, 6));
+            int day = Integer.parseInt(getNeedTime(date).substring(6, 8));
+            calendarView.scrollToCalendar(yead, month, day);//跳转到选中日期
+            initChangeLunar(yead, month, day);//农历日期
         })
                 .setType(new boolean[]{true, true, true, false, false, false})// 控制分别控制“年”“月”“日”“时”“分”“秒”的显示或隐藏。new boolean[]{true, true, true, false, false, false}
                 .isDialog(true)
@@ -476,6 +478,38 @@ public class CalendarFragment extends MyExFragment implements
             }
             mDialog.show();
         }
+    }
+
+    private String getNeedTime(Date date) {//可根据需要自行截取数据显示
+        SimpleDateFormat format = (SimpleDateFormat) SimpleDateFormat.getDateInstance();
+        format.applyPattern("yyyyMMdd");
+        return format.format(date);
+    }
+
+    private void initChangeLunar(int yead, int month, int day) {
+        JuYouBo.LunarToNongLi(getActivity(), yead, month, day, new NetResultCallBack() {
+            @Override
+            public void onSuccess(int what, CurrentBean currentBean) {
+
+                LunarChangeDateBean lunarChangeDateBean = JSONUtil.getObj(String.valueOf(currentBean.getData()), LunarChangeDateBean.class);
+                tvCalendarToday.setText(lunarChangeDateBean.getNl_yue() + lunarChangeDateBean.getNl_ri());
+                tvCalendarLunarYear.setText(lunarChangeDateBean.getGz_nian() + lunarChangeDateBean.getShengxiao() + "年");
+                tvCalendarLunarMonth.setText(lunarChangeDateBean.getGz_yue() + "月");
+                tvCalendarLunarDay.setText(lunarChangeDateBean.getGz_ri() + "日");
+                tvCalendarLunarWeek.setText(lunarChangeDateBean.getWeek_3());
+                tvYiOne.setText(lunarChangeDateBean.getYi().get(0));
+                tvYiTwo.setText(lunarChangeDateBean.getYi().get(1));
+                tvJiOne.setText(lunarChangeDateBean.getJi().get(0));
+                tvJiTwo.setText(lunarChangeDateBean.getJi().get(1));
+
+
+            }
+
+            @Override
+            public void onFail(int what, CurrentBean currentBean) {
+
+            }
+        });
     }
 
     /**
@@ -639,26 +673,6 @@ public class CalendarFragment extends MyExFragment implements
         }
 
     }
-
-    AddressDialog addressDialog;
-
-    //省份
-    private String provinceName = "";
-    private String provinceCode = "";
-    //市
-    private String cityName = "";
-    //区
-    private String areaName = "";
-    private AddressDialog.SelectAreaListener selectAreaListener = new AddressDialog.SelectAreaListener() {
-        @Override
-        public void select(String province, String city, String area) {
-            provinceName = province;
-            cityName = city;
-            areaName = area;
-//            test_textview.setText(areaName);
-
-        }
-    };
 
 
 }

@@ -119,16 +119,6 @@
                     android:textSize="12sp" />
 
                 <TextView
-                    android:id="@+id/tv_calendar_lunar_hour"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="乙末时"
-                    android:textColor="@color/main_but"
-                    android:textSize="@dimen/sp_12" />
-
-                <TextView
                     android:id="@+id/tv_calendar_lunar_week"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -166,7 +156,6 @@
                         android:layout_marginRight="@dimen/dp_5"
                         android:background="@drawable/calendar_fortune_yi_bg"
                         android:gravity="center"
-                        android:padding="@dimen/dp_5"
                         android:text="宜"
                         android:textColor="@color/color_32A05A"
                         android:textSize="@dimen/sp_13" />
@@ -208,7 +197,6 @@
                         android:layout_marginRight="@dimen/dp_5"
                         android:background="@drawable/calendar_fortune_ji_bg"
                         android:gravity="center"
-                        android:padding="@dimen/dp_5"
                         android:text="忌"
                         android:textColor="@color/color_E64646"
                         android:textSize="@dimen/sp_13" />
