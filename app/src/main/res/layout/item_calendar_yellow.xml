@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="@dimen/dp_6"
-    android:layout_marginRight="@dimen/dp_6"
     android:layout_marginTop="@dimen/dp_8"
+    android:layout_marginRight="@dimen/dp_6"
     android:background="@drawable/calendar_fortune_bg"
     android:orientation="vertical">
 
@@ -30,7 +30,7 @@
                 android:layout_weight="2">
 
                 <TextView
-                    android:id="@+id/test_textview"
+                    android:id="@+id/tv_calendar_today"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
@@ -59,8 +59,8 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/dp_8"
                             android:layout_gravity="center"
+                            android:layout_marginLeft="@dimen/dp_8"
                             android:padding="@dimen/dp_3"
                             android:text="择吉避凶"
                             android:textColor="@color/color_E64646"
@@ -71,8 +71,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginRight="@dimen/dp_8"
                             android:layout_marginLeft="@dimen/dp_3"
+                            android:layout_marginRight="@dimen/dp_8"
                             android:src="@mipmap/ic_calendar_fortune_back" />
                     </LinearLayout>
 
@@ -90,6 +90,7 @@
                 android:gravity="center">
 
                 <TextView
+                    android:id="@+id/tv_calendar_lunar_year"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
@@ -98,6 +99,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/tv_calendar_lunar_month"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -107,6 +109,7 @@
                     android:textSize="@dimen/sp_12" />
 
                 <TextView
+                    android:id="@+id/tv_calendar_lunar_day"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -116,6 +119,7 @@
                     android:textSize="12sp" />
 
                 <TextView
+                    android:id="@+id/tv_calendar_lunar_hour"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -125,6 +129,7 @@
                     android:textSize="@dimen/sp_12" />
 
                 <TextView
+                    android:id="@+id/tv_calendar_lunar_week"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -167,6 +172,7 @@
                         android:textSize="@dimen/sp_13" />
 
                     <TextView
+                        android:id="@+id/tv_yi_one"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dp_3"
@@ -175,6 +181,7 @@
                         android:textSize="@dimen/sp_15" />
 
                     <TextView
+                        android:id="@+id/tv_yi_two"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dp_3"
@@ -207,6 +214,7 @@
                         android:textSize="@dimen/sp_13" />
 
                     <TextView
+                        android:id="@+id/tv_ji_one"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dp_3"
@@ -215,6 +223,7 @@
                         android:textSize="@dimen/sp_15" />
 
                     <TextView
+                        android:id="@+id/tv_ji_two"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:padding="@dimen/dp_3"
@@ -263,6 +272,7 @@
             android:textSize="@dimen/sp_16" />
 
         <TextView
+            android:id="@+id/tv_calendar_lunar_jieri"
             android:layout_width="@dimen/dp_0"
             android:layout_height="match_parent"
             android:layout_marginLeft="@dimen/dp_12"
@@ -274,6 +284,7 @@
             android:textSize="@dimen/sp_16" />
 
         <TextView
+            android:id="@+id/tv_calendar_lunar_jieri_holiday"
             android:layout_width="@dimen/dp_0"
             android:layout_height="wrap_content"
             android:layout_weight="2"
@@ -285,6 +296,7 @@
             android:textSize="@dimen/sp_16" />
 
         <TextView
+            android:id="@+id/tv_calendar_lunar_jieri_date"
             android:layout_width="@dimen/dp_0"
             android:layout_height="match_parent"
             android:layout_weight="2"
@@ -300,6 +312,7 @@
             android:background="@color/color_E64646" />
 
         <TextView
+            android:id="@+id/tv_calendar_lunar_after_jieri_week"
             android:layout_width="@dimen/dp_0"
             android:layout_height="match_parent"
             android:layout_weight="2"
@@ -309,12 +322,12 @@
             android:textSize="@dimen/sp_16" />
 
         <TextView
+            android:id="@+id/tv_calendar_lunar_after_jieri_date"
             android:layout_width="@dimen/dp_0"
             android:layout_height="match_parent"
             android:layout_weight="2"
             android:drawablePadding="@dimen/dp_8"
             android:gravity="center_vertical"
-
             android:text="六天后"
             android:textColor="#A0A0A0"
             android:textSize="@dimen/sp_16" />

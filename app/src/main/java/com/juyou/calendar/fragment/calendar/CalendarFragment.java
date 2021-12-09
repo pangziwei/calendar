@@ -2,10 +2,7 @@ package com.juyou.calendar.fragment.calendar;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
-import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.RectF;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -29,15 +26,12 @@ import android.widget.Toast;
 import com.baidu.mobads.sdk.api.CPUWebAdRequestParam;
 import com.baidu.mobads.sdk.api.CpuAdView;
 import com.baidu.mobads.sdk.api.CpuLpFontSize;
-import com.google.gson.Gson;
 import com.haibin.calendarview.Calendar;
 import com.haibin.calendarview.CalendarUtil;
 import com.haibin.calendarview.CalendarView;
-import com.haibin.calendarview.TrunkBranchAnnals;
 import com.juyou.calendar.R;
 import com.juyou.calendar.base.MyExFragment;
 import com.juyou.calendar.dialog.AddressDialog;
-
 import com.juyou.calendar.manage.GradationScrollView;
 import com.juyou.calendar.util.SharedPreUtils;
 import com.littlejie.circleprogress.CircleProgress;
@@ -92,14 +86,56 @@ public class CalendarFragment extends MyExFragment implements
     LinearLayout llCenterTitle;
     @BindView(R.id.tv_date)
     TextView tvDate;
-    @BindView(R.id.test_textview)
-    TextView test_textview;
     @BindView(R.id.ll_date)
     LinearLayout llDate;
     @BindView(R.id.ll_test)
     LinearLayout llTest;
     @BindView(R.id.calendarView)
     CalendarView calendarView;
+    @BindView(R.id.tv_lef_back)
+    ImageView tvLefBack;
+    @BindView(R.id.iv_title_right)
+    ImageView ivTitleRight;
+    @BindView(R.id.tv_calendar_today)
+    TextView tvCalendarToday;
+    @BindView(R.id.tv_calendar_lunar_year)
+    TextView tvCalendarLunarYear;
+    @BindView(R.id.tv_calendar_lunar_month)
+    TextView tvCalendarLunarMonth;
+    @BindView(R.id.tv_calendar_lunar_day)
+    TextView tvCalendarLunarDay;
+    @BindView(R.id.tv_calendar_lunar_hour)
+    TextView tvCalendarLunarHour;
+    @BindView(R.id.tv_calendar_lunar_week)
+    TextView tvCalendarLunarWeek;
+    @BindView(R.id.tv_yi_one)
+    TextView tvYiOne;
+    @BindView(R.id.tv_yi_two)
+    TextView tvYiTwo;
+    @BindView(R.id.tv_ji_one)
+    TextView tvJiOne;
+    @BindView(R.id.tv_ji_two)
+    TextView tvJiTwo;
+    @BindView(R.id.tv_calendar_lunar_jieri)
+    TextView tvCalendarLunarJieri;
+    @BindView(R.id.tv_calendar_lunar_jieri_holiday)
+    TextView tvCalendarLunarJieriHoliday;
+    @BindView(R.id.tv_calendar_lunar_after_jieri_date)
+    TextView tvCalendarLunarAfterJieriDate;
+    @BindView(R.id.tv_calendar_lunar_after_jieri_week)
+    TextView tvCalendarLunarAfterJieriWeek;
+    @BindView(R.id.tv_calendar_lunar_jieri_date)
+    TextView tvCalendarLunarJieriDate;
+    @BindView(R.id.tv_calendar_my_fortune)
+    TextView tvCalendarMyFortune;
+    @BindView(R.id.tv_calendar_zonghe)
+    TextView tvCalendarZonghe;
+    @BindView(R.id.tv_calendar_shiye)
+    TextView tvCalendarShiye;
+    @BindView(R.id.tv_calendar_caifu)
+    TextView tvCalendarCaifu;
+    @BindView(R.id.tv_calendar_ganqing)
+    TextView tvCalendarGanqing;
     private int[] cDate = CalendarUtil.getCurrentDate();
 
 
@@ -619,7 +655,7 @@ public class CalendarFragment extends MyExFragment implements
             provinceName = province;
             cityName = city;
             areaName = area;
-            test_textview.setText(areaName);
+//            test_textview.setText(areaName);
 
         }
     };

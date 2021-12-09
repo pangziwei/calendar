@@ -43,7 +43,7 @@ import com.juyou.calendar.bo.StringCache;
 import com.juyou.calendar.bo.UserBo;
 import com.juyou.calendar.dialog.UpdataDialog;
 import com.juyou.calendar.fragment.mine.MineFragment;
-import com.juyou.calendar.fragment.YellowCalendarFragment;
+import com.juyou.calendar.fragment.yellowcalendar.YellowCalendarFragment;
 import com.juyou.calendar.fragment.calendar.CalendarFragment;
 import com.juyou.calendar.fragment.stare.StareFragment;
 import com.juyou.calendar.mine.newlogin.NewLoginActivity;

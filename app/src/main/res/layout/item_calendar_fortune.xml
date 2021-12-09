@@ -39,6 +39,7 @@
         </TextView>
 
         <TextView
+            android:id="@+id/tv_calendar_my_fortune"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_gravity="end"
@@ -113,13 +114,15 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tv_calendar_zonghe"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_5"
                 android:background="@drawable/calendar_fortune_total_bg"
-
+                android:ellipsize="end"
+                android:lines="1"
                 android:padding="@dimen/dp_5"
-                android:text="思维敏捷，积极发言"
+                android:text="思维敏捷，积极发言,思维敏捷，积极发言"
                 android:textColor="@color/white"
                 android:textSize="@dimen/sp_10"
                 android:textStyle="bold" />
@@ -136,10 +139,13 @@
 
 
             <TextView
+                android:id="@+id/tv_calendar_shiye"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_5"
                 android:background="@drawable/calendar_fortune_cause_bg"
+                android:ellipsize="end"
+                android:lines="1"
                 android:padding="@dimen/dp_5"
                 android:text="工作烦劳，身心俱疲"
                 android:textColor="@color/white"
@@ -164,12 +170,14 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tv_calendar_caifu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_5"
                 android:background="@drawable/calendar_fortune_money_bg"
+                android:ellipsize="end"
+                android:lines="1"
                 android:padding="@dimen/dp_5"
-
                 android:text="财运上涨，投资得利"
                 android:textColor="@color/white"
                 android:textSize="@dimen/sp_10"
@@ -187,10 +195,13 @@
 
 
             <TextView
+                android:id="@+id/tv_calendar_ganqing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dp_5"
                 android:background="@drawable/calendar_fortune_felling_bg"
+                android:ellipsize="end"
+                android:lines="1"
                 android:padding="@dimen/dp_5"
                 android:text="相处融洽，感情升温"
                 android:textColor="@color/white"

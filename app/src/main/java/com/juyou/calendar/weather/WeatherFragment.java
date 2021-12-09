@@ -222,6 +222,7 @@ public class WeatherFragment extends MyExFragment {
             public void onSuccess(String content) {
                 CaiYunHourlysBean caiYunHourlysBean = new Gson().fromJson(content, CaiYunHourlysBean.class);
                 initCaiYunHourlys(caiYunHourlysBean);
+//                Log.e("天气", "caiYunHourlysBean---------------" + new Gson().toJson(caiYunHourlysBean));
                 tvTodayCond.setText(caiYunHourlysBean.getResult().getHourly().getDescription());
             }
 
@@ -233,6 +234,8 @@ public class WeatherFragment extends MyExFragment {
 
     private void initCaiYunHourlys(CaiYunHourlysBean result) {
         List<CaiYunhourlysListBean> dataHour = new ArrayList<>();
+//        Log.e("天气", "caiYunHourlysBean---------------" + new Gson().toJson(dataHour));
+
         if (result != null && result.getResult().getHourly() != null) {
             caiYunHourlysBean = result;
             for (int i = 0; i < result.getResult().getHourly().getTemperature().size(); i++) {
@@ -247,6 +250,8 @@ public class WeatherFragment extends MyExFragment {
                 forecastManager.setOrientation(LinearLayoutManager.HORIZONTAL);
                 rvApiRecycle.setLayoutManager(forecastManager);
                 rvApiRecycle.setAdapter(caiYunHourlysListAdapter);
+                Log.e("天气", "caiYunHourlysBean---------------" + new Gson().toJson(dataHour));
+
             } else {
                 caiYunHourlysListAdapter.refreshData(getActivity(), dataHour);
             }
@@ -267,6 +272,9 @@ public class WeatherFragment extends MyExFragment {
             @Override
             public void onSuccess(String content) {
                 CaiYunDailyBean caiYunDailyBean = new Gson().fromJson(content, CaiYunDailyBean.class);
+
+                Log.e("天气", "caiYunHourlysBean------caiYunDailyBean---------" + new Gson().toJson(caiYunDailyBean));
+
                 initCaiYunDailys(caiYunDailyBean);//15天
                 CaiYunDailyBean.ResultBean.DailyBean.LifeIndexBean lifeIndexBean = caiYunDailyBean.getResult().getDaily().getLife_index();
 //               生活指数
@@ -286,6 +294,7 @@ public class WeatherFragment extends MyExFragment {
                 sunView.setTimes(astroBean.getSunrise().getTime(), astroBean.getSunset().getTime(), currentTime);
 
             }
+
             @Override
             public void onFailure(Throwable error, String content) {
 
@@ -305,6 +314,7 @@ public class WeatherFragment extends MyExFragment {
                 caiYundaiysListBean.setSkycon(caiYunDailyBean.getResult().getDaily().getSkycon());
                 dataDaily.add(caiYundaiysListBean);
             }
+            Log.e("dataDaily", "ji--------------------"+new Gson().toJson(dataDaily));
             if (forecastAdapter == null) {
                 forecastAdapter = new ForecastAdapter(getActivity(), dataDaily);
                 LinearLayoutManager forecastManager = new LinearLayoutManager(getActivity());

@@ -3,7 +3,7 @@ package com.juyou.calendar.bean;
 /**
  * @author 聚友互动
  * @datetime 2021-12-07 15:15
- * @detail :
+ * @detail :阴历农历变换后的日期
  */
 public class DateChangeBean {
 
