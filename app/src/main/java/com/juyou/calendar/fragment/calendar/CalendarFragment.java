@@ -2,7 +2,6 @@ package com.juyou.calendar.fragment.calendar;
 
 import android.annotation.SuppressLint;
 import android.app.Dialog;
-import android.graphics.Paint;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -23,10 +22,11 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+
 import com.baidu.mobads.sdk.api.CPUWebAdRequestParam;
 import com.baidu.mobads.sdk.api.CpuAdView;
 import com.baidu.mobads.sdk.api.CpuLpFontSize;
-import com.google.gson.Gson;
 import com.haibin.calendarview.Calendar;
 import com.haibin.calendarview.CalendarUtil;
 import com.haibin.calendarview.CalendarView;
@@ -37,6 +37,7 @@ import com.juyou.calendar.bo.CurrentBean;
 import com.juyou.calendar.bo.JuYouBo;
 import com.juyou.calendar.bo.NetResultCallBack;
 import com.juyou.calendar.manage.GradationScrollView;
+import com.juyou.calendar.util.ISharedPreference;
 import com.juyou.calendar.util.SharedPreUtils;
 import com.littlejie.circleprogress.CircleProgress;
 import com.manggeek.android.geek.utils.JSONUtil;
@@ -55,9 +56,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class CalendarFragment extends MyExFragment implements
-        GradationScrollView.ScrollViewListener,
-        CalendarView.OnCalendarSelectListener {
+public class CalendarFragment extends MyExFragment implements GradationScrollView.ScrollViewListener, CalendarView.OnCalendarSelectListener {
 
 
     @BindView(R.id.ll_title_left)
@@ -72,6 +71,8 @@ public class CalendarFragment extends MyExFragment implements
     LinearLayout llRight;
     @BindView(R.id.rl_pa)
     LinearLayout rlPa;
+    @BindView(R.id.ll02)
+    LinearLayout ll02;
     @BindView(R.id.channel)
     Spinner channel;
     @BindView(R.id.button)
@@ -94,6 +95,8 @@ public class CalendarFragment extends MyExFragment implements
     LinearLayout llDate;
     @BindView(R.id.ll_test)
     LinearLayout llTest;
+    @BindView(R.id.ll_01)
+    LinearLayout ll01;
     @BindView(R.id.calendarView)
     CalendarView calendarView;
     @BindView(R.id.tv_lef_back)
@@ -139,7 +142,9 @@ public class CalendarFragment extends MyExFragment implements
     @BindView(R.id.tv_calendar_ganqing)
     TextView tvCalendarGanqing;
     private int[] cDate = CalendarUtil.getCurrentDate();
-
+    //日历节假日数据
+    protected List<LocalDate> mHolidayList;
+    protected List<LocalDate> mWorkdayList;
 
     /**
      * 滑动最大区域-相对布局的高
@@ -171,40 +176,52 @@ public class CalendarFragment extends MyExFragment implements
             llCenterTitle.setVisibility(View.VISIBLE);
             goBackCalendar.setVisibility(View.GONE);
             llDate.setVisibility(View.GONE);
+
+
+            Log.e(TAG, "y <= 0");
         } else if (y > 0 && y <= height) { //滑动距离小于banner图的高度时，设置背景和字体颜色颜色透明度渐变
             //滑动的距离：最大距离（相对布局高度） = 透明的改变 ： 最大透明度
             //透明的改变 =  (滑动的距离/最大距离)*255
             //(滑动的距离/最大距离)
-            float scale = (float) y / height;
-            //透明度
-            float alpha = (scale * 255);
+//            float scale = (float) y / height;
+//            //透明度
+//            float alpha = (scale * 255);
 
             tvTitleLeft.setVisibility(View.VISIBLE);
             llRight.setVisibility(View.VISIBLE);
             llCenterTitle.setVisibility(View.VISIBLE);
             goBackCalendar.setVisibility(View.GONE);
             llDate.setVisibility(View.GONE);
-//            calendar.setBackgroundColor(Color.argb((int) alpha, 255, 0, 0));
+//            ll01.setBackgroundColor(Color.argb((int) alpha, 255, 0, 0));
+
+            Log.e(TAG, "y <= height----" + height);
+            Log.e(TAG, "y <=----" + y);
         } else {    //滑动到banner下面设置普通颜色
             //y>height
             //透明度：0~255
 //            rlOut.setVisibility(View.GONE);
             //y>height
             //透明度：0~255
-//            calendar.setBackgroundColor(Color.argb((int) alpha, 255, 0, 0));
-//            rlOut.setBackgroundColor(Color.argb((int) 255, 255, 0, 0));
+
             tvTitleLeft.setVisibility(View.GONE);
             llRight.setVisibility(View.GONE);
             llCenterTitle.setVisibility(View.GONE);
             goBackCalendar.setVisibility(View.VISIBLE);
             llDate.setVisibility(View.VISIBLE);
+            Log.e(TAG, "y --------height-----" + y);
+//            ll02.setVisibility(View.GONE);
+//            llGo.setVisibility(View.GONE);
+//            gsScrollview.setVisibility(View.GONE);
+//            ll01.setBackgroundColor(Color.argb((int) 0, 255,0,0));
+//            ll01.setBackgroundColor(Color.argb((int) 255, 255,0,0));
+//            gsScrollview.setBackgroundColor(Color.argb((int) 0, 255,0,0));
         }
 
     }
 
     @Override
     public void onCalendarOutOfRange(Calendar calendar) {
-
+        Log.e(TAG, "calendar-----------" + calendar);
     }
 
     @SuppressLint("SetTextI18n")
@@ -266,35 +283,22 @@ public class CalendarFragment extends MyExFragment implements
             this.value = value;
         }
 
-
     }
-
 
     @Override
     protected void initView(View view, Bundle savedInstanceState) {
         ButterKnife.bind(this, view);
         init();
-
-
         initAD();
-
-//        initNowDay();//天气的初始化
-
         initListeners();//渐变的高度监听
-
-
         initCalendar();
+
     }
 
-    protected List<LocalDate> mHolidayList;
-    protected List<LocalDate> mWorkdayList;
 
-
-    private Paint getPaint() {
-        Paint paint = new Paint();
-        paint.setAntiAlias(true);
-        paint.setTextAlign(Paint.Align.CENTER);
-        return paint;
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
     }
 
     private void initCalendar() {
@@ -346,7 +350,7 @@ public class CalendarFragment extends MyExFragment implements
                         this);
 
                 //得到相对布局的高
-                height = calendarView.getHeight();
+                height = ll01.getHeight();
 //                Log.e("llCalendOut", "llCalendOut-----该方法付付-------------" + height);
                 //设置ScrollView的滑动监听
                 gsScrollview.setScrollViewListener(CalendarFragment.this);
@@ -375,18 +379,7 @@ public class CalendarFragment extends MyExFragment implements
         circleProgress.setValue(76);//这个是进度数---专业实况天气接口v63
         tvDate.setText(cDate[0] + "年" + cDate[1] + "月" + cDate[2] + "日" + " ");
 
-//        calendarView.setOnYearChangeListener(this);
         calendarView.setOnCalendarSelectListener(this);
-//        calendarView.setOnMonthChangeListener(this);
-//        calendarView.setOnCalendarLongClickListener(this, true);
-//        calendarView.setOnWeekChangeListener(this);
-//        calendarView.setOnYearViewChangeListener(this);
-
-//        //设置日期拦截事件，仅适用单选模式，当前无效
-//        calendarView.setOnCalendarInterceptListener(this);
-//
-//        calendarView.setOnViewChangeListener(this);
-
 
         initChangeLunar(cDate[0], cDate[1], cDate[2]);//农历日期
 
@@ -405,12 +398,10 @@ public class CalendarFragment extends MyExFragment implements
                 chooseTime(viewActionBarTitle);
                 break;
             case R.id.ll_test:
-                calendarView.setWeekStarWithMon();
 
                 break;
             case R.id.ll_calendar_fortune:
                 Toast.makeText(getActivity(), "今日运势", Toast.LENGTH_SHORT).show();
-                calendarView.setWeekStarWithSun();
                 break;
             case R.id.ll_right:
                 Toast.makeText(getActivity(), "天气", Toast.LENGTH_SHORT).show();
@@ -430,6 +421,8 @@ public class CalendarFragment extends MyExFragment implements
                         gsScrollview.post(new Runnable() {
                             @Override
                             public void run() {
+//                                ll01.setVisibility(View.VISIBLE);
+//                                gsScrollview.setVisibility(View.VISIBLE);
                                 gsScrollview.fullScroll(ScrollView.FOCUS_UP);
                             }
                         });
@@ -516,8 +509,6 @@ public class CalendarFragment extends MyExFragment implements
      * 内容联盟模板渲染，展示频道
      */
     private void showSelectedCpuWebPage() {
-
-
         /**
          *  注意构建参数时，setCustomUserId 为必选项，
          *  传入的outerId是为了更好的保证能够获取到广告和内容
@@ -568,6 +559,7 @@ public class CalendarFragment extends MyExFragment implements
 
                     @Override
                     public void onContentImpression(String impressionContentNums) {
+
                         Log.e(TAG, "onContentImpression: impressionContentNums = " + impressionContentNums);
                     }
                 });
@@ -623,6 +615,14 @@ public class CalendarFragment extends MyExFragment implements
         if (mCpuView != null) {
             mCpuView.onResume();
         }
+        //可优化部分
+        if (ISharedPreference.getInstance(getActivity().getApplication()).getWeekMonNotice()) {
+//            选择是周一
+            calendarView.setWeekStarWithMon();
+        } else {
+            calendarView.setWeekStarWithSun();
+        }
+
     }
 
     @Override
@@ -631,6 +631,7 @@ public class CalendarFragment extends MyExFragment implements
         if (mCpuView != null) {
             mCpuView.onPause();
         }
+
     }
 
     @Override
@@ -640,7 +641,6 @@ public class CalendarFragment extends MyExFragment implements
             mCpuView.onDestroy();
         }
     }
-
 
     /**
      * 获取appsid
@@ -673,6 +673,4 @@ public class CalendarFragment extends MyExFragment implements
         }
 
     }
-
-
 }

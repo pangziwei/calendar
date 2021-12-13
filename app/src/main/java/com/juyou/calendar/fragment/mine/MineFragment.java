@@ -79,6 +79,7 @@ public class MineFragment extends MyExFragment {
     }
 
 
+
     @OnClick({R.id.tv_mine_login, R.id.ll_mine_star_query, R.id.ll_mine_jiri_query, R.id.ll_mine_fortune_query, R.id.ll_mine_yellow_query, R.id.ll_mine_jieqian, R.id.ll_mine_dream, R.id.ll_mine_day_weather, R.id.ll_mine_name_test, R.id.ll_mine_star, R.id.btn_mine_about, R.id.iv_mine_setting})
     public void onViewClicked(View view) {
         switch (view.getId()) {

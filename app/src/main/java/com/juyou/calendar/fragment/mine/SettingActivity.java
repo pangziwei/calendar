@@ -2,7 +2,6 @@ package com.juyou.calendar.fragment.mine;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -11,22 +10,18 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.gson.Gson;
 import com.juyou.calendar.R;
 import com.juyou.calendar.activity.MyMainActivity;
 import com.juyou.calendar.bo.StringCache;
-import com.juyou.calendar.fragment.calendar.CalendarFragment;
 import com.juyou.calendar.mine.FeedbackActivity;
 import com.juyou.calendar.mine.about.AboutActivity;
-import com.manggeek.android.geek.GeekActivity;
-
-import java.lang.reflect.Field;
+import com.juyou.calendar.util.ISharedPreference;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class SettingActivity extends AppCompatActivity {
+public class SettingActivity extends AppCompatActivity implements View.OnClickListener {
 
     @BindView(R.id.tv_title_left)
     TextView tvTitleLeft;
@@ -38,10 +33,6 @@ public class SettingActivity extends AppCompatActivity {
     ImageView ivTitleRight;
     @BindView(R.id.notice)
     Switch notice;
-    @BindView(R.id.tv_week_sun)
-    TextView tvWeekSun;
-    @BindView(R.id.tv_week_mon)
-    TextView tvWeekMon;
     @BindView(R.id.ll_setting_feed_back)
     LinearLayout llSettingFeedBack;
     @BindView(R.id.ll_setting_about_us)
@@ -51,12 +42,34 @@ public class SettingActivity extends AppCompatActivity {
     @BindView(R.id.btn_exit)
     TextView btnExit;
 
-    Class clazz = null;
+
+    public TextView tv_week_sun;
+    public TextView tv_week_mon;
+
+    private ISharedPreference sharedPreference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
+        sharedPreference = ISharedPreference.getInstance(getApplication());
+
+        tv_week_sun = findViewById(R.id.tv_week_sun);
+        tv_week_mon = findViewById(R.id.tv_week_mon);
+        tv_week_sun.setOnClickListener(this);
+        tv_week_mon.setOnClickListener(this);
+        //可优化部分
+        if (ISharedPreference.getInstance(getApplication()).getWeekMonNotice()) {
+            isOnClickSun();
+        } else {
+
+        }
+        if (ISharedPreference.getInstance(getApplication()).getWeekSunNotice()) {
+
+        } else {
+            isOnClickMon();
+        }
+
         ButterKnife.bind(this);
         initView();
     }
@@ -69,26 +82,14 @@ public class SettingActivity extends AppCompatActivity {
         tvTitleLeft.setVisibility(View.GONE);
     }
 
-    @OnClick({R.id.ll_title_left, R.id.notice, R.id.tv_week_sun, R.id.tv_week_mon, R.id.ll_setting_feed_back, R.id.ll_setting_about_us, R.id.btn_exit})
+    @OnClick({R.id.ll_title_left, R.id.notice, R.id.ll_setting_feed_back, R.id.ll_setting_about_us, R.id.btn_exit})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_title_left:
                 finish();
                 break;
             case R.id.notice:
-                break;
-            case R.id.tv_week_sun:
-                tvWeekSun.setTextColor(getResources().getColor(R.color.white));
-                tvWeekMon.setTextColor(getResources().getColor(R.color.color_F04646));
-                tvWeekSun.setBackgroundResource(R.drawable.setting_chose_sun_bg);
-                tvWeekMon.setBackgroundResource(R.drawable.setting_choice_sun);
-
-                break;
-            case R.id.tv_week_mon:
-                tvWeekMon.setTextColor(getResources().getColor(R.color.white));
-                tvWeekSun.setTextColor(getResources().getColor(R.color.color_F04646));
-                tvWeekSun.setBackgroundResource(R.drawable.setting_choice_mun);
-                tvWeekMon.setBackgroundResource(R.drawable.setting_choice_mun_bg);
+//                notice.setChecked();
                 break;
             case R.id.ll_setting_feed_back:
                 startActivity(new Intent(SettingActivity.this, FeedbackActivity.class));
@@ -100,21 +101,42 @@ public class SettingActivity extends AppCompatActivity {
             case R.id.btn_exit:
                 StringCache.put("login", "false");
                 StringCache.put("token", "");
-                //下次默认的收款方式
-                StringCache.put("strNumber", "");
-                StringCache.put("payType", "");
-                //下次默认的收款方式
-                StringCache.put("payTypeWechat", "");
-                StringCache.put("payTypeAlipay", "");
-                StringCache.put("payTypeBank", "");
-                //CID的设置为空
-//                StringCache.put("GTCID", "");
-//                Intent intent = new Intent(AboutActivity.this, MainActivity.class);
                 Intent intent = new Intent(SettingActivity.this, MyMainActivity.class);
                 intent.putExtra("SelectIndex", 1);
                 startActivity(intent);
                 finish();
                 break;
         }
+    }
+
+    private void isOnClickMon() {
+        tv_week_mon.setTextColor(this.getResources().getColor(R.color.white));
+        tv_week_sun.setTextColor(this.getResources().getColor(R.color.color_F04646));
+        tv_week_sun.setBackgroundResource(R.drawable.setting_choice_mun);
+        tv_week_mon.setBackgroundResource(R.drawable.setting_choice_mun_bg);
+    }
+
+    private void isOnClickSun() {
+        tv_week_sun.setTextColor(this.getResources().getColor(R.color.white));
+        tv_week_mon.setTextColor(this.getResources().getColor(R.color.color_F04646));
+        tv_week_sun.setBackgroundResource(R.drawable.setting_chose_sun_bg);
+        tv_week_mon.setBackgroundResource(R.drawable.setting_choice_sun);
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.tv_week_sun:
+                isOnClickSun();
+                sharedPreference.saveWeekSunNotice(true);
+                sharedPreference.saveWeekMonNotice(false);
+                break;
+            case R.id.tv_week_mon:
+                isOnClickMon();
+                sharedPreference.saveWeekSunNotice(false);
+                sharedPreference.saveWeekMonNotice(true);
+                break;
+        }
+
     }
 }
