@@ -111,9 +111,9 @@ dependencies {
 
     //动态权限申请
     implementation 'pub.devrel:easypermissions:1.0.1'
-
     //分享
     implementation project(':socialsdk')
+
 
     //验证码
     implementation project(':VerificationCodeInputView_Lib')
@@ -173,4 +173,11 @@ dependencies {
     //TabLayout
 //    https://blog.csdn.net/qq_36388797/article/details/81942503
     implementation project(':FlycoTabLayout_Lib')
+
+    //友盟基础库依赖（必须）
+//    api 'com.umeng.umsdk:common:9.4.4'
+//    api 'com.umeng.umsdk:asms:1.4.1'
+    //友盟Push依赖
+//    api 'com.umeng.umsdk:push:6.4.7'
+
 }

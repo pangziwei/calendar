@@ -8,8 +8,6 @@ import android.net.ConnectivityManager;
 import com.juyou.calendar.base.MyExFragment;
 
 /**
- * @author LianZheng
- * @create at 2021-03-30，10:23
  * @desc 自定义检查手机网络状态是否切换的广播接受器
  */
 public class NetBroadcastReceiver extends BroadcastReceiver {

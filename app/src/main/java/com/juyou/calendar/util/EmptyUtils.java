@@ -4,7 +4,7 @@ import java.util.Collection;
 import java.util.Map;
 
 /*
- * 链证科技 2021年04月25日，星期日，18:03:12
+ *
  * 作用：Android判断是否为空的工具类
  */
 public class EmptyUtils {

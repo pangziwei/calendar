@@ -47,12 +47,18 @@ import com.juyou.calendar.fragment.yellowcalendar.YellowCalendarFragment;
 import com.juyou.calendar.fragment.calendar.CalendarFragment;
 import com.juyou.calendar.fragment.stare.StareFragment;
 import com.juyou.calendar.mine.newlogin.NewLoginActivity;
+import com.juyou.calendar.util.ConstantUtil;
 import com.juyou.calendar.weather.WeatherActivity;
 import com.juyou.calendar.weather.WeatherFragment;
 import com.manggeek.android.geek.utils.JSONUtil;
 import com.manggeek.android.geek.utils.PermissionUtils;
+import com.tencent.tauth.IUiListener;
+import com.tencent.tauth.Tencent;
+import com.tencent.tauth.UiError;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
+
+import org.json.JSONObject;
 
 import java.util.List;
 import java.util.Timer;
@@ -86,12 +92,15 @@ public class MyMainActivity extends BaseActivity {
     @BindView(R.id.main_radioGroup)
     LinearLayout mainRadioGroup;
 
+    public static Tencent mTencent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_my_main);
+
+        mTencent = Tencent.createInstance(ConstantUtil.QQ_APP_ID, this.getApplicationContext());
 
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -105,14 +114,14 @@ public class MyMainActivity extends BaseActivity {
         }
 
 
-//        PushManager.getInstance().initialize(this, PushService.class);
-//        PushManager.getInstance().registerPushIntentService(this.getApplicationContext(), IntentService.class);//消息推送
-        UMConfigure.init(this, "5fc4629253a0037e285182ce", "umeng", UMConfigure.DEVICE_TYPE_PHONE, "");//58edcfeb310c93091c000be2 5965ee00734be40b580001a0
+        UMConfigure.init(this, ConstantUtil.UMENG_APP_KEY, "umeng", UMConfigure.DEVICE_TYPE_PHONE, "");//58edcfeb310c93091c000be2 5965ee00734be40b580001a0
         PlatformConfig.setWeixin("wx27924c382baf48f5", "b702dba0329eee9852dca6d68eed7b79");
         catchException();
 
 
         ButterKnife.bind(this);
+          //第三方qq登录请求初始化
+        Tencent.setIsPermissionGranted(true);
 
         initView();
         updataDialog = new UpdataDialog(mActivity);
@@ -352,8 +361,7 @@ public class MyMainActivity extends BaseActivity {
                 this.resImg();
                 this.setSelect(2);
                 Log.e("返回键", "打副本是班");
-            }
-            else if (selectIndex == 4) {
+            } else if (selectIndex == 4) {
                 Log.e("tag", "-----2");
                 this.resImg();
                 this.setSelect(4);
@@ -534,5 +542,37 @@ public class MyMainActivity extends BaseActivity {
         updataDialog.show();
     }
 
+    public static class BaseUiListener implements IUiListener {
+        //        @Override
+//        public void onComplete(JSONObject response) {
+//            mBaseMessageText.setText("onComplete:");
+//            mMessageText.setText(response.toString());
+//            doComplete(response);
+//        }
+        protected void doComplete(JSONObject values) {
+        }
+
+        @Override
+        public void onComplete(Object o) {
+
+        }
+
+        @Override
+        public void onError(UiError e) {
+
+            Log.e("onError:", "code:" + e.errorCode + ", msg:"
+                    + e.errorMessage + ", detail:" + e.errorDetail);
+        }
+
+        @Override
+        public void onCancel() {
+            Log.e("onError:", "onCancel");
+        }
+
+        @Override
+        public void onWarning(int i) {
+
+        }
+    }
 
 }

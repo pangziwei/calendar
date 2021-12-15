@@ -142,7 +142,7 @@ public class CalendarFragment extends MyExFragment implements GradationScrollVie
     @BindView(R.id.tv_calendar_ganqing)
     TextView tvCalendarGanqing;
     private int[] cDate = CalendarUtil.getCurrentDate();
-    //日历节假日数据
+    //日历节假日数据列表
     protected List<LocalDate> mHolidayList;
     protected List<LocalDate> mWorkdayList;
 

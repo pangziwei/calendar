@@ -25,9 +25,10 @@
     <application
         android:name=".base.BaseApplication"
         android:allowBackup="false"
-        android:icon="@drawable/ic_app"
+        android:icon="@mipmap/ic_app"
         android:label="@string/app_name"
         android:requestLegacyExternalStorage="true"
+        android:roundIcon="@mipmap/ic_app"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar"
         android:usesCleartextTraffic="true"
@@ -138,6 +139,15 @@
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="behind"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="61b80390775e2a5a76d9fa53" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="juyouhudong" />
+
     </application>
 
 </manifest>

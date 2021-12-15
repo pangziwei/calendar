@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
+    <color name="lineColorDE">#DEDEDE</color>
     <color name="white">#FFFFFF</color>
     <color name="gray">#CCCCCC</color>
     <color name="line">#ddd</color>

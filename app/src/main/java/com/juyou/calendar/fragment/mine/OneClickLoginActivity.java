@@ -22,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.gson.Gson;
 import com.juyou.calendar.R;
+import com.juyou.calendar.activity.MyMainActivity;
 import com.juyou.calendar.bean.LoginToApiBean;
 import com.juyou.calendar.bean.LoginbackBean;
 import com.juyou.calendar.bo.CurrentBean;
@@ -29,6 +30,7 @@ import com.juyou.calendar.bo.JuYouBo;
 import com.juyou.calendar.bo.NetResultCallBack;
 import com.juyou.calendar.dialog.ShowAllSpan;
 import com.juyou.calendar.eventbus.QQLoginEventBus;
+import com.juyou.calendar.util.ConstantUtil;
 import com.juyou.calendar.util.H5UrlMananger;
 import com.juyou.calendar.util.WebUtils;
 import com.manggeek.android.geek.utils.JSONUtil;
@@ -40,6 +42,7 @@ import com.tencent.connect.share.QQShare;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
+import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.zrq.spanbuilder.SpanBuilder;
 
 import org.greenrobot.eventbus.EventBus;
@@ -53,12 +56,13 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.juyou.calendar.activity.MyMainActivity.mTencent;
+
 public class OneClickLoginActivity extends AppCompatActivity {
     private static final String TAG = "OneClickLoginActivity";
-    private static final String APP_ID = "101980039";
 
 
-    public static Tencent mTencent;
+    //    public static Tencent mTencent;
     //QQ包名
     private static final String PACKAGE_QQ = "com.tencent.mobileqq";
     @BindView(R.id.ll_title_left)
@@ -106,9 +110,8 @@ public class OneClickLoginActivity extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        Tencent.setIsPermissionGranted(true);
         ButterKnife.bind(this);
-        mTencent = Tencent.createInstance(APP_ID, this.getApplicationContext());
+//        mTencent = Tencent.createInstance(ConstantUtil.QQ_APP_ID, this.getApplicationContext());
         SpannableStringBuilder stringBuilder = new SpannableStringBuilder();
         stringBuilder.append(new SpanBuilder("登录即同意", 14, getResources().getColor(R.color.blackTrans)))
                 .append(new SpanBuilder("《用户协议》", 14, getResources().getColor(R.color.main_but_down)).setClick(tvLinkLogin, new ShowAllSpan(this, widget -> WebUtils.loadTitleWeb(this, H5UrlMananger.USER_AGGREMENT_URL, "用户协议"))))
@@ -156,11 +159,12 @@ public class OneClickLoginActivity extends AppCompatActivity {
                     initShake();
                     return;
                 }
-//                onClickShare();//分享
 
+                onClickShare();
                 break;
             case R.id.ll_title_left:
                 finish();
+
                 break;
 
         }
@@ -171,7 +175,7 @@ public class OneClickLoginActivity extends AppCompatActivity {
         llLoginShake.startAnimation(animation);
     }
 
-    private void onClickShare() {
+    private void onClickShareQQ() {
         final Bundle params = new Bundle();
         params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_DEFAULT);
         params.putString(QQShare.SHARE_TO_QQ_TITLE, "要分享的标题");
@@ -180,41 +184,9 @@ public class OneClickLoginActivity extends AppCompatActivity {
         params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL, "http://imgcache.qq.com/qzone/space_item/pre/0/66768.gif");
         params.putString(QQShare.SHARE_TO_QQ_APP_NAME, "测试应用发货单款");
 //        params.putInt(QQShare.SHARE_TO_QQ_EXT_INT,  "其他附加功能");
-        mTencent.shareToQQ(OneClickLoginActivity.this, params, new BaseUiListener());
+        mTencent.shareToQQ(OneClickLoginActivity.this, params, new MyMainActivity.BaseUiListener());
     }
 
-    private class BaseUiListener implements IUiListener {
-        //        @Override
-//        public void onComplete(JSONObject response) {
-//            mBaseMessageText.setText("onComplete:");
-//            mMessageText.setText(response.toString());
-//            doComplete(response);
-//        }
-        protected void doComplete(JSONObject values) {
-        }
-
-        @Override
-        public void onComplete(Object o) {
-
-        }
-
-        @Override
-        public void onError(UiError e) {
-
-            Log.e("onError:", "code:" + e.errorCode + ", msg:"
-                    + e.errorMessage + ", detail:" + e.errorDetail);
-        }
-
-        @Override
-        public void onCancel() {
-            Log.e("onError:", "onCancel");
-        }
-
-        @Override
-        public void onWarning(int i) {
-
-        }
-    }
 
     /**
      * QQ登录
@@ -338,8 +310,8 @@ public class OneClickLoginActivity extends AppCompatActivity {
             public void onComplete(Object object) {
 //                try {
 //
-                    LoginUser = object.toString();
-                    loginToApiBean.setUser(LoginUser);
+                LoginUser = object.toString();
+                loginToApiBean.setUser(LoginUser);
 //                    Log.e(TAG, "个人信息：登录参数----user-----" + object.toString());
 //                    Log.e(TAG, "个人信息：登录参数----user---LoginUser--" + LoginUser);
 //                    //头像
@@ -464,6 +436,19 @@ public class OneClickLoginActivity extends AppCompatActivity {
         }
 
         return is;
+    }
+
+
+    //    调用分享接口分享图文消息的示例代码如下：
+    private void onClickShare() {
+        final Bundle params = new Bundle();
+        params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_DEFAULT);
+        params.putString(QQShare.SHARE_TO_QQ_TITLE, "要分享的标题");
+        params.putString(QQShare.SHARE_TO_QQ_SUMMARY, "要分享的摘要");
+        params.putString(QQShare.SHARE_TO_QQ_TARGET_URL, "http://www.qq.com/news/1.html");
+        params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL, "http://imgcache.qq.com/qzone/space_item/pre/0/66768.gif");
+        params.putString(QQShare.SHARE_TO_QQ_APP_NAME, "测试应用222222");
+        mTencent.shareToQQ(OneClickLoginActivity.this, params, new MyMainActivity.BaseUiListener());
     }
 
 

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_parent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:background="@drawable/white_bigger_corner_tl_tr"
+    android:orientation="vertical"
+    android:paddingTop="@dimen/dp_15">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingBottom="@dimen/dp_20"
+        android:text="分享"
+        android:textColor="@color/textcoloe3"
+        android:textSize="@dimen/sp_16" />
+
+    <HorizontalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/ll_wx"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/white_selector"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/dp_15"
+                    android:paddingRight="@dimen/dp_15"
+                    android:paddingBottom="@dimen/dp_5">
+
+                    <ImageView
+                        android:id="@+id/share_wx"
+                        android:layout_width="@dimen/dp_45"
+                        android:layout_height="@dimen/dp_45"
+                        android:background="@drawable/umeng_socialize_wechat" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:paddingTop="@dimen/dp_5"
+                        android:text="微信"
+                        android:textColor="@color/textcoloe3"
+                        android:textSize="@dimen/sp_12" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/ll_wxp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/white_selector"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/dp_15"
+                    android:paddingRight="@dimen/dp_15"
+                    android:paddingBottom="@dimen/dp_5">
+
+                    <ImageView
+                        android:id="@+id/share_wxp"
+                        android:layout_width="@dimen/dp_45"
+                        android:layout_height="@dimen/dp_45"
+                        android:background="@drawable/umeng_socialize_wxcircle" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:paddingTop="@dimen/dp_5"
+                        android:text="朋友圈"
+                        android:textColor="@color/textcoloe3"
+                        android:textSize="@dimen/sp_12" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_qq"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/white_selector"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/dp_15"
+                    android:paddingRight="@dimen/dp_15"
+                    android:paddingBottom="@dimen/dp_5">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_45"
+                        android:layout_height="@dimen/dp_45"
+                        android:background="@drawable/umeng_socialize_qq" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:paddingTop="@dimen/dp_5"
+                        android:text="QQ"
+                        android:textColor="@color/textcoloe3"
+                        android:textSize="@dimen/sp_12" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_qq_space"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/white_selector"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/dp_15"
+                    android:paddingRight="@dimen/dp_15"
+                    android:paddingBottom="@dimen/dp_5">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_45"
+                        android:layout_height="@dimen/dp_45"
+                        android:background="@drawable/umeng_socialize_qzone" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:paddingTop="@dimen/dp_5"
+                        android:text="QQ空间"
+                        android:textColor="@color/textcoloe3"
+                        android:textSize="@dimen/sp_12" />
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/ll_wb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/white_selector"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/dp_15"
+                    android:paddingRight="@dimen/dp_15"
+                    android:paddingBottom="@dimen/dp_5">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_45"
+                        android:layout_height="@dimen/dp_45"
+                        android:background="@drawable/umeng_socialize_sina" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:paddingTop="@dimen/dp_5"
+                        android:text="新浪微博"
+                        android:textColor="@color/textcoloe3"
+                        android:textSize="@dimen/sp_12" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/ll_share_url"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/white_selector"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/dp_15"
+                    android:paddingRight="@dimen/dp_15"
+                    android:paddingBottom="@dimen/dp_5">
+
+                    <ImageView
+                        android:layout_width="@dimen/dp_45"
+                        android:layout_height="@dimen/dp_45"
+                        android:background="@drawable/umeng_socialize_copyurl" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:paddingTop="@dimen/dp_5"
+                        android:text="复制链接"
+                        android:textColor="@color/textcoloe3"
+                        android:textSize="@dimen/sp_12" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </HorizontalScrollView>
+
+    <TextView
+        android:id="@+id/share_closeIv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/white_selector"
+        android:gravity="center"
+        android:paddingTop="@dimen/dp_26"
+        android:paddingBottom="@dimen/dp_26"
+        android:text="取消"
+        android:textSize="@dimen/sp_16" />
+</LinearLayout>

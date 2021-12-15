@@ -2,6 +2,7 @@ package com.juyou.calendar.fragment.yellowcalendar;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -25,6 +26,7 @@ import com.juyou.calendar.base.MyExFragment;
 import com.juyou.calendar.bean.DateChangeBean;
 import com.juyou.calendar.bean.LunarChangeDateBean;
 import com.juyou.calendar.bean.LunarDateBean;
+import com.juyou.calendar.bo.Api;
 import com.juyou.calendar.bo.CurrentBean;
 import com.juyou.calendar.bo.JuYouBo;
 import com.juyou.calendar.bo.NetResultCallBack;
@@ -36,7 +38,11 @@ import com.juyou.calendar.fragment.yellowcalendar.adapter.YellowCalendarYiAdapte
 import com.juyou.calendar.fragment.yellowcalendar.bean.YellowLunarJiListBean;
 import com.juyou.calendar.fragment.yellowcalendar.bean.YellowLunarTimeListBean;
 import com.juyou.calendar.fragment.yellowcalendar.bean.YellowLunarYiListBean;
+import com.juyou.calendar.util.ContentShare;
+import com.juyou.calendar.util.DialogManager;
+import com.juyou.calendar.util.H5UrlMananger;
 import com.juyou.calendar.weather.bean.CaiYunhourlysListBean;
+import com.manggeek.android.geek.cache.StringCache;
 import com.manggeek.android.geek.utils.JSONUtil;
 
 import java.text.SimpleDateFormat;
@@ -180,6 +186,7 @@ public class YellowCalendarFragment extends MyExFragment {
         });
     }
 
+
     private void showTimeDate(List<String> ji) {
         List<YellowLunarTimeListBean> LunarTime = new ArrayList<>();
         for (int i = 0; i < ji.size(); i++) {
@@ -212,7 +219,7 @@ public class YellowCalendarFragment extends MyExFragment {
 
         if (yellowCalendarYiAdapter == null) {
             yellowCalendarYiAdapter = new YellowCalendarYiAdapter(getActivity(), LunarYi);
-            GridLayoutManager forecastManager = new GridLayoutManager(getActivity(), 3);
+            GridLayoutManager forecastManager = new GridLayoutManager(getActivity(), 4);
             forecastManager.setOrientation(LinearLayoutManager.VERTICAL);
             rvYiRecycle.setLayoutManager(forecastManager);
             rvYiRecycle.setAdapter(yellowCalendarYiAdapter);
@@ -252,7 +259,6 @@ public class YellowCalendarFragment extends MyExFragment {
         initData();//一进来的就是转一下农历
     }
 
-
     @Override
     public void loadData() {
 
@@ -276,6 +282,7 @@ public class YellowCalendarFragment extends MyExFragment {
         switch (view.getId()) {
             case R.id.ll_right:
                 Toast.makeText(getActivity(), "右上角分享", Toast.LENGTH_SHORT).show();
+                showShareDialog();
                 break;
             case R.id.ll_center_title:
                 Toast.makeText(getActivity(), "选择日期", Toast.LENGTH_SHORT).show();
@@ -443,4 +450,16 @@ public class YellowCalendarFragment extends MyExFragment {
         format.applyPattern("yyyyMMdd");
         return format.format(date);
     }
+
+    //显示分享弹框
+    private void showShareDialog() {
+//        分享吧
+        ContentShare contentShare = new ContentShare(getActivity());
+//        contentShare.setShareSpannedContent("我是万年历", "大家好我是分享的内容", "https://blog.csdn.net/qq_37328546?spm=1019.2139.3001.5343", "https://image.baidu.com/search/detail?ct=503316480&z=0&ipn=false&word=%E5%A3%81%E7%BA%B8%20%E4%B8%8D%E5%90%8C%E9%A3%8E%E6%A0%BC%20%E5%94%AF%E7%BE%8E&step_word=&hs=0&pn=0&spn=0&di=32120&pi=0&rn=1&tn=baiduimagedetail&is=0%2C0&istype=2&ie=utf-8&oe=utf-8&in=&cl=2&lm=-1&st=-1&cs=3631594132%2C3972221223&os=1799234586%2C1945397593&simid=3631594132%2C3972221223&adpicid=0&lpn=0&ln=3814&fr=&fmq=1526269427171_R&fm=&ic=0&s=undefined&hd=undefined&latest=undefined&copyright=undefined&se=&sme=&tab=0&width=&height=&face=undefined&ist=&jit=&cg=wallpaper&bdtype=0&oriquery=&objurl=https%3A%2F%2Fgimg2.baidu.com%2Fimage_search%2Fsrc%3Dhttp%3A%2F%2Fqqpublic.qpic.cn%2Fqq_public%2F0%2F0-2215652282-11777CCC9C4A35E8002E7EB8A27111DB%2F0%3Ffmt%3Djpg%26size%3D135%26h%3D506%26w%3D900%26ppv%3D1.jpg%26refer%3Dhttp%3A%2F%2Fqqpublic.qpic.cn%26app%3D2002%26size%3Df9999%2C10000%26q%3Da80%26n%3D0%26g%3D0n%26fmt%3Djpeg%3Fsec%3D1642053506%26t%3Dd3d3bbe79c417dc605d24a51b338a935&fromurl=ippr_z2C%24qAzdH3FAzdH3Fh7wtkw5_z%26e3Bqq_z%26e3Bv54AzdH3FfAzdH3FdadaaddbAZOMIaaa%3F6juj6%3Dfrt1j6&gsm=1&rpstart=0&rpnum=0&islist=&querylist=&nojc=undefined");
+//        contentShare.ShareToQQ("我是万年历", "大家好我是分享的内容", "https://blog.csdn.net/qq_37328546?spm=1019.2139.3001.5343", "https://image.baidu.com/search/detail?ct=503316480&z=0&ipn=false&word=%E5%A3%81%E7%BA%B8%20%E4%B8%8D%E5%90%8C%E9%A3%8E%E6%A0%BC%20%E5%94%AF%E7%BE%8E&step_word=&hs=0&pn=0&spn=0&di=32120&pi=0&rn=1&tn=baiduimagedetail&is=0%2C0&istype=2&ie=utf-8&oe=utf-8&in=&cl=2&lm=-1&st=-1&cs=3631594132%2C3972221223&os=1799234586%2C1945397593&simid=3631594132%2C3972221223&adpicid=0&lpn=0&ln=3814&fr=&fmq=1526269427171_R&fm=&ic=0&s=undefined&hd=undefined&latest=undefined&copyright=undefined&se=&sme=&tab=0&width=&height=&face=undefined&ist=&jit=&cg=wallpaper&bdtype=0&oriquery=&objurl=https%3A%2F%2Fgimg2.baidu.com%2Fimage_search%2Fsrc%3Dhttp%3A%2F%2Fqqpublic.qpic.cn%2Fqq_public%2F0%2F0-2215652282-11777CCC9C4A35E8002E7EB8A27111DB%2F0%3Ffmt%3Djpg%26size%3D135%26h%3D506%26w%3D900%26ppv%3D1.jpg%26refer%3Dhttp%3A%2F%2Fqqpublic.qpic.cn%26app%3D2002%26size%3Df9999%2C10000%26q%3Da80%26n%3D0%26g%3D0n%26fmt%3Djpeg%3Fsec%3D1642053506%26t%3Dd3d3bbe79c417dc605d24a51b338a935&fromurl=ippr_z2C%24qAzdH3FAzdH3Fh7wtkw5_z%26e3Bqq_z%26e3Bv54AzdH3FfAzdH3FdadaaddbAZOMIaaa%3F6juj6%3Dfrt1j6&gsm=1&rpstart=0&rpnum=0&islist=&querylist=&nojc=undefined");
+        DialogManager.getInstance().showShareDialog(getActivity(), contentShare);
+
+
+    }
+
 }
