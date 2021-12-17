@@ -39,6 +39,7 @@ import com.tencent.connect.UserInfo;
 import com.tencent.connect.auth.QQToken;
 import com.tencent.connect.common.Constants;
 import com.tencent.connect.share.QQShare;
+import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
@@ -56,6 +57,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+import static com.juyou.calendar.activity.MyMainActivity.api;
 import static com.juyou.calendar.activity.MyMainActivity.mTencent;
 
 public class OneClickLoginActivity extends AppCompatActivity {
@@ -150,7 +152,11 @@ public class OneClickLoginActivity extends AppCompatActivity {
                     return;
                 }
                 //注销登录
-                mTencent.logout(this);
+//                mTencent.logout(this);
+//                Final SendAuth.SendMessageToWX.Req req = new SendAuth.Req();
+//                req.scope = "snsapi_userinfo";
+//                req.state = "wechat_sdk_demo_test";
+//                api.sendReq(req);
 
                 break;
             case R.id.ll_wb_login:
@@ -164,7 +170,6 @@ public class OneClickLoginActivity extends AppCompatActivity {
                 break;
             case R.id.ll_title_left:
                 finish();
-
                 break;
 
         }

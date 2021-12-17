@@ -147,7 +147,14 @@
         <meta-data
             android:name="UMENG_CHANNEL"
             android:value="juyouhudong" />
-
+        <!--        微信相关-->
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:launchMode="singleTask"
+            android:taskAffinity="com.juyou.calendar"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
     </application>
 
 </manifest>

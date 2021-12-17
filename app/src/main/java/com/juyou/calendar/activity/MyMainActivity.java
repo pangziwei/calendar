@@ -1,7 +1,10 @@
 package com.juyou.calendar.activity;
 
 import android.Manifest;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
@@ -42,22 +45,30 @@ import com.juyou.calendar.bo.NewResultCallBack;
 import com.juyou.calendar.bo.StringCache;
 import com.juyou.calendar.bo.UserBo;
 import com.juyou.calendar.dialog.UpdataDialog;
-import com.juyou.calendar.fragment.mine.MineFragment;
-import com.juyou.calendar.fragment.yellowcalendar.YellowCalendarFragment;
 import com.juyou.calendar.fragment.calendar.CalendarFragment;
+import com.juyou.calendar.fragment.mine.MineFragment;
 import com.juyou.calendar.fragment.stare.StareFragment;
+import com.juyou.calendar.fragment.yellowcalendar.YellowCalendarFragment;
 import com.juyou.calendar.mine.newlogin.NewLoginActivity;
 import com.juyou.calendar.util.ConstantUtil;
 import com.juyou.calendar.weather.WeatherActivity;
 import com.juyou.calendar.weather.WeatherFragment;
 import com.manggeek.android.geek.utils.JSONUtil;
 import com.manggeek.android.geek.utils.PermissionUtils;
+import com.manggeek.android.geek.utils.PrintUtil;
+import com.tencent.mm.opensdk.constants.ConstantsAPI;
+import com.tencent.mm.opensdk.modelbase.BaseReq;
+import com.tencent.mm.opensdk.modelbase.BaseResp;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
+import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
 import com.umeng.commonsdk.UMConfigure;
 import com.umeng.socialize.PlatformConfig;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
@@ -67,7 +78,7 @@ import java.util.TimerTask;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MyMainActivity extends BaseActivity {
+public class MyMainActivity extends BaseActivity implements IWXAPIEventHandler {
     @BindView(R.id.main_star)
     TextView mainStar;
     @BindView(R.id.main_weather)
@@ -91,8 +102,11 @@ public class MyMainActivity extends BaseActivity {
     TextView mainMine;
     @BindView(R.id.main_radioGroup)
     LinearLayout mainRadioGroup;
+    public MyTestLoginBean myTestLoginBean;
 
-    public static Tencent mTencent;
+    public static Tencent mTencent;//qq互联的用于分享
+
+    public static IWXAPI api;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,13 +129,31 @@ public class MyMainActivity extends BaseActivity {
 
 
         UMConfigure.init(this, ConstantUtil.UMENG_APP_KEY, "umeng", UMConfigure.DEVICE_TYPE_PHONE, "");//58edcfeb310c93091c000be2 5965ee00734be40b580001a0
-        PlatformConfig.setWeixin("wx27924c382baf48f5", "b702dba0329eee9852dca6d68eed7b79");
+//        PlatformConfig.setWeixin("wx27924c382baf48f5", "b702dba0329eee9852dca6d68eed7b79");
         catchException();
 
 
         ButterKnife.bind(this);
-          //第三方qq登录请求初始化
+        //第三方qq登录请求初始化
         Tencent.setIsPermissionGranted(true);
+
+        // 通过WXAPIFactory工厂，获取IWXAPI的实例
+        api = WXAPIFactory.createWXAPI(this, ConstantUtil.WX_APP_ID);
+        // 将应用的appId注册到微信
+        api.registerApp(ConstantUtil.WX_APP_ID);
+
+        api.handleIntent(getIntent(), this);
+
+        //建议动态监听微信启动广播进行注册到微信
+        registerReceiver(new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+
+                // 将该app注册到微信
+                api.registerApp(ConstantUtil.WX_APP_ID);
+            }
+        }, new IntentFilter(ConstantsAPI.ACTION_REFRESH_WXAPP));
+
 
         initView();
         updataDialog = new UpdataDialog(mActivity);
@@ -140,9 +172,6 @@ public class MyMainActivity extends BaseActivity {
         initLogin();
 
     }
-
-
-    public MyTestLoginBean myTestLoginBean;
 
     private void initLogin() {
         JuYouBo.TestLogin("admin", "123456", "10001", new NetResultCallBack() {
@@ -343,6 +372,8 @@ public class MyMainActivity extends BaseActivity {
     @Override
     protected void onNewIntent(Intent intent) {
         super.onNewIntent(intent);
+        setIntent(intent);
+        api.handleIntent(intent, this);
         if (intent != null) {
             int selectIndex = intent.getIntExtra("SelectIndex", -1);
             Log.e("tag", "selectIndex---" + selectIndex);
@@ -541,6 +572,59 @@ public class MyMainActivity extends BaseActivity {
         updataDialog.setCanceledOnTouchOutside(false);
         updataDialog.show();
     }
+
+    @Override
+    public void onReq(BaseReq baseReq) {
+        Log.e("微信支付", "微信支付失败,请清理微信缓存数据并重新登录");
+
+        switch (baseReq.getType()) {
+            case ConstantsAPI.COMMAND_GETMESSAGE_FROM_WX:
+                Log.e("微信支付", "微信支付失败,请清理微信缓存数据并重新登录");
+
+                break;
+            case ConstantsAPI.COMMAND_SHOWMESSAGE_FROM_WX:
+                Log.e("微信支付", "微信支付失败,请清理微信缓存数据并重新登录");
+
+                break;
+            default:
+                break;
+        }
+    }
+
+    @Override
+    public void onResp(BaseResp baseResp) {
+        Log.e("微信支付", "==========baseResp:" + JSONUtil.toString(baseResp) + "\n" + baseResp.errStr + "\n" + baseResp.getType() + "\n");
+
+        switch (baseResp.errCode) {
+            case BaseResp.ErrCode.ERR_COMM:
+                // 可能的原因：签名错误、未注册APPID、项目设置APPID不正确、注册的APPID与设置的不匹配、其他异常等。
+                PrintUtil.toastMakeText("微信支付失败,请清理微信缓存数据并重新登录");
+                Log.e("微信支付", "微信支付失败,请清理微信缓存数据并重新登录");
+                break;
+            case BaseResp.ErrCode.ERR_USER_CANCEL:
+                PrintUtil.toastMakeText("微信支付已取消");
+                Log.e("微信支付", "微信支付已取消");
+                break;
+            case BaseResp.ErrCode.ERR_OK:
+                PrintUtil.toastMakeText("微信支付成功");
+                Log.e("微信支付", "微信支付成功");
+                break;
+            case BaseResp.ErrCode.ERR_AUTH_DENIED:
+                PrintUtil.toastMakeText("微信认证失败");
+                Log.e("微信支付", "微信认证失败");
+                break;
+            case BaseResp.ErrCode.ERR_SENT_FAILED:
+                PrintUtil.toastMakeText("微信发送失败");
+                Log.e("微信支付", "微信发送失败");
+                break;
+            case BaseResp.ErrCode.ERR_UNSUPPORT:
+                Log.e("微信支付", "未知错误");
+                PrintUtil.toastMakeText("未知错误");
+                break;
+        }
+        finish();
+    }
+
 
     public static class BaseUiListener implements IUiListener {
         //        @Override

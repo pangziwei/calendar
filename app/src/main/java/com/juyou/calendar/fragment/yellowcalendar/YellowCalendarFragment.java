@@ -26,6 +26,7 @@ import com.juyou.calendar.base.MyExFragment;
 import com.juyou.calendar.bean.DateChangeBean;
 import com.juyou.calendar.bean.LunarChangeDateBean;
 import com.juyou.calendar.bean.LunarDateBean;
+import com.juyou.calendar.bean.YellowLunarDateBean;
 import com.juyou.calendar.bo.Api;
 import com.juyou.calendar.bo.CurrentBean;
 import com.juyou.calendar.bo.JuYouBo;
@@ -44,6 +45,8 @@ import com.juyou.calendar.util.H5UrlMananger;
 import com.juyou.calendar.weather.bean.CaiYunhourlysListBean;
 import com.manggeek.android.geek.cache.StringCache;
 import com.manggeek.android.geek.utils.JSONUtil;
+
+import org.apache.log4j.pattern.LogEvent;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -141,7 +144,6 @@ public class YellowCalendarFragment extends MyExFragment {
     private int[] cDate = CalendarUtil.getCurrentDate();
     Calendar calendar;
     DateChangeBean dateChangeBean;//变换后的日期
-    LunarDateBean lunarDateBean;//请求接口获取的农历禁忌什么的数据
     YellowCalendarJiAdapter yellowCalendarJiAdapter;
     YellowCalendarYiAdapter yellowCalendarYiAdapter;
     YellowCalendarTimeAdapter yellowCalendarTimeAdapter;
@@ -158,22 +160,25 @@ public class YellowCalendarFragment extends MyExFragment {
         JuYouBo.LunarToNongLi(getActivity(), cDate[0], cDate[1], cDate[2], new NetResultCallBack() {
             @Override
             public void onSuccess(int what, CurrentBean currentBean) {
-                lunarDateBean = JSONUtil.getObj(String.valueOf(currentBean.getData()), LunarDateBean.class);
-                showJiDateYi(lunarDateBean.getYi());//黄历上的宜
-                showJiDate(lunarDateBean.getJi());//黄历上的忌
-                showTimeDate(lunarDateBean.getYi());//黄历上的时辰宜忌
-                tvFortuneLunarDate.setText("农历" + lunarDateBean.getNl_yue() + lunarDateBean.getNl_ri());
-                tvFortuneTgdzYear.setText(lunarDateBean.getGz_nian() + lunarDateBean.getShengxiao() + "年");
-                tvFortuneTgdzMonth.setText(lunarDateBean.getGz_yue() + "月");
-                tvFortuneTgdzDay.setText(lunarDateBean.getGz_ri() + "日");
-                tvFortuneWeek.setText(lunarDateBean.getWeek_3());
-                yellowFive.setText(lunarDateBean.getWx_ri()); //五行日
+                YellowLunarDateBean   yellowLunarDateBean = JSONUtil.getObj(String.valueOf(currentBean.getData()), YellowLunarDateBean.class);
+
+                Log.e("测试接口", "currentBean----------------"+new Gson().toJson(currentBean.getData()));
+
+                showJiDateYi(yellowLunarDateBean.getYi());//黄历上的宜
+                showJiDate(yellowLunarDateBean.getJi());//黄历上的忌
+                showTimeDate(yellowLunarDateBean.getYi());//黄历上的时辰宜忌
+                tvFortuneLunarDate.setText("农历" + yellowLunarDateBean.getNl_yue() + yellowLunarDateBean.getNl_ri());
+                tvFortuneTgdzYear.setText(yellowLunarDateBean.getGz_nian() + yellowLunarDateBean.getShengxiao() + "年");
+                tvFortuneTgdzMonth.setText(yellowLunarDateBean.getGz_yue() + "月");
+                tvFortuneTgdzDay.setText(yellowLunarDateBean.getGz_ri() + "日");
+                tvFortuneWeek.setText(yellowLunarDateBean.getWeek_3());
+                yellowFive.setText(yellowLunarDateBean.getWx_ri()); //五行日
                 char ch;
                 String str;
-                for (int i = 0; i < lunarDateBean.getXingxiu().length(); i++) {
-                    ch = lunarDateBean.getXingxiu().charAt(i);
+                for (int i = 0; i < yellowLunarDateBean.getXingxiu().length(); i++) {
+                    ch = yellowLunarDateBean.getXingxiu().charAt(i);
                     if (ch == '-') {
-                        str = lunarDateBean.getXingxiu().replaceAll("-", "\r\n");//正则替换;
+                        str = yellowLunarDateBean.getXingxiu().replaceAll("-", "\r\n");//正则替换;
                         yellowConstellationUp.setText(str);
                     }
                 }
@@ -204,7 +209,6 @@ public class YellowCalendarFragment extends MyExFragment {
         } else {
             yellowCalendarTimeAdapter.refreshData(getActivity(), LunarTime);
         }
-
 
     }
 
@@ -281,7 +285,7 @@ public class YellowCalendarFragment extends MyExFragment {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.ll_right:
-                Toast.makeText(getActivity(), "右上角分享", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getActivity(), "右上角分享", Toast.LENGTH_SHORT).show();
                 showShareDialog();
                 break;
             case R.id.ll_center_title:
@@ -330,7 +334,7 @@ public class YellowCalendarFragment extends MyExFragment {
             public void onSuccess(int what, CurrentBean currentBean) {
 
                 Log.e(TAG, "lunarDateBean------currentBean---currentBean----" + new Gson().toJson(currentBean));
-                lunarDateBean = JSONUtil.getObj(String.valueOf(currentBean.getData()), LunarDateBean.class);
+                LunarDateBean  lunarDateBean = JSONUtil.getObj(String.valueOf(currentBean.getData()), LunarDateBean.class);
 //                Log.e(TAG, "lunarDateBean-------------" + lunarDateBean);
                 showJiDateYi(lunarDateBean.getYi());//黄历上的宜
                 showJiDate(lunarDateBean.getJi());//黄历上的忌
@@ -455,7 +459,7 @@ public class YellowCalendarFragment extends MyExFragment {
     private void showShareDialog() {
 //        分享吧
         ContentShare contentShare = new ContentShare(getActivity());
-//        contentShare.setShareSpannedContent("我是万年历", "大家好我是分享的内容", "https://blog.csdn.net/qq_37328546?spm=1019.2139.3001.5343", "https://image.baidu.com/search/detail?ct=503316480&z=0&ipn=false&word=%E5%A3%81%E7%BA%B8%20%E4%B8%8D%E5%90%8C%E9%A3%8E%E6%A0%BC%20%E5%94%AF%E7%BE%8E&step_word=&hs=0&pn=0&spn=0&di=32120&pi=0&rn=1&tn=baiduimagedetail&is=0%2C0&istype=2&ie=utf-8&oe=utf-8&in=&cl=2&lm=-1&st=-1&cs=3631594132%2C3972221223&os=1799234586%2C1945397593&simid=3631594132%2C3972221223&adpicid=0&lpn=0&ln=3814&fr=&fmq=1526269427171_R&fm=&ic=0&s=undefined&hd=undefined&latest=undefined&copyright=undefined&se=&sme=&tab=0&width=&height=&face=undefined&ist=&jit=&cg=wallpaper&bdtype=0&oriquery=&objurl=https%3A%2F%2Fgimg2.baidu.com%2Fimage_search%2Fsrc%3Dhttp%3A%2F%2Fqqpublic.qpic.cn%2Fqq_public%2F0%2F0-2215652282-11777CCC9C4A35E8002E7EB8A27111DB%2F0%3Ffmt%3Djpg%26size%3D135%26h%3D506%26w%3D900%26ppv%3D1.jpg%26refer%3Dhttp%3A%2F%2Fqqpublic.qpic.cn%26app%3D2002%26size%3Df9999%2C10000%26q%3Da80%26n%3D0%26g%3D0n%26fmt%3Djpeg%3Fsec%3D1642053506%26t%3Dd3d3bbe79c417dc605d24a51b338a935&fromurl=ippr_z2C%24qAzdH3FAzdH3Fh7wtkw5_z%26e3Bqq_z%26e3Bv54AzdH3FfAzdH3FdadaaddbAZOMIaaa%3F6juj6%3Dfrt1j6&gsm=1&rpstart=0&rpnum=0&islist=&querylist=&nojc=undefined");
+        contentShare.setShareSpannedContent("我是万年历", "大家好我是分享的内容", "https://blog.csdn.net/qq_37328546?spm=1019.2139.3001.5343", "https://image.baidu.com/search/detail?ct=503316480&z=0&ipn=false&word=%E5%A3%81%E7%BA%B8%20%E4%B8%8D%E5%90%8C%E9%A3%8E%E6%A0%BC%20%E5%94%AF%E7%BE%8E&step_word=&hs=0&pn=0&spn=0&di=32120&pi=0&rn=1&tn=baiduimagedetail&is=0%2C0&istype=2&ie=utf-8&oe=utf-8&in=&cl=2&lm=-1&st=-1&cs=3631594132%2C3972221223&os=1799234586%2C1945397593&simid=3631594132%2C3972221223&adpicid=0&lpn=0&ln=3814&fr=&fmq=1526269427171_R&fm=&ic=0&s=undefined&hd=undefined&latest=undefined&copyright=undefined&se=&sme=&tab=0&width=&height=&face=undefined&ist=&jit=&cg=wallpaper&bdtype=0&oriquery=&objurl=https%3A%2F%2Fgimg2.baidu.com%2Fimage_search%2Fsrc%3Dhttp%3A%2F%2Fqqpublic.qpic.cn%2Fqq_public%2F0%2F0-2215652282-11777CCC9C4A35E8002E7EB8A27111DB%2F0%3Ffmt%3Djpg%26size%3D135%26h%3D506%26w%3D900%26ppv%3D1.jpg%26refer%3Dhttp%3A%2F%2Fqqpublic.qpic.cn%26app%3D2002%26size%3Df9999%2C10000%26q%3Da80%26n%3D0%26g%3D0n%26fmt%3Djpeg%3Fsec%3D1642053506%26t%3Dd3d3bbe79c417dc605d24a51b338a935&fromurl=ippr_z2C%24qAzdH3FAzdH3Fh7wtkw5_z%26e3Bqq_z%26e3Bv54AzdH3FfAzdH3FdadaaddbAZOMIaaa%3F6juj6%3Dfrt1j6&gsm=1&rpstart=0&rpnum=0&islist=&querylist=&nojc=undefined");
 //        contentShare.ShareToQQ("我是万年历", "大家好我是分享的内容", "https://blog.csdn.net/qq_37328546?spm=1019.2139.3001.5343", "https://image.baidu.com/search/detail?ct=503316480&z=0&ipn=false&word=%E5%A3%81%E7%BA%B8%20%E4%B8%8D%E5%90%8C%E9%A3%8E%E6%A0%BC%20%E5%94%AF%E7%BE%8E&step_word=&hs=0&pn=0&spn=0&di=32120&pi=0&rn=1&tn=baiduimagedetail&is=0%2C0&istype=2&ie=utf-8&oe=utf-8&in=&cl=2&lm=-1&st=-1&cs=3631594132%2C3972221223&os=1799234586%2C1945397593&simid=3631594132%2C3972221223&adpicid=0&lpn=0&ln=3814&fr=&fmq=1526269427171_R&fm=&ic=0&s=undefined&hd=undefined&latest=undefined&copyright=undefined&se=&sme=&tab=0&width=&height=&face=undefined&ist=&jit=&cg=wallpaper&bdtype=0&oriquery=&objurl=https%3A%2F%2Fgimg2.baidu.com%2Fimage_search%2Fsrc%3Dhttp%3A%2F%2Fqqpublic.qpic.cn%2Fqq_public%2F0%2F0-2215652282-11777CCC9C4A35E8002E7EB8A27111DB%2F0%3Ffmt%3Djpg%26size%3D135%26h%3D506%26w%3D900%26ppv%3D1.jpg%26refer%3Dhttp%3A%2F%2Fqqpublic.qpic.cn%26app%3D2002%26size%3Df9999%2C10000%26q%3Da80%26n%3D0%26g%3D0n%26fmt%3Djpeg%3Fsec%3D1642053506%26t%3Dd3d3bbe79c417dc605d24a51b338a935&fromurl=ippr_z2C%24qAzdH3FAzdH3Fh7wtkw5_z%26e3Bqq_z%26e3Bv54AzdH3FfAzdH3FdadaaddbAZOMIaaa%3F6juj6%3Dfrt1j6&gsm=1&rpstart=0&rpnum=0&islist=&querylist=&nojc=undefined");
         DialogManager.getInstance().showShareDialog(getActivity(), contentShare);
 

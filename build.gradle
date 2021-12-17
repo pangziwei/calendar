@@ -6,6 +6,7 @@ buildscript {
         jcenter()
         //友盟
         maven { url 'https://dl.bintray.com/umsdk/release' }
+        mavenCentral()//微信的SDK
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.5.2'
@@ -30,7 +31,7 @@ allprojects {
         //友盟
         maven { url 'https://dl.bintray.com/umsdk/release' }
 
-
+        mavenCentral()//微信的SDK
     }
 }
 
